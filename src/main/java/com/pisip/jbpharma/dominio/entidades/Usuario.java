@@ -1,0 +1,77 @@
+package com.pisip.jbpharma.dominio.entidades;
+
+import java.util.Date;
+
+public class Usuario {
+	
+	private int idUsuario;
+    private String nombre;
+    private String correo;
+    private String contrasenaHash;
+    private boolean estadoUsuario;
+    private Date fechaCreacion;
+    
+	public Usuario() {
+		super();
+	}
+	
+	public Usuario(int idUsuario, String nombre, String correo, String contrasenaHash, boolean estadoUsuario,
+			Date fechaCreacion) {
+		super();
+		this.idUsuario = idUsuario;
+		this.nombre = nombre;
+		this.correo = correo;
+		this.contrasenaHash = contrasenaHash;
+		this.estadoUsuario = estadoUsuario;
+		this.fechaCreacion = fechaCreacion;
+	}
+	
+	public int getIdUsuario() {
+		return idUsuario;
+	}
+	
+	public void setIdUsuario(int idUsuario) {
+		this.idUsuario = idUsuario;
+	}
+	
+	public String getNombre() {
+		return nombre;
+	}
+	
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+	
+	public String getCorreo() {
+		return correo;
+	}
+	
+	public void setCorreo(String correo) {
+		this.correo = correo;
+	}
+	
+	public String getContrasenaHash() {
+		return contrasenaHash;
+	}
+	
+	public void setContrasenaHash(String contrasenaHash) {
+		this.contrasenaHash = contrasenaHash;
+	}
+	
+	public boolean isEstadoUsuario() {
+		return estadoUsuario;
+	}
+	
+	public void setEstadoUsuario(boolean estadoUsuario) {
+		this.estadoUsuario = estadoUsuario;
+	}
+	
+	public Date getFechaCreacion() {
+		return fechaCreacion;
+	}
+	
+	public void setFechaCreacion(Date fechaCreacion) {
+		this.fechaCreacion = fechaCreacion;
+	}
+    
+}
