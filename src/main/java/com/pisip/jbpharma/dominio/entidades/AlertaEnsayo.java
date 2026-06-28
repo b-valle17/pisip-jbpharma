@@ -103,6 +103,6 @@ public class AlertaEnsayo {
 	public void setFechaEnvio(LocalDateTime fechaEnvio) {
 		this.fechaEnvio = fechaEnvio;
 	}
-	
+
 }
 
