@@ -8,6 +8,9 @@ import jakarta.validation.constraints.NotNull;
 public class UsuarioRequestDto {
 
 	@NotBlank
+	private int idUsuario;
+	
+	@NotBlank
 	private String nombre;
 
 	@NotBlank
@@ -20,6 +23,14 @@ public class UsuarioRequestDto {
 	private Boolean estadoUsuario;
 
 	private Date fechaCreacion;
+
+	public int getIdUsuario() {
+		return idUsuario;
+	}
+
+	public void setIdUsuario(int idUsuario) {
+		this.idUsuario = idUsuario;
+	}
 
 	public String getNombre() {
 		return nombre;

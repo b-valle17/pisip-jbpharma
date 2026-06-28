@@ -19,6 +19,7 @@ public class RolRepositorioImpl implements IRolRepositorio {
 		this.entityMapper = entityMapper;
 	}
 
+	@SuppressWarnings("null")
 	@Override
 	public Rol guardar(Rol nuevoRol) {
 		RolEntity guardado = jpaRepositorio.save(entityMapper.toEntity(nuevoRol));

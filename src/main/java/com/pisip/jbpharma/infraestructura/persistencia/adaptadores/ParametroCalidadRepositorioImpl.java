@@ -20,6 +20,7 @@ public class ParametroCalidadRepositorioImpl implements IParametroCalidadReposit
 		this.entityMapper = entityMapper;
 	}
 
+	@SuppressWarnings("null")
 	@Override
 	public ParametroCalidad guardar(ParametroCalidad nuevoParametro) {
 		ParametroCalidadEntity guardado = jpaRepositorio.save(entityMapper.toEntity(nuevoParametro));

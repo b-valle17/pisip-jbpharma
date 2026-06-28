@@ -5,10 +5,21 @@ import jakarta.validation.constraints.NotBlank;
 public class RolRequestDto {
 
 	@NotBlank
+	private int idRol;
+	
+	@NotBlank
 	private String nombreRol;
 
 	@NotBlank
 	private String descripcion;
+
+	public int getIdRol() {
+		return idRol;
+	}
+
+	public void setIdRol(int idRol) {
+		this.idRol = idRol;
+	}
 
 	public String getNombreRol() {
 		return nombreRol;
