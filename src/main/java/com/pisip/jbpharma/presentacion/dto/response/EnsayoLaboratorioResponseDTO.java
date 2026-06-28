@@ -1,0 +1,19 @@
+package com.pisip.jbpharma.presentacion.dto.response;
+
+import java.time.LocalDateTime;
+
+import lombok.Data;
+
+@Data
+public class EnsayoLaboratorioResponseDTO {
+	private Long idEnsayo;
+	private Integer idLote;
+	private Integer idProducto;
+	private String codigoEnsayo;
+	private LocalDateTime fechaEnsayo;
+	private String responsable;
+	private String observacion;
+	private String estado;
+	private LocalDateTime creadoEn;
+
+}
