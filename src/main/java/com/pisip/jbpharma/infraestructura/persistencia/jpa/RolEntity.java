@@ -1,7 +1,5 @@
 package com.pisip.jbpharma.infraestructura.persistencia.jpa;
 
-import java.util.Date;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -12,18 +10,14 @@ import lombok.Data;
 
 @Entity
 @Data
-@Table(name = "usuario")
-public class UsuarioEntity {
+@Table(name = "rol")
+public class RolEntity {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int idUsuario;
-	@Column(name = ("nombre_usuario"))
-    private String nombre;
-	@Column(name = ("correo_usuario"))
-    private String correo;
-    private String contrasenaHash;
-    private boolean estadoUsuario;
-    private Date fechaCreacion;
+	private int idRol;
+    private String nombreRol;
+    @Column(name = ("descripcion_rol"))
+    private String descripcion;
 
 }
