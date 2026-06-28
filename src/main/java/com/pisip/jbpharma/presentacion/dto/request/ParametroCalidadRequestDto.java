@@ -8,7 +8,7 @@ import jakarta.validation.constraints.NotNull;
 
 public class ParametroCalidadRequestDto {
 
-	@NotBlank
+	@NotNull
 	private int idParametro;
 	
 	@NotBlank

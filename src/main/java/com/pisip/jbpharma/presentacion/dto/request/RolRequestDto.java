@@ -1,10 +1,11 @@
 package com.pisip.jbpharma.presentacion.dto.request;
 
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 public class RolRequestDto {
 
-	@NotBlank
+	@NotNull
 	private int idRol;
 	
 	@NotBlank
