@@ -2,6 +2,7 @@ package com.pisip.jbpharma.aplicacion.casouso.impl;
 
 import java.util.List;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.pisip.jbpharma.aplicacion.casouso.entrada.IUsuarioUseCase;
@@ -33,14 +34,17 @@ public class UsuarioUseCaseImpl implements IUsuarioUseCase {
 	@Override
 	public Usuario autenticar(String correo, String contrasenaPlana) {
 		Usuario usuario = repositorio.buscarPorCorreo(correo)
-				.orElseThrow(() -> new RuntimeException("Credenciales invalidas"));
+				.orElseThrow(() -> new org.springframework.web.server.ResponseStatusException(HttpStatus.UNAUTHORIZED,
+						"Credenciales invalidas"));
 		if (!passwordEncoder.matches(contrasenaPlana, usuario.getContrasenaHash())) {
-			throw new RuntimeException("Credenciales invalidas");
+			throw new org.springframework.web.server.ResponseStatusException(HttpStatus.UNAUTHORIZED,
+					"Credenciales invalidas");
 		}
 		if (!usuario.isEstadoUsuario()) {
-			throw new RuntimeException("El usuario se encuentra inactivo. Contacte al administrador.");
+			throw new org.springframework.web.server.ResponseStatusException(HttpStatus.FORBIDDEN,
+					"El usuario se encuentra inactivo. Contacte al administrador.");
 		}
-		
+
 		return usuario;
 	}
 
