@@ -13,42 +13,56 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.pisip.jbpharma.aplicacion.casouso.entrada.iUsuarioUseCase;
-import com.pisip.jbpharma.presentacion.dto.request.UsuarioRequestDTO;
-import com.pisip.jbpharma.presentacion.dto.response.UsuarioResponseDTO;
-import com.pisip.jbpharma.presentacion.mapeadores.iUsuarioDtoMapper;
+import com.pisip.jbpharma.aplicacion.casouso.entrada.IUsuarioUseCase;
+import com.pisip.jbpharma.dominio.entidades.Usuario;
+import com.pisip.jbpharma.presentacion.dto.request.UsuarioRequestDto;
+import com.pisip.jbpharma.presentacion.dto.response.UsuarioResponseDto;
+import com.pisip.jbpharma.presentacion.mapeadores.IUsuarioDtoMapper;
 
 import jakarta.validation.Valid;
 
 @RestController
-@RequestMapping("api/usuario")
+@RequestMapping("/api/usuarios")
 public class UsuarioController {
-	
-	private final iUsuarioUseCase usuarioUseCase;
-	private final iUsuarioDtoMapper mapper;
 
-	public UsuarioController(iUsuarioUseCase usuarioUseCase, iUsuarioDtoMapper mapper) {
-		
+	private final IUsuarioUseCase usuarioUseCase;
+	private final IUsuarioDtoMapper mapper;
+
+	public UsuarioController(IUsuarioUseCase usuarioUseCase, IUsuarioDtoMapper mapper) {
 		this.usuarioUseCase = usuarioUseCase;
 		this.mapper = mapper;
 	}
 
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
-	public UsuarioResponseDTO guardar(@Valid @RequestBody UsuarioRequestDTO request) {
-		return mapper.toResponseDto(usuarioUseCase.guardar(mapper.toDomain(request)));
+	public UsuarioResponseDto guardar(@Valid @RequestBody UsuarioRequestDto request) {
+		Usuario usuario = mapper.toDomain(request);
+		usuario.setEstadoUsuario(Boolean.TRUE.equals(request.getEstadoUsuario()));
+		if (usuario.getFechaCreacion() == null) {
+			usuario.setFechaCreacion(new java.util.Date());
+		}
+		return mapper.toResponseDto(usuarioUseCase.guardar(usuario));
 	}
-	
+
+	@PostMapping("/login")
+	public ResponseEntity<UsuarioResponseDto> login(@Valid @RequestBody com.pisip.jbpharma.presentacion.dto.request.LoginRequestDto request) {
+		Usuario usuario = usuarioUseCase.autenticar(request.getCorreo(), request.getContrasenaHash());
+		return ResponseEntity.ok(mapper.toResponseDto(usuario));
+	}
+
 	@GetMapping
-	public List<UsuarioResponseDTO> listarTodos(){
-		return usuarioUseCase.listarTodos().stream().map(mapper :: toResponseDto).toList();
-		
+	public List<UsuarioResponseDto> listarTodo() {
+		return usuarioUseCase.listarTodos().stream().map(mapper::toResponseDto).toList();
 	}
-	
+
+	@GetMapping("/{idUsuario}")
+	public UsuarioResponseDto buscarPorId(@PathVariable int idUsuario) {
+		return mapper.toResponseDto(usuarioUseCase.buscarPorId(idUsuario));
+	}
+
 	@DeleteMapping("/{idUsuario}")
-	public ResponseEntity<Void> eliminar(@PathVariable int idUsuario){
+	public ResponseEntity<Void> eliminar(@PathVariable int idUsuario) {
 		usuarioUseCase.eliminar(idUsuario);
 		return ResponseEntity.noContent().build();
 	}
-
 }

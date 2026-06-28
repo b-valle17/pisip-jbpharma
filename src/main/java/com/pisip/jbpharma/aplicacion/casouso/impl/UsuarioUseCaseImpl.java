@@ -2,43 +2,59 @@ package com.pisip.jbpharma.aplicacion.casouso.impl;
 
 import java.util.List;
 
-import com.pisip.jbpharma.aplicacion.casouso.entrada.iUsuarioUseCase;
+import org.springframework.http.HttpStatus;
+import org.springframework.security.crypto.password.PasswordEncoder;
+
+import com.pisip.jbpharma.aplicacion.casouso.entrada.IUsuarioUseCase;
 import com.pisip.jbpharma.dominio.entidades.Usuario;
-import com.pisip.jbpharma.dominio.repositorio.iUsuarioRepositorio;
+import com.pisip.jbpharma.dominio.repositorio.IUsuarioRepositorio;
 
-public class UsuarioUseCaseImpl implements iUsuarioUseCase{
-	
-	private final iUsuarioRepositorio repositorio;
-	
+public class UsuarioUseCaseImpl implements IUsuarioUseCase {
 
-	public UsuarioUseCaseImpl(iUsuarioRepositorio repositorio) {
-		
+	private final IUsuarioRepositorio repositorio;
+	private final PasswordEncoder passwordEncoder;
+
+	public UsuarioUseCaseImpl(IUsuarioRepositorio repositorio, PasswordEncoder passwordEncoder) {
 		this.repositorio = repositorio;
+		this.passwordEncoder = passwordEncoder;
 	}
 
 	@Override
 	public Usuario guardar(Usuario nuevoUsuario) {
-		// Justo aqui se aplican las reglas de negocio
+		String contrasenaEncriptada = passwordEncoder.encode(nuevoUsuario.getContrasenaHash());
+		nuevoUsuario.setContrasenaHash(contrasenaEncriptada);
 		return repositorio.guardar(nuevoUsuario);
 	}
 
 	@Override
 	public Usuario buscarPorId(int idUsuario) {
-		// TODO Auto-generated method stub
-		return repositorio.buscarPorId(idUsuario).orElseThrow(()->new RuntimeException("Usuario no encontrado"));
+		return repositorio.buscarPorId(idUsuario).orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+	}
+
+	@Override
+	public Usuario autenticar(String correo, String contrasenaPlana) {
+		Usuario usuario = repositorio.buscarPorCorreo(correo)
+				.orElseThrow(() -> new org.springframework.web.server.ResponseStatusException(HttpStatus.UNAUTHORIZED,
+						"Credenciales invalidas"));
+		if (!passwordEncoder.matches(contrasenaPlana, usuario.getContrasenaHash())) {
+			throw new org.springframework.web.server.ResponseStatusException(HttpStatus.UNAUTHORIZED,
+					"Credenciales invalidas");
+		}
+		if (!usuario.isEstadoUsuario()) {
+			throw new org.springframework.web.server.ResponseStatusException(HttpStatus.FORBIDDEN,
+					"El usuario se encuentra inactivo. Contacte al administrador.");
+		}
+
+		return usuario;
 	}
 
 	@Override
 	public List<Usuario> listarTodos() {
-		// TODO Auto-generated method stub
 		return repositorio.listarTodos();
 	}
 
 	@Override
 	public void eliminar(int idUsuario) {
 		repositorio.eliminar(idUsuario);
-		
 	}
-
-
 }
