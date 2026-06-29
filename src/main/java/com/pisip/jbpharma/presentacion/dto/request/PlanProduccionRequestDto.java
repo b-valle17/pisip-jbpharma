@@ -7,19 +7,20 @@ import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
 @Data
-public class UsuarioRequestDTO {
+public class PlanProduccionRequestDto {
 	
 	@NotNull
-	private int idUsuario;
+	private int idPlan;
 	@NotBlank
-    private String nombre;
+	private String codigoPlan;
 	@NotBlank
-    private String correo;
+	private int mes;
 	@NotBlank
-    private String contrasenaHash;
+	private int anio;
 	@NotBlank
-    private boolean estadoUsuario;
+	private Date fechaEmision;
 	@NotBlank
-    private Date fechaCreacion;
-
+	private String estado;
+	@NotBlank
+	private String descripcion;
 }
