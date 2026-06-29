@@ -5,7 +5,7 @@ import java.util.Date;
 import lombok.Data;
 
 @Data
-public class UsuarioResponseDTO {
+public class UsuarioResponseDto {
 	
 	private int idUsuario;
     private String nombre;
