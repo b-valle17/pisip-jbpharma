@@ -2,11 +2,6 @@ package com.pisip.jbpharma.infraestructura.configuracion;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.web.SecurityFilterChain;
 
 import com.pisip.jbpharma.aplicacion.casouso.entrada.IProductoUseCase;
 import com.pisip.jbpharma.aplicacion.casouso.entrada.IOrdenProduccionUseCase;
@@ -76,21 +71,7 @@ import com.pisip.jbpharma.infraestructura.repositorio.iParametroValidacionjpaRep
 import com.pisip.jbpharma.infraestructura.repositorio.iValidacionSemaforicajpaRepositorio;
 
 @Configuration
-@EnableWebSecurity
 public class JbpharmaConfig {
-
-	@Bean
-	public PasswordEncoder passwordEncoder() {
-		return new BCryptPasswordEncoder();
-	}
-
-	@Bean
-	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-		http.csrf(csrf -> csrf.disable()).authorizeHttpRequests(auth -> auth
-				.requestMatchers("/api/usuarios", "/api/usuarios/login", "/api/productos", "/api/parametros-calidad", "/api/productos/**", "/api/parametros-calidad/**").permitAll().anyRequest().authenticated());
-
-		return http.build();
-	}
 
 	@Bean
 	IUsuarioRepositorio usuarioRepositorio(IUsuarioJpaRepositorio jpaRepositorio, IUsuarioJpaMapper mapper) {
@@ -98,8 +79,8 @@ public class JbpharmaConfig {
 	}
 
 	@Bean
-	IUsuarioUseCase usuarioUseCase(IUsuarioRepositorio repositorio, PasswordEncoder passwordEncoder) {
-		return new UsuarioUseCaseImpl(repositorio, passwordEncoder);
+	IUsuarioUseCase usuarioUseCase(IUsuarioRepositorio repositorio) {
+		return new UsuarioUseCaseImpl(repositorio);
 	}
 
 	@Bean

@@ -2,8 +2,8 @@ package com.pisip.jbpharma.aplicacion.casouso.impl;
 
 import java.util.List;
 
+import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.http.HttpStatus;
-import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.pisip.jbpharma.aplicacion.casouso.entrada.IUsuarioUseCase;
 import com.pisip.jbpharma.dominio.entidades.Usuario;
@@ -12,18 +12,16 @@ import com.pisip.jbpharma.dominio.repositorio.IUsuarioRepositorio;
 public class UsuarioUseCaseImpl implements IUsuarioUseCase {
 
 	private final IUsuarioRepositorio repositorio;
-	private final PasswordEncoder passwordEncoder;
 
-	public UsuarioUseCaseImpl(IUsuarioRepositorio repositorio, PasswordEncoder passwordEncoder) {
+	public UsuarioUseCaseImpl(IUsuarioRepositorio repositorio) {
 		this.repositorio = repositorio;
-		this.passwordEncoder = passwordEncoder;
 	}
 
 	@Override
-	@SuppressWarnings("null")
 	public Usuario guardar(Usuario nuevoUsuario) {
-		String contrasenaEncriptada = passwordEncoder.encode(nuevoUsuario.getContrasenaHash());
+		String contrasenaEncriptada = BCrypt.hashpw(nuevoUsuario.getContrasenaHash(), BCrypt.gensalt());
 		nuevoUsuario.setContrasenaHash(contrasenaEncriptada);
+
 		return repositorio.guardar(nuevoUsuario);
 	}
 
@@ -33,15 +31,16 @@ public class UsuarioUseCaseImpl implements IUsuarioUseCase {
 	}
 
 	@Override
-	@SuppressWarnings("null")
 	public Usuario autenticar(String correo, String contrasenaPlana) {
 		Usuario usuario = repositorio.buscarPorCorreo(correo)
 				.orElseThrow(() -> new org.springframework.web.server.ResponseStatusException(HttpStatus.UNAUTHORIZED,
 						"Credenciales invalidas"));
-		if (!passwordEncoder.matches(contrasenaPlana, usuario.getContrasenaHash())) {
+
+		if (!BCrypt.checkpw(contrasenaPlana, usuario.getContrasenaHash())) {
 			throw new org.springframework.web.server.ResponseStatusException(HttpStatus.UNAUTHORIZED,
 					"Credenciales invalidas");
 		}
+
 		if (!usuario.isEstadoUsuario()) {
 			throw new org.springframework.web.server.ResponseStatusException(HttpStatus.FORBIDDEN,
 					"El usuario se encuentra inactivo. Contacte al administrador.");

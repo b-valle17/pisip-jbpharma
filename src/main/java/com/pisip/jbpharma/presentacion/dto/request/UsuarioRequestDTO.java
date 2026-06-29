@@ -17,9 +17,8 @@ public class UsuarioRequestDTO {
     private String correo;
 	@NotBlank
     private String contrasenaHash;
-	@NotBlank
+	@NotNull
     private boolean estadoUsuario;
-	@NotBlank
     private Date fechaCreacion;
 
 }
