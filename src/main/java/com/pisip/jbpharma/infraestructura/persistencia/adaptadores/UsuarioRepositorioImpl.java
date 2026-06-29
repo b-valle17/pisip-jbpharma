@@ -19,6 +19,7 @@ public class UsuarioRepositorioImpl implements IUsuarioRepositorio {
 		this.entityMapper = entityMapper;
 	}
 
+	@SuppressWarnings("null")
 	@Override
 	public Usuario guardar(Usuario nuevoUsuario) {
 		UsuarioEntity guardado = jpaRepositorio.save(entityMapper.toEntity(nuevoUsuario));

@@ -20,6 +20,7 @@ public class UsuarioUseCaseImpl implements IUsuarioUseCase {
 	}
 
 	@Override
+	@SuppressWarnings("null")
 	public Usuario guardar(Usuario nuevoUsuario) {
 		String contrasenaEncriptada = passwordEncoder.encode(nuevoUsuario.getContrasenaHash());
 		nuevoUsuario.setContrasenaHash(contrasenaEncriptada);
@@ -32,6 +33,7 @@ public class UsuarioUseCaseImpl implements IUsuarioUseCase {
 	}
 
 	@Override
+	@SuppressWarnings("null")
 	public Usuario autenticar(String correo, String contrasenaPlana) {
 		Usuario usuario = repositorio.buscarPorCorreo(correo)
 				.orElseThrow(() -> new org.springframework.web.server.ResponseStatusException(HttpStatus.UNAUTHORIZED,

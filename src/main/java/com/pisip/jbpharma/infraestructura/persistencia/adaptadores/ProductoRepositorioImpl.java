@@ -19,6 +19,7 @@ public class ProductoRepositorioImpl implements IProductoRepositorio {
 		this.entityMapper = entityMapper;
 	}
 
+	@SuppressWarnings("null")
 	@Override
 	public Producto guardar(Producto nuevoProducto) {
 		ProductoEntity guardado = jpaRepositorio.save(entityMapper.toEntity(nuevoProducto));

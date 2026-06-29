@@ -8,6 +8,9 @@ import jakarta.validation.constraints.NotNull;
 
 public class ParametroCalidadRequestDto {
 
+	@NotNull
+	private int idParametro;
+	
 	@NotBlank
 	private String nombreParametro;
 
@@ -21,6 +24,14 @@ public class ParametroCalidadRequestDto {
 	private String unidadMedida;
 
 	private Date fechaConfiguracion;
+
+	public int getIdParametro() {
+		return idParametro;
+	}
+
+	public void setIdParametro(int idParametro) {
+		this.idParametro = idParametro;
+	}
 
 	public String getNombreParametro() {
 		return nombreParametro;

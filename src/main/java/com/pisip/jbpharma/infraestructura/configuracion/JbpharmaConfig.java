@@ -75,7 +75,7 @@ public class JbpharmaConfig {
 	@Bean
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 		http.csrf(csrf -> csrf.disable()).authorizeHttpRequests(auth -> auth
-				.requestMatchers("/api/usuarios", "/api/usuarios/login").permitAll().anyRequest().authenticated());
+				.requestMatchers("/api/usuarios", "/api/usuarios/login", "/api/productos", "/api/parametros-calidad", "/api/productos/**", "/api/parametros-calidad/**").permitAll().anyRequest().authenticated());
 
 		return http.build();
 	}

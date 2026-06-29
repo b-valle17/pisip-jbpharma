@@ -36,7 +36,7 @@ public class ProductoUseCaseImpl implements IProductoUseCase {
 
 	@Override
 	public Producto actualizar(int id, Producto productoDatos) {
-		Producto productoExistente = buscarPorId(id);
+		buscarPorId(id);
 		productoDatos.setIdProducto(id);
 		return repositorio.guardar(productoDatos);
 	}
