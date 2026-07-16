@@ -25,5 +25,8 @@ public class ProductoEntity {
 
 	@OneToMany(mappedBy = "fkProductoEntity")
 	private List<ParametroCalidadEntity> listaParametroCalidad;
+	
+	@OneToMany(mappedBy = "fkProductoEntity")
+	private List<OrdenProduccionEntity> ordenproduccion;
 
 }

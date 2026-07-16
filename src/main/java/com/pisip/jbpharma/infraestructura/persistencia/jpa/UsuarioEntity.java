@@ -1,6 +1,7 @@
 package com.pisip.jbpharma.infraestructura.persistencia.jpa;
 
 import java.util.Date;
+import java.util.List;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -9,6 +10,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.Data;
 
@@ -31,5 +33,11 @@ public class UsuarioEntity {
 	@ManyToOne
 	@JoinColumn(name = "fk_rol")
 	private RolEntity fkRolEntity;
+	
+	@OneToMany(mappedBy = "fkUsuarioEntity")
+	private List<PlanProduccionEntity> planproduccion;
+	
+	@OneToMany(mappedBy = "fkUsuarioEntity")
+	private List<OrdenProduccionEntity> ordenproduccion;
 
 }
