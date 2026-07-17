@@ -2,12 +2,15 @@ package com.pisip.jbpharma.presentacion.dto.response;
 
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 public class PlanProduccionResponseDto {
 	
 	private int idPlan;
 	private String codigoPlan;
 	private int mes;
 	private int anio;
+	@JsonFormat(pattern = "yyyy-MM-dd", timezone = "America/Bogota")
 	private Date fechaEmision;
 	private String estado;
 	private String descripcion;
