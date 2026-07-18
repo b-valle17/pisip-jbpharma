@@ -14,7 +14,17 @@ import com.pisip.jbpharma.aplicacion.casouso.entrada.iEnsayoLaboratorioUseCase;
 import com.pisip.jbpharma.aplicacion.casouso.entrada.iEnsayoVariableUseCase;
 import com.pisip.jbpharma.aplicacion.casouso.entrada.iParametroValidacionUseCase;
 import com.pisip.jbpharma.aplicacion.casouso.entrada.iValidacionSemaforicaUseCase;
+import com.pisip.jbpharma.aplicacion.casouso.entrada.IAuditoriaLoteUseCase;
+import com.pisip.jbpharma.aplicacion.casouso.entrada.IDictamenLoteUseCase;
+import com.pisip.jbpharma.aplicacion.casouso.entrada.IHistorialLoteUseCase;
+import com.pisip.jbpharma.aplicacion.casouso.entrada.IIndicadorKpiUseCase;
+import com.pisip.jbpharma.aplicacion.casouso.entrada.IInformeAuditoriaUseCase;
 import com.pisip.jbpharma.aplicacion.casouso.impl.ProductoUseCaseImpl;
+import com.pisip.jbpharma.aplicacion.casouso.impl.AuditoriaLoteUseCaseImpl;
+import com.pisip.jbpharma.aplicacion.casouso.impl.DictamenLoteUseCaseImpl;
+import com.pisip.jbpharma.aplicacion.casouso.impl.HistorialLoteUseCaseImpl;
+import com.pisip.jbpharma.aplicacion.casouso.impl.IndicadorKpiUseCaseImpl;
+import com.pisip.jbpharma.aplicacion.casouso.impl.InformeAuditoriaUseCaseImpl;
 import com.pisip.jbpharma.aplicacion.casouso.impl.AlertaEnsayoUseCaseImpl;
 import com.pisip.jbpharma.aplicacion.casouso.impl.EnsayoLaboratorioUseCaseImpl;
 import com.pisip.jbpharma.aplicacion.casouso.impl.EnsayoVariableUseCaseImpl;
@@ -36,7 +46,17 @@ import com.pisip.jbpharma.dominio.repositorio.iEnsayoLaboratorioRepositorio;
 import com.pisip.jbpharma.dominio.repositorio.iEnsayoVariableRepositorio;
 import com.pisip.jbpharma.dominio.repositorio.iParametroValidacionRepositorio;
 import com.pisip.jbpharma.dominio.repositorio.iValidacionSemaforicaRepositorio;
+import com.pisip.jbpharma.dominio.repositorio.IAuditoriaLoteRepositorio;
+import com.pisip.jbpharma.dominio.repositorio.IDictamenLoteRepositorio;
+import com.pisip.jbpharma.dominio.repositorio.IHistorialLoteRepositorio;
+import com.pisip.jbpharma.dominio.repositorio.IIndicadorKpiRepositorio;
+import com.pisip.jbpharma.dominio.repositorio.IInformeAuditoriaRepositorio;
 import com.pisip.jbpharma.infraestructura.persistencia.adaptadores.ProductoRepositorioImpl;
+import com.pisip.jbpharma.infraestructura.persistencia.adaptadores.AuditoriaLoteRepositorioImpl;
+import com.pisip.jbpharma.infraestructura.persistencia.adaptadores.DictamenLoteRepositorioImpl;
+import com.pisip.jbpharma.infraestructura.persistencia.adaptadores.HistorialLoteRepositorioImpl;
+import com.pisip.jbpharma.infraestructura.persistencia.adaptadores.IndicadorKpiRepositorioImpl;
+import com.pisip.jbpharma.infraestructura.persistencia.adaptadores.InformeAuditoriaRepositorioImpl;
 import com.pisip.jbpharma.infraestructura.persistencia.adaptadores.AlertaEnsayoRepositorioImpl;
 import com.pisip.jbpharma.infraestructura.persistencia.adaptadores.EnsayoLaboratorioRepositorioImpl;
 import com.pisip.jbpharma.infraestructura.persistencia.adaptadores.EnsayoVariableRepositorioImpl;
@@ -58,6 +78,11 @@ import com.pisip.jbpharma.infraestructura.persistencia.mapeadores.iEnsayoLaborat
 import com.pisip.jbpharma.infraestructura.persistencia.mapeadores.iEnsayoVariablejpaMapper;
 import com.pisip.jbpharma.infraestructura.persistencia.mapeadores.iParametroValidacionjpaMapper;
 import com.pisip.jbpharma.infraestructura.persistencia.mapeadores.iValidacionSemaforicajpaMapper;
+import com.pisip.jbpharma.infraestructura.persistencia.mapeadores.IAuditoriaLoteJpaMapper;
+import com.pisip.jbpharma.infraestructura.persistencia.mapeadores.IDictamenLoteJpaMapper;
+import com.pisip.jbpharma.infraestructura.persistencia.mapeadores.IHistorialLoteJpaMapper;
+import com.pisip.jbpharma.infraestructura.persistencia.mapeadores.IIndicadorKpiJpaMapper;
+import com.pisip.jbpharma.infraestructura.persistencia.mapeadores.IInformeAuditoriaJpaMapper;
 import com.pisip.jbpharma.infraestructura.repositorio.IProductoJpaRepositorio;
 import com.pisip.jbpharma.infraestructura.repositorio.IOrdenProduccionJpaRepositorio;
 import com.pisip.jbpharma.infraestructura.repositorio.IParametroCalidadJpaRepositorio;
@@ -69,6 +94,11 @@ import com.pisip.jbpharma.infraestructura.repositorio.iEnsayoLaboratoriojpaRepos
 import com.pisip.jbpharma.infraestructura.repositorio.iEnsayoVariablejpaRepositorio;
 import com.pisip.jbpharma.infraestructura.repositorio.iParametroValidacionjpaRepositorio;
 import com.pisip.jbpharma.infraestructura.repositorio.iValidacionSemaforicajpaRepositorio;
+import com.pisip.jbpharma.infraestructura.repositorio.IAuditoriaLoteJpaRepositorio;
+import com.pisip.jbpharma.infraestructura.repositorio.IDictamenLoteJpaRepositorio;
+import com.pisip.jbpharma.infraestructura.repositorio.IHistorialLoteJpaRepositorio;
+import com.pisip.jbpharma.infraestructura.repositorio.IIndicadorKpiJpaRepositorio;
+import com.pisip.jbpharma.infraestructura.repositorio.IInformeAuditoriaJpaRepositorio;
 
 @Configuration
 public class JbpharmaConfig {
@@ -113,64 +143,70 @@ public class JbpharmaConfig {
 	IProductoUseCase productoUseCase(IProductoRepositorio repositorio) {
 		return new ProductoUseCaseImpl(repositorio);
 	}
-	
+
 	@Bean
-	iAlertaEnsayoRepositorio alertaEnsayoRepositorio(iAlertaEnsayojpaRepositorio jpaRepositorio, iAlertaEnsayojpaMapper mapper) {
+	iAlertaEnsayoRepositorio alertaEnsayoRepositorio(iAlertaEnsayojpaRepositorio jpaRepositorio,
+			iAlertaEnsayojpaMapper mapper) {
 		return new AlertaEnsayoRepositorioImpl(jpaRepositorio, mapper);
-				
+
 	}
 
 	@Bean
 	iAlertaEnsayoUseCase alertaEnsayoUseCase(iAlertaEnsayoRepositorio respositorio) {
 		return new AlertaEnsayoUseCaseImpl(respositorio);
 	}
-	
+
 	@Bean
-	iEnsayoLaboratorioRepositorio ensayoLaboratorioRepositorio(iEnsayoLaboratoriojpaRepositorio jpaRepositorio, iEnsayoLaboratoriojpaMapper mapper) {
+	iEnsayoLaboratorioRepositorio ensayoLaboratorioRepositorio(iEnsayoLaboratoriojpaRepositorio jpaRepositorio,
+			iEnsayoLaboratoriojpaMapper mapper) {
 		return new EnsayoLaboratorioRepositorioImpl(jpaRepositorio, mapper);
-				
+
 	}
 
 	@Bean
 	iEnsayoLaboratorioUseCase EnsayoLaboratorioUseCase(iEnsayoLaboratorioRepositorio respositorio) {
 		return new EnsayoLaboratorioUseCaseImpl(respositorio);
 	}
-	
+
 	@Bean
-	iEnsayoVariableRepositorio ensayoVariableRepositorio(iEnsayoVariablejpaRepositorio jpaRepositorio, iEnsayoVariablejpaMapper mapper) {
+	iEnsayoVariableRepositorio ensayoVariableRepositorio(iEnsayoVariablejpaRepositorio jpaRepositorio,
+			iEnsayoVariablejpaMapper mapper) {
 		return new EnsayoVariableRepositorioImpl(jpaRepositorio, mapper);
-				
+
 	}
 
 	@Bean
 	iEnsayoVariableUseCase EnsayoVariableUseCase(iEnsayoVariableRepositorio respositorio) {
 		return new EnsayoVariableUseCaseImpl(respositorio);
 	}
-	
+
 	@Bean
-	iParametroValidacionRepositorio parametroValidacionRepositorio(iParametroValidacionjpaRepositorio jpaRepositorio, iParametroValidacionjpaMapper mapper) {
+	iParametroValidacionRepositorio parametroValidacionRepositorio(iParametroValidacionjpaRepositorio jpaRepositorio,
+			iParametroValidacionjpaMapper mapper) {
 		return new ParametroValidacionRepositorioImpl(jpaRepositorio, mapper);
-				
+
 	}
 
 	@Bean
 	iParametroValidacionUseCase ParametroValidacionUseCase(iParametroValidacionRepositorio respositorio) {
 		return new ParametroValidacionUseCaseImpl(respositorio);
 	}
-	
+
 	@Bean
-	iValidacionSemaforicaRepositorio validacionSemaforicaRepositorio(iValidacionSemaforicajpaRepositorio jpaRepositorio, iValidacionSemaforicajpaMapper mapper) {
+	iValidacionSemaforicaRepositorio validacionSemaforicaRepositorio(iValidacionSemaforicajpaRepositorio jpaRepositorio,
+			iValidacionSemaforicajpaMapper mapper) {
 		return new ValidacionSemaforicaRepositorioImpl(jpaRepositorio, mapper);
-				
+
 	}
 
 	@Bean
 	iValidacionSemaforicaUseCase ValidacionSemaforicaUseCase(iValidacionSemaforicaRepositorio respositorio) {
 		return new ValidacionSemaforicaUseCaseImpl(respositorio);
 	}
-	
+
 	@Bean
-	IPlanProduccionRepositorio planProduccionRepositorio(IPlanProduccionJpaRepositorio jpaRepositorio, IPlanProduccionJpaMapper mapper) {
+	IPlanProduccionRepositorio planProduccionRepositorio(IPlanProduccionJpaRepositorio jpaRepositorio,
+			IPlanProduccionJpaMapper mapper) {
 		return new PlanProduccionRepositorioImpl(jpaRepositorio, mapper);
 	}
 
@@ -178,14 +214,74 @@ public class JbpharmaConfig {
 	IPlanProduccionUseCase planProduccionUseCase(IPlanProduccionRepositorio repositorio) {
 		return new PlanProduccionUseCaseImpl(repositorio);
 	}
-	
+
 	@Bean
-	IOrdenProduccionRepositorio ordenProduccionRepositorio(IOrdenProduccionJpaRepositorio jpaRepositorio, IOrdenProduccionJpaMapper mapper) {
+	IOrdenProduccionRepositorio ordenProduccionRepositorio(IOrdenProduccionJpaRepositorio jpaRepositorio,
+			IOrdenProduccionJpaMapper mapper) {
 		return new OrdenProduccionRepositorioImpl(jpaRepositorio, mapper);
 	}
 
 	@Bean
 	IOrdenProduccionUseCase ordenProduccionUseCase(IOrdenProduccionRepositorio repositorio) {
 		return new OrdenProduccionUseCaseImpl(repositorio);
+	}
+
+	@Bean
+	IAuditoriaLoteRepositorio auditoriaLoteRepositorio(IAuditoriaLoteJpaRepositorio jpaRepositorio,
+			IAuditoriaLoteJpaMapper mapper) {
+		return new AuditoriaLoteRepositorioImpl(jpaRepositorio, mapper);
+	}
+
+	@Bean
+	IAuditoriaLoteUseCase auditoriaLoteUseCase(IAuditoriaLoteRepositorio repositorio) {
+		return new AuditoriaLoteUseCaseImpl(repositorio);
+	}
+
+	/* DictamenLote */
+	@Bean
+	IDictamenLoteRepositorio dictamenLoteRepositorio(IDictamenLoteJpaRepositorio jpaRepositorio,
+			IDictamenLoteJpaMapper mapper) {
+		return new DictamenLoteRepositorioImpl(jpaRepositorio, mapper);
+	}
+
+	@Bean
+	IDictamenLoteUseCase dictamenLoteUseCase(IDictamenLoteRepositorio repositorio) {
+		return new DictamenLoteUseCaseImpl(repositorio);
+	}
+
+	/* HistorialLote */
+	@Bean
+	IHistorialLoteRepositorio historialLoteRepositorio(IHistorialLoteJpaRepositorio jpaRepositorio,
+			IHistorialLoteJpaMapper mapper) {
+		return new HistorialLoteRepositorioImpl(jpaRepositorio, mapper);
+	}
+
+	@Bean
+	IHistorialLoteUseCase historialLoteUseCase(IHistorialLoteRepositorio repositorio) {
+		return new HistorialLoteUseCaseImpl(repositorio);
+	}
+
+	/* IndicadorKpi */
+	@Bean
+	IIndicadorKpiRepositorio indicadorKpiRepositorio(IIndicadorKpiJpaRepositorio jpaRepositorio,
+			IIndicadorKpiJpaMapper mapper) {
+		return new IndicadorKpiRepositorioImpl(jpaRepositorio, mapper);
+	}
+
+	@Bean
+	IIndicadorKpiUseCase indicadorKpiUseCase(IIndicadorKpiRepositorio repositorio) {
+		return new IndicadorKpiUseCaseImpl(repositorio);
+	}
+
+	/* InformeAuditoria */
+	@Bean
+	IInformeAuditoriaRepositorio informeAuditoriaRepositorio(IInformeAuditoriaJpaRepositorio jpaRepositorio,
+			IInformeAuditoriaJpaMapper mapper) {
+		return new InformeAuditoriaRepositorioImpl(jpaRepositorio, mapper);
+	}
+
+	@Bean
+	IInformeAuditoriaUseCase informeAuditoriaUseCase(IInformeAuditoriaRepositorio repositorio) {
+		return new InformeAuditoriaUseCaseImpl(repositorio);
 	}
 }
