@@ -3,6 +3,7 @@ package com.pisip.jbpharma.infraestructura.persistencia.jpa;
 import java.math.BigDecimal;
 import java.util.Date;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -16,18 +17,20 @@ import lombok.Data;
 @Data
 @Table(name = "parametro_calidad")
 public class ParametroCalidadEntity {
-	
-	 @Id
-	 @GeneratedValue(strategy = GenerationType.IDENTITY)
-	 private int idParametro;
-	 private String nombreParametro;
-	 private BigDecimal limiteMinimo;
-	 private BigDecimal limiteMaximo;
-	 private String unidadMedida;
-	 private Date fechaConfiguracion;
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int idParametro;
+	private String nombreParametro;
+	private BigDecimal limiteMinimo;
+	private BigDecimal limiteMaximo;
+	private String unidadMedida;
+	private Date fechaConfiguracion;
+	@Column(name = "id_producto")
+	private Integer idProducto;
 
 	@ManyToOne
-	@JoinColumn(name = "fk_producto")
+	@JoinColumn(name = "id_producto", insertable = false, updatable = false)
 	private ProductoEntity fkProductoEntity;
 
 }

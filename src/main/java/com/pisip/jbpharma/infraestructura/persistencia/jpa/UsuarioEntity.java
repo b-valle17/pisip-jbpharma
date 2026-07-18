@@ -29,10 +29,12 @@ public class UsuarioEntity {
     private String contrasenaHash;
     private boolean estadoUsuario;
     private Date fechaCreacion;
-
-	@ManyToOne
-	@JoinColumn(name = "fk_rol")
-	private RolEntity fkRolEntity;
+ 	@Column(name = "id_rol")
+ 	private Integer idRol;
+ 	
+ 	@ManyToOne
+ 	@JoinColumn(name = "id_rol", insertable = false, updatable = false)
+ 	private RolEntity fkRolEntity;
 	
 	@OneToMany(mappedBy = "fkUsuarioEntity")
 	private List<PlanProduccionEntity> planproduccion;

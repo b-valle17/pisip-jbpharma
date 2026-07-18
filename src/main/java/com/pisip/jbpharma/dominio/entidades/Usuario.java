@@ -10,13 +10,14 @@ public class Usuario {
     private String contrasenaHash;
     private boolean estadoUsuario;
     private Date fechaCreacion;
+    private int idRol;
     
 	public Usuario() {
 		super();
 	}
-	
+
 	public Usuario(int idUsuario, String nombre, String correo, String contrasenaHash, boolean estadoUsuario,
-			Date fechaCreacion) {
+			Date fechaCreacion, int idRol) {
 		super();
 		this.idUsuario = idUsuario;
 		this.nombre = nombre;
@@ -24,54 +25,62 @@ public class Usuario {
 		this.contrasenaHash = contrasenaHash;
 		this.estadoUsuario = estadoUsuario;
 		this.fechaCreacion = fechaCreacion;
+		this.idRol = idRol;
 	}
-	
+
 	public int getIdUsuario() {
 		return idUsuario;
 	}
-	
+
 	public void setIdUsuario(int idUsuario) {
 		this.idUsuario = idUsuario;
 	}
-	
+
 	public String getNombre() {
 		return nombre;
 	}
-	
+
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-	
+
 	public String getCorreo() {
 		return correo;
 	}
-	
+
 	public void setCorreo(String correo) {
 		this.correo = correo;
 	}
-	
+
 	public String getContrasenaHash() {
 		return contrasenaHash;
 	}
-	
+
 	public void setContrasenaHash(String contrasenaHash) {
 		this.contrasenaHash = contrasenaHash;
 	}
-	
+
 	public boolean isEstadoUsuario() {
 		return estadoUsuario;
 	}
-	
+
 	public void setEstadoUsuario(boolean estadoUsuario) {
 		this.estadoUsuario = estadoUsuario;
 	}
-	
+
 	public Date getFechaCreacion() {
 		return fechaCreacion;
 	}
-	
+
 	public void setFechaCreacion(Date fechaCreacion) {
 		this.fechaCreacion = fechaCreacion;
 	}
-    
+
+	public int getIdRol() {
+		return idRol;
+	}
+
+	public void setIdRol(int idRol) {
+		this.idRol = idRol;
+	}
 }
