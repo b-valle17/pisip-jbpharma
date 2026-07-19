@@ -5,11 +5,7 @@ import java.time.LocalDateTime;
 public class EnsayoLaboratorio {
 
 	private Long idEnsayo;
-<<<<<<< HEAD
 	private Integer idOrden;
-=======
-	private Integer idLote;
->>>>>>> main
 	private Integer idProducto;
 	private String codigoEnsayo;
 	private LocalDateTime fechaEnsayo;
@@ -22,19 +18,11 @@ public class EnsayoLaboratorio {
 		super();
 	}
 
-<<<<<<< HEAD
 	public EnsayoLaboratorio(Long idEnsayo, Integer idOrden, Integer idProducto, String codigoEnsayo,
 			LocalDateTime fechaEnsayo, String responsable, String observacion, String estado, LocalDateTime creadoEn) {
 		super();
 		this.idEnsayo = idEnsayo;
 		this.idOrden = idOrden;
-=======
-	public EnsayoLaboratorio(Long idEnsayo, Integer idLote, Integer idProducto, String codigoEnsayo,
-			LocalDateTime fechaEnsayo, String responsable, String observacion, String estado, LocalDateTime creadoEn) {
-		super();
-		this.idEnsayo = idEnsayo;
-		this.idLote = idLote;
->>>>>>> main
 		this.idProducto = idProducto;
 		this.codigoEnsayo = codigoEnsayo;
 		this.fechaEnsayo = fechaEnsayo;
@@ -52,21 +40,12 @@ public class EnsayoLaboratorio {
 		this.idEnsayo = idEnsayo;
 	}
 
-<<<<<<< HEAD
 	public Integer getIdOrden() {
 		return idOrden;
 	}
 
 	public void setIdOrden(Integer idOrden) {
 		this.idOrden = idOrden;
-=======
-	public Integer getIdLote() {
-		return idLote;
-	}
-
-	public void setIdLote(Integer idLote) {
-		this.idLote = idLote;
->>>>>>> main
 	}
 
 	public Integer getIdProducto() {
@@ -126,9 +105,5 @@ public class EnsayoLaboratorio {
 	}
 	
 	
-<<<<<<< HEAD
-	
-=======
->>>>>>> main
 }
 
