@@ -103,7 +103,7 @@ public class EnsayoLaboratorio {
 	public void setCreadoEn(LocalDateTime creadoEn) {
 		this.creadoEn = creadoEn;
 	}
-	
+
 	
 }
 

@@ -29,7 +29,7 @@ public class EnsayoLaboratorioRepositorioImpl implements iEnsayoLaboratorioRepos
 	}
 
 	@Override
-	public Optional<EnsayoLaboratorio> buscarPorId(int idEnsayoLaboratorio) {
+	public Optional<EnsayoLaboratorio> buscarPorId(long idEnsayoLaboratorio) {
 		return jpaRepositorio.findById(idEnsayoLaboratorio).map(entityMapper :: toDominio);
 	}
 
@@ -39,7 +39,7 @@ public class EnsayoLaboratorioRepositorioImpl implements iEnsayoLaboratorioRepos
 	}
 
 	@Override
-	public void eliminar(int idEnsayoLaboratorio) {
+	public void eliminar(long idEnsayoLaboratorio) {
 		jpaRepositorio.deleteById(idEnsayoLaboratorio);
 		
 	}

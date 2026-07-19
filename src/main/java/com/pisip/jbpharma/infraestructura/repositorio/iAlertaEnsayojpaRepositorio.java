@@ -4,6 +4,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.pisip.jbpharma.infraestructura.persistencia.jpa.AlertaEnsayoEntity;
 
-public interface iAlertaEnsayojpaRepositorio extends JpaRepository<AlertaEnsayoEntity, Integer> {
+public interface iAlertaEnsayojpaRepositorio extends JpaRepository<AlertaEnsayoEntity, Long> {
 
 }

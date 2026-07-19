@@ -13,6 +13,5 @@ public class UsuarioResponseDTO {
     private String contrasenaHash;
     private boolean estadoUsuario;
     private Date fechaCreacion;
-    private int idRol;
 
 }

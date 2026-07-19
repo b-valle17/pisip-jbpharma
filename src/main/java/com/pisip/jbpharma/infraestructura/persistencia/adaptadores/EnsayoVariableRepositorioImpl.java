@@ -31,7 +31,7 @@ public class EnsayoVariableRepositorioImpl implements iEnsayoVariableRepositorio
 	}
 
 	@Override
-	public Optional<EnsayoVariable> buscarPorId(int idEnsayoVariable) {
+	public Optional<EnsayoVariable> buscarPorId(long idEnsayoVariable) {
 		return jpaRepositorio.findById(idEnsayoVariable).map(entityMapper :: toDominio);
 	}
 
@@ -41,7 +41,7 @@ public class EnsayoVariableRepositorioImpl implements iEnsayoVariableRepositorio
 	}
 
 	@Override
-	public void eliminar(int idEnsayoVariable) {
+	public void eliminar(long idEnsayoVariable) {
 		jpaRepositorio.deleteById(idEnsayoVariable);
 		
 	}

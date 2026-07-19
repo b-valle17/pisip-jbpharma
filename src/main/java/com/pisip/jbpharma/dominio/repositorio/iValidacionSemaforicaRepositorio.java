@@ -8,8 +8,8 @@ import com.pisip.jbpharma.dominio.entidades.ValidacionSemaforica;
 public interface iValidacionSemaforicaRepositorio {
 	
 	ValidacionSemaforica guardar(ValidacionSemaforica nuevaValidacionSemaforica);
-	Optional<ValidacionSemaforica> buscarPorId(int idValidacionSemaforica);
+	Optional<ValidacionSemaforica> buscarPorId(long idValidacionSemaforica);
 	List<ValidacionSemaforica> listarTodos();
-	void eliminar(int idValidacionSemaforica);
+	void eliminar(long idValidacionSemaforica);
 
 }

@@ -3,17 +3,12 @@ package com.pisip.jbpharma.infraestructura.persistencia.jpa;
 import java.time.LocalDateTime;
 import java.util.List;
 import jakarta.persistence.*;
-
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
-@Data
+@Getter
+@Setter
 @Table(name = "ensayo_laboratorio")
 public class EnsayoLaboratorioEntity {
 
@@ -30,7 +25,7 @@ public class EnsayoLaboratorioEntity {
     @JoinColumn(name = "id_producto")
     private ProductoEntity producto;
 
-    @Column(name = "codigo_ensayo")
+    @Column(name = "codigo_ensayo", nullable = false, unique = true, length = 30)
     private String codigoEnsayo;
 
     @Column(name = "fecha_ensayo")
@@ -48,7 +43,10 @@ public class EnsayoLaboratorioEntity {
     @Column(name = "creado_en")
     private LocalDateTime creadoEn = LocalDateTime.now();
 
-    @OneToMany(mappedBy = "fkEnsayoLaboratorioEntity")
+    @OneToMany(
+        mappedBy = "fkEnsayoLaboratorioEntity",
+        cascade = CascadeType.ALL,
+        orphanRemoval = true
+    )
     private List<EnsayoVariableEntity> listaEnsayos;
-
 }

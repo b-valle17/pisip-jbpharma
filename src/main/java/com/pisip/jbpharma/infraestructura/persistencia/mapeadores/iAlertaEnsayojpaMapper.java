@@ -1,15 +1,15 @@
 package com.pisip.jbpharma.infraestructura.persistencia.mapeadores;
 
 import org.mapstruct.Mapper;
-
+import org.mapstruct.Mapping;
 import com.pisip.jbpharma.dominio.entidades.AlertaEnsayo;
 import com.pisip.jbpharma.infraestructura.persistencia.jpa.AlertaEnsayoEntity;
 
-@Mapper(componentModel = "Spring")
+@Mapper(componentModel = "spring")
 public interface iAlertaEnsayojpaMapper {
-	
-	AlertaEnsayo toDominio(AlertaEnsayoEntity entity);
-	AlertaEnsayoEntity toEntity(AlertaEnsayo alertaEnsayo);
-	
+    @Mapping(source = "fkValidacionSemaforicaEntity.idValidacion", target = "idValidacion")
+    AlertaEnsayo toDominio(AlertaEnsayoEntity entity);
 
+    @Mapping(source = "idValidacion", target = "fkValidacionSemaforicaEntity.idValidacion")
+    AlertaEnsayoEntity toEntity(AlertaEnsayo alertaEnsayo);
 }

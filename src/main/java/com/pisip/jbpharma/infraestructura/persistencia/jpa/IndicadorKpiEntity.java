@@ -1,25 +1,32 @@
 package com.pisip.jbpharma.infraestructura.persistencia.jpa;
 
 import java.math.BigDecimal;
-import java.util.Date;
+import java.time.LocalDateTime;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-import lombok.Data;
+import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
 @Entity
+@Getter
+@Setter
 @Table(name = "indicador_kpi")
 public class IndicadorKpiEntity {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int idKpi;
-	private String nombreIndicador;
-	private BigDecimal valor;
-	private Date fechaCalculo;
-	private String descripcion;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_kpi")
+    private Integer idKpi;
+
+    @Column(name = "nombre_indicador", nullable = false, length = 120)
+    private String nombreIndicador;
+
+    @Column(name = "valor", nullable = false, precision = 14, scale = 4)
+    private BigDecimal valor;
+
+    @Column(name = "fecha_calculo", nullable = false)
+    private LocalDateTime fechaCalculo = LocalDateTime.now();
+
+    @Column(name = "descripcion", length = 255)
+    private String descripcion;
 }
