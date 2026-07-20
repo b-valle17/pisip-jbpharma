@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -60,24 +59,6 @@ public class UsuarioController {
 	@GetMapping("/{idUsuario}")
 	public UsuarioResponseDto buscarPorId(@PathVariable int idUsuario) {
 		return mapper.toResponseDto(usuarioUseCase.buscarPorId(idUsuario));
-	}
-	
-	@PutMapping("/{idUsuario}")
-	public UsuarioResponseDTO actualizar(@PathVariable int idUsuario, @Valid @RequestBody UsuarioRequestDTO request) {
-	    // 1. Buscamos el usuario existente para recuperar sus datos históricos
-	    Usuario usuarioExistente = usuarioUseCase.buscarPorId(idUsuario);
-	    
-	    // 2. Mapeamos el DTO del formulario al objeto de dominio
-	    Usuario usuario = mapper.toDomain(request);
-	    usuario.setIdUsuario(idUsuario); 
-	    
-	    // 3. Rescatamos la fecha de creación original para que no se pierda o se ponga null
-	    if (usuarioExistente != null) {
-	        usuario.setFechaCreacion(usuarioExistente.getFechaCreacion());
-	    }
-	    
-	    // 4. Guardamos los cambios
-	    return mapper.toResponseDto(usuarioUseCase.guardar(usuario)); 
 	}
 
 	@DeleteMapping("/{idUsuario}")

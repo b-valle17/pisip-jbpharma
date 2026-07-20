@@ -8,8 +8,8 @@ import com.pisip.jbpharma.dominio.entidades.EnsayoLaboratorio;
 public interface iEnsayoLaboratorioRepositorio {
 	
 	EnsayoLaboratorio guardar(EnsayoLaboratorio nuevoEnsayoLaboratorio);
-	Optional<EnsayoLaboratorio> buscarPorId(int idEnsayoLaboratorio);
+	Optional<EnsayoLaboratorio> buscarPorId(long idEnsayoLaboratorio);
 	List<EnsayoLaboratorio> listarTodos();
-	void eliminar(int idEnsayoLaboratorio);
+	void eliminar(long idEnsayoLaboratorio);
 
 }

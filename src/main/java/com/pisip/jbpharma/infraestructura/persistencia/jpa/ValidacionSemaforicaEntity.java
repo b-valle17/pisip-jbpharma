@@ -3,11 +3,13 @@ package com.pisip.jbpharma.infraestructura.persistencia.jpa;
 import java.time.LocalDateTime;
 import java.util.List;
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 
 @Entity
-@Data
+@Getter
+@Setter
 @Table(name = "validacion_semaforica")
 public class ValidacionSemaforicaEntity {
 
@@ -22,7 +24,7 @@ public class ValidacionSemaforicaEntity {
 
     @ManyToOne
     @JoinColumn(name = "id_parametro")
-    private ParametroValidacionEntity fkParametroValidacionEntity;
+    private ParametroCalidadEntity fkParametroCalidadEntity;
 
     @Column(name = "resultado")
     private String resultado;
@@ -33,7 +35,10 @@ public class ValidacionSemaforicaEntity {
     @Column(name = "fecha_validacion")
     private LocalDateTime fechaValidacion = LocalDateTime.now();
 
-    @OneToMany(mappedBy = "fkValidacionSemaforicaEntity")
+    @OneToMany(
+        mappedBy = "fkValidacionSemaforicaEntity",
+        cascade = CascadeType.ALL,
+        orphanRemoval = true
+    )
     private List<AlertaEnsayoEntity> listaAlertas;
-
 }

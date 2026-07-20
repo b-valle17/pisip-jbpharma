@@ -30,7 +30,7 @@ public class ValidacionSemaforicaRepositorioImpl implements iValidacionSemaforic
 	}
 
 	@Override
-	public Optional<ValidacionSemaforica> buscarPorId(int idValidacionSemaforica) {
+	public Optional<ValidacionSemaforica> buscarPorId(long idValidacionSemaforica) {
 		return jpaRepositorio.findById(idValidacionSemaforica).map(entityMapper :: toDominio);
 	}
 
@@ -40,7 +40,7 @@ public class ValidacionSemaforicaRepositorioImpl implements iValidacionSemaforic
 	}
 
 	@Override
-	public void eliminar(int idValidacionSemaforica) {
+	public void eliminar(long idValidacionSemaforica) {
 		jpaRepositorio.deleteById(idValidacionSemaforica);
 		
 	}

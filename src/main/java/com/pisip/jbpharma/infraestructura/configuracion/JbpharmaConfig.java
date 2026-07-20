@@ -21,7 +21,6 @@ import com.pisip.jbpharma.aplicacion.casouso.entrada.IUsuarioUseCase;
 import com.pisip.jbpharma.aplicacion.casouso.entrada.iAlertaEnsayoUseCase;
 import com.pisip.jbpharma.aplicacion.casouso.entrada.iEnsayoLaboratorioUseCase;
 import com.pisip.jbpharma.aplicacion.casouso.entrada.iEnsayoVariableUseCase;
-import com.pisip.jbpharma.aplicacion.casouso.entrada.iParametroValidacionUseCase;
 import com.pisip.jbpharma.aplicacion.casouso.entrada.iValidacionSemaforicaUseCase;
 import com.pisip.jbpharma.aplicacion.casouso.impl.ProductoUseCaseImpl;
 import com.pisip.jbpharma.aplicacion.casouso.impl.AlertaEnsayoUseCaseImpl;
@@ -34,7 +33,6 @@ import com.pisip.jbpharma.aplicacion.casouso.impl.IndicadorKpiUseCaseImpl;
 import com.pisip.jbpharma.aplicacion.casouso.impl.InformeAuditoriaUseCaseImpl;
 import com.pisip.jbpharma.aplicacion.casouso.impl.OrdenProduccionUseCaseImpl;
 import com.pisip.jbpharma.aplicacion.casouso.impl.ParametroCalidadUseCaseImpl;
-import com.pisip.jbpharma.aplicacion.casouso.impl.ParametroValidacionUseCaseImpl;
 import com.pisip.jbpharma.aplicacion.casouso.impl.PlanProduccionUseCaseImpl;
 import com.pisip.jbpharma.aplicacion.casouso.impl.RolUseCaseImpl;
 import com.pisip.jbpharma.aplicacion.casouso.impl.UsuarioUseCaseImpl;
@@ -53,7 +51,6 @@ import com.pisip.jbpharma.dominio.repositorio.IUsuarioRepositorio;
 import com.pisip.jbpharma.dominio.repositorio.iAlertaEnsayoRepositorio;
 import com.pisip.jbpharma.dominio.repositorio.iEnsayoLaboratorioRepositorio;
 import com.pisip.jbpharma.dominio.repositorio.iEnsayoVariableRepositorio;
-import com.pisip.jbpharma.dominio.repositorio.iParametroValidacionRepositorio;
 import com.pisip.jbpharma.dominio.repositorio.iValidacionSemaforicaRepositorio;
 import com.pisip.jbpharma.infraestructura.persistencia.adaptadores.ProductoRepositorioImpl;
 import com.pisip.jbpharma.infraestructura.persistencia.adaptadores.AlertaEnsayoRepositorioImpl;
@@ -66,7 +63,6 @@ import com.pisip.jbpharma.infraestructura.persistencia.adaptadores.IndicadorKpiR
 import com.pisip.jbpharma.infraestructura.persistencia.adaptadores.InformeAuditoriaRepositorioImpl;
 import com.pisip.jbpharma.infraestructura.persistencia.adaptadores.OrdenProduccionRepositorioImpl;
 import com.pisip.jbpharma.infraestructura.persistencia.adaptadores.ParametroCalidadRepositorioImpl;
-import com.pisip.jbpharma.infraestructura.persistencia.adaptadores.ParametroValidacionRepositorioImpl;
 import com.pisip.jbpharma.infraestructura.persistencia.adaptadores.PlanProduccionRepositorioImpl;
 import com.pisip.jbpharma.infraestructura.persistencia.adaptadores.RolRepositorioImpl;
 import com.pisip.jbpharma.infraestructura.persistencia.adaptadores.UsuarioRepositorioImpl;
@@ -85,7 +81,6 @@ import com.pisip.jbpharma.infraestructura.persistencia.mapeadores.IUsuarioJpaMap
 import com.pisip.jbpharma.infraestructura.persistencia.mapeadores.iAlertaEnsayojpaMapper;
 import com.pisip.jbpharma.infraestructura.persistencia.mapeadores.iEnsayoLaboratoriojpaMapper;
 import com.pisip.jbpharma.infraestructura.persistencia.mapeadores.iEnsayoVariablejpaMapper;
-import com.pisip.jbpharma.infraestructura.persistencia.mapeadores.iParametroValidacionjpaMapper;
 import com.pisip.jbpharma.infraestructura.persistencia.mapeadores.iValidacionSemaforicajpaMapper;
 import com.pisip.jbpharma.infraestructura.repositorio.IProductoJpaRepositorio;
 import com.pisip.jbpharma.infraestructura.repositorio.IAuditoriaLoteJpaRepositorio;
@@ -101,7 +96,6 @@ import com.pisip.jbpharma.infraestructura.repositorio.IUsuarioJpaRepositorio;
 import com.pisip.jbpharma.infraestructura.repositorio.iAlertaEnsayojpaRepositorio;
 import com.pisip.jbpharma.infraestructura.repositorio.iEnsayoLaboratoriojpaRepositorio;
 import com.pisip.jbpharma.infraestructura.repositorio.iEnsayoVariablejpaRepositorio;
-import com.pisip.jbpharma.infraestructura.repositorio.iParametroValidacionjpaRepositorio;
 import com.pisip.jbpharma.infraestructura.repositorio.iValidacionSemaforicajpaRepositorio;
 
 @Configuration
@@ -201,20 +195,7 @@ public class JbpharmaConfig {
 	}
 
 	@Bean
-	iParametroValidacionRepositorio parametroValidacionRepositorio(iParametroValidacionjpaRepositorio jpaRepositorio,
-			iParametroValidacionjpaMapper mapper) {
-		return new ParametroValidacionRepositorioImpl(jpaRepositorio, mapper);
-
-	}
-
-	@Bean
-	iParametroValidacionUseCase ParametroValidacionUseCase(iParametroValidacionRepositorio respositorio) {
-		return new ParametroValidacionUseCaseImpl(respositorio);
-	}
-
-	@Bean
-	iValidacionSemaforicaRepositorio validacionSemaforicaRepositorio(iValidacionSemaforicajpaRepositorio jpaRepositorio,
-			iValidacionSemaforicajpaMapper mapper) {
+	iValidacionSemaforicaRepositorio validacionSemaforicaRepositorio(iValidacionSemaforicajpaRepositorio jpaRepositorio, iValidacionSemaforicajpaMapper mapper) {
 		return new ValidacionSemaforicaRepositorioImpl(jpaRepositorio, mapper);
 
 	}

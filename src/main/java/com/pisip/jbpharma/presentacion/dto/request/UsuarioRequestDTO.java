@@ -20,6 +20,5 @@ public class UsuarioRequestDTO {
 	@NotNull
     private boolean estadoUsuario;
     private Date fechaCreacion;
-    private int idRol;
 
 }

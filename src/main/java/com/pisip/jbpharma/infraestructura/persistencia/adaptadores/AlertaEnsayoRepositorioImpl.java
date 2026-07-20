@@ -30,7 +30,7 @@ public class AlertaEnsayoRepositorioImpl implements iAlertaEnsayoRepositorio{
 		}
 
 		@Override
-		public Optional<AlertaEnsayo> buscarPorId(int idAlertaEnsayo) {
+		public Optional<AlertaEnsayo> buscarPorId(long idAlertaEnsayo) {
 			return jpaRepositorio.findById(idAlertaEnsayo).map(entityMapper :: toDominio);
 		}
 
@@ -40,7 +40,7 @@ public class AlertaEnsayoRepositorioImpl implements iAlertaEnsayoRepositorio{
 		}
 
 		@Override
-		public void eliminar(int idAlertaEnsayo) {
+		public void eliminar(long idAlertaEnsayo) {
 			jpaRepositorio.deleteById(idAlertaEnsayo);
 			
 		}

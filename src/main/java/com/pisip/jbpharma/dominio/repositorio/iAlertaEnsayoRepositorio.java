@@ -8,8 +8,8 @@ import com.pisip.jbpharma.dominio.entidades.AlertaEnsayo;
 public interface iAlertaEnsayoRepositorio {
 	
 	AlertaEnsayo guardar(AlertaEnsayo nuevaAlertaEnsayo);
-	Optional<AlertaEnsayo> buscarPorId(int idAlertaEnsayo);
+	Optional<AlertaEnsayo> buscarPorId(long idAlertaEnsayo);
 	List<AlertaEnsayo> listarTodos();
-	void eliminar(int idAlertaEnsayo);
+	void eliminar(long idAlertaEnsayo);
 
 }
