@@ -15,9 +15,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.pisip.jbpharma.aplicacion.casouso.entrada.IUsuarioUseCase;
 import com.pisip.jbpharma.dominio.entidades.Usuario;
-import com.pisip.jbpharma.presentacion.dto.request.UsuarioRequestDto;
-import com.pisip.jbpharma.presentacion.dto.response.UsuarioResponseDto;
-import com.pisip.jbpharma.presentacion.mapeadores.IUsuarioDtoMapper;
+import com.pisip.jbpharma.presentacion.dto.request.UsuarioRequestDTO;
+import com.pisip.jbpharma.presentacion.dto.response.UsuarioResponseDTO;
+import com.pisip.jbpharma.presentacion.mapeadores.IUsuarioDTOMapper;
 
 import jakarta.validation.Valid;
 
@@ -26,16 +26,16 @@ import jakarta.validation.Valid;
 public class UsuarioController {
 
 	private final IUsuarioUseCase usuarioUseCase;
-	private final IUsuarioDtoMapper mapper;
+	private final IUsuarioDTOMapper mapper;
 
-	public UsuarioController(IUsuarioUseCase usuarioUseCase, IUsuarioDtoMapper mapper) {
+	public UsuarioController(IUsuarioUseCase usuarioUseCase, IUsuarioDTOMapper mapper) {
 		this.usuarioUseCase = usuarioUseCase;
 		this.mapper = mapper;
 	}
 
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
-	public UsuarioResponseDto guardar(@Valid @RequestBody UsuarioRequestDto request) {
+	public UsuarioResponseDTO guardar(@Valid @RequestBody UsuarioRequestDTO request) {
 		Usuario usuario = mapper.toDomain(request);
 		usuario.setEstadoUsuario(Boolean.TRUE.equals(request.isEstadoUsuario()));
 		if (usuario.getFechaCreacion() == null) {
@@ -45,19 +45,19 @@ public class UsuarioController {
 	}
 
 	@PostMapping("/login")
-	public ResponseEntity<UsuarioResponseDto> login(
+	public ResponseEntity<UsuarioResponseDTO> login(
 			@Valid @RequestBody com.pisip.jbpharma.presentacion.dto.request.LoginRequestDto request) {
 		Usuario usuario = usuarioUseCase.autenticar(request.getCorreo(), request.getContrasenaHash());
 		return ResponseEntity.ok(mapper.toResponseDto(usuario));
 	}
 
 	@GetMapping
-	public List<UsuarioResponseDto> listarTodo() {
+	public List<UsuarioResponseDTO> listarTodo() {
 		return usuarioUseCase.listarTodos().stream().map(mapper::toResponseDto).toList();
 	}
 
 	@GetMapping("/{idUsuario}")
-	public UsuarioResponseDto buscarPorId(@PathVariable int idUsuario) {
+	public UsuarioResponseDTO buscarPorId(@PathVariable int idUsuario) {
 		return mapper.toResponseDto(usuarioUseCase.buscarPorId(idUsuario));
 	}
 
