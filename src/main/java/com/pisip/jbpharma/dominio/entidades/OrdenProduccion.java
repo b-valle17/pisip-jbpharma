@@ -5,7 +5,7 @@ import java.util.Date;
 
 public class OrdenProduccion {
 
-	private int idOrden;
+	private Integer idOrden;
 	private String numeroLote;
 	private BigDecimal cantidadLote;
 	private Date fechaInicio;
@@ -16,7 +16,7 @@ public class OrdenProduccion {
 		super();
 	}
 
-	public OrdenProduccion(int idOrden, String numeroLote, BigDecimal cantidadLote, Date fechaInicio, Date fechaFin,
+	public OrdenProduccion(Integer idOrden, String numeroLote, BigDecimal cantidadLote, Date fechaInicio, Date fechaFin,
 			String estado) {
 		super();
 		this.idOrden = idOrden;
@@ -27,11 +27,11 @@ public class OrdenProduccion {
 		this.estado = estado;
 	}
 
-	public int getIdOrden() {
+	public Integer getIdOrden() {
 		return idOrden;
 	}
 
-	public void setIdOrden(int idOrden) {
+	public void setIdOrden(Integer idOrden) {
 		this.idOrden = idOrden;
 	}
 

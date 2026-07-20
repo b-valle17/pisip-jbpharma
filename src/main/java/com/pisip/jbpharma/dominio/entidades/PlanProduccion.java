@@ -4,20 +4,19 @@ import java.util.Date;
 
 public class PlanProduccion {
 	
-	private int idPlan;
+	private Integer idPlan; 
 	private String codigoPlan;
-	private int mes;
-	private int anio;
+	private Integer mes;    
+	private Integer anio;   
 	private Date fechaEmision;
 	private String estado;
 	private String descripcion;
 	
 	public PlanProduccion() {
 		super();
-
 	}
 
-	public PlanProduccion(int idPlan, String codigoPlan, int mes, int anio, Date fechaEmision, String estado,
+	public PlanProduccion(Integer idPlan, String codigoPlan, Integer mes, Integer anio, Date fechaEmision, String estado,
 			String descripcion) {
 		super();
 		this.idPlan = idPlan;
@@ -29,11 +28,11 @@ public class PlanProduccion {
 		this.descripcion = descripcion;
 	}
 
-	public int getIdPlan() {
+	public Integer getIdPlan() {
 		return idPlan;
 	}
 
-	public void setIdPlan(int idPlan) {
+	public void setIdPlan(Integer idPlan) {
 		this.idPlan = idPlan;
 	}
 
@@ -45,19 +44,19 @@ public class PlanProduccion {
 		this.codigoPlan = codigoPlan;
 	}
 
-	public int getMes() {
+	public Integer getMes() {
 		return mes;
 	}
 
-	public void setMes(int mes) {
+	public void setMes(Integer mes) {
 		this.mes = mes;
 	}
 
-	public int getAnio() {
+	public Integer getAnio() {
 		return anio;
 	}
 
-	public void setAnio(int anio) {
+	public void setAnio(Integer anio) {
 		this.anio = anio;
 	}
 
