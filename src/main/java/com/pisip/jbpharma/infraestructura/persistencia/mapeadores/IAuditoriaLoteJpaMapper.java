@@ -1,5 +1,9 @@
 package com.pisip.jbpharma.infraestructura.persistencia.mapeadores;
 
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.util.Date;
+
 import org.mapstruct.Mapper;
 
 import com.pisip.jbpharma.dominio.entidades.AuditoriaLote;
@@ -11,4 +15,20 @@ public interface IAuditoriaLoteJpaMapper {
 	AuditoriaLoteEntity toEntity(AuditoriaLote auditoriaLote);
 
 	AuditoriaLote toDomain(AuditoriaLoteEntity entity);
+
+	// Convierte de LocalDateTime (JPA) a Date (Dominio) - Soluciona tu error
+	default Date map(LocalDateTime localDateTime) {
+		if (localDateTime == null) {
+			return null;
+		}
+		return Date.from(localDateTime.atZone(ZoneId.systemDefault()).toInstant());
+	}
+
+	// Convierte de Date (Dominio) a LocalDateTime (JPA) - Evita el error inverso en toEntity
+	default LocalDateTime map(Date date) {
+		if (date == null) {
+			return null;
+		}
+		return LocalDateTime.ofInstant(date.toInstant(), ZoneId.systemDefault());
+	}
 }
