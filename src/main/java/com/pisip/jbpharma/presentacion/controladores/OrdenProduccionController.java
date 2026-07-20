@@ -41,7 +41,7 @@ public class OrdenProduccionController {
 	}
 
 	@GetMapping("/{idPlanProduccion}")
-	public OrdenProduccionResponseDto buscarPorId(@PathVariable int idOrden) {
+	public OrdenProduccionResponseDto buscarPorId(@PathVariable Integer idOrden) {
 		return mapper.toResponseDto(ordenProduccionUseCase.buscarPorId(idOrden));
 	};
 
@@ -65,7 +65,7 @@ public class OrdenProduccionController {
 	}
 
 	@DeleteMapping("/{id}")
-	public ResponseEntity<Void> eliminar(@PathVariable int idOrden) {
+	public ResponseEntity<Void> eliminar(@PathVariable Integer idOrden) {
 		ordenProduccionUseCase.eliminar(idOrden);
 		return ResponseEntity.noContent().build();
 	}
