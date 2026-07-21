@@ -16,6 +16,7 @@ public interface IDictamenLoteJpaMapper {
 	@Mapping(source = "ordenProduccion.idOrden", target = "idOrdenProduccion")
 	@Mapping(source = "usuarioInspector.idUsuario", target = "idUsuarioInspector")
 	DictamenLote toDomain(DictamenLoteEntity entity);
+	DictamenLoteEntity toEntity(DictamenLote dictamenLote);
 	// Resuelve el error al pasar de la Entidad (LocalDateTime) al Dominio (Date)
 	default Date map(LocalDateTime localDateTime) {
 		if (localDateTime == null) {

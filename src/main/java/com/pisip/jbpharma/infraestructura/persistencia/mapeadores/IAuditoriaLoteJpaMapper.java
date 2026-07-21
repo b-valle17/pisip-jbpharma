@@ -14,9 +14,12 @@ import com.pisip.jbpharma.infraestructura.persistencia.jpa.AuditoriaLoteEntity;
 public interface IAuditoriaLoteJpaMapper {
 
 	@Mapping(source = "ordenProduccion.idOrden", target = "idOrdenProduccion")
-	@Mapping(source = "usuarioAuditor.idUsuario", target = "idUsuarioAuditor")
+	@Mapping(source = "usuarioAuditor.idUsuario", target = "idUsuarioAuditor")	
 	AuditoriaLote toDomain(AuditoriaLoteEntity entity);
-	// Convierte de LocalDateTime (JPA) a Date (Dominio) - Soluciona tu error
+	AuditoriaLoteEntity toEntity(AuditoriaLote auditoriaLote);
+	
+	
+	// Convierte de LocalDateTime (JPA) a Date (Dominio)
 	default Date map(LocalDateTime localDateTime) {
 		if (localDateTime == null) {
 			return null;
@@ -24,7 +27,7 @@ public interface IAuditoriaLoteJpaMapper {
 		return Date.from(localDateTime.atZone(ZoneId.systemDefault()).toInstant());
 	}
 
-	// Convierte de Date (Dominio) a LocalDateTime (JPA) - Evita el error inverso en toEntity
+	// Convierte de Date (Dominio) a LocalDateTime (JPA)
 	default LocalDateTime map(Date date) {
 		if (date == null) {
 			return null;
