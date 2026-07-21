@@ -41,4 +41,12 @@ public class DictamenLoteRepositorioImpl implements IDictamenLoteRepositorio {
 	public void eliminar(int idDictamen) {
 		jpaRepositorio.deleteById(idDictamen);
 	}
+
+	@Override
+	public Optional<DictamenLote> buscarPorIdOrdenProduccion(int idOrdenProduccion) {
+		return jpaRepositorio.findByOrdenProduccion_IdOrdenOrderByFechaDictamenDesc(idOrdenProduccion)
+				.stream()
+				.findFirst()
+				.map(entityMapper::toDomain);
+	}
 }
