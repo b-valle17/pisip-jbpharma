@@ -41,7 +41,7 @@ public class PlanProduccionController {
 	}
 
 	@GetMapping("/{idPlanProduccion}")
-	public PlanProduccionResponseDto buscarPorId(@PathVariable int idPlan) {
+	public PlanProduccionResponseDto buscarPorId(@PathVariable Integer idPlan) {
 		return mapper.toResponseDto(planProduccionUseCase.buscarPorId(idPlan));
 	};
 
@@ -65,7 +65,7 @@ public class PlanProduccionController {
 	}
 
 	@DeleteMapping("/{id}")
-	public ResponseEntity<Void> eliminar(@PathVariable int idPlan) {
+	public ResponseEntity<Void> eliminar(@PathVariable Integer idPlan) {
 		planProduccionUseCase.eliminar(idPlan);
 		return ResponseEntity.noContent().build();
 	}

@@ -9,7 +9,7 @@ public class ValidacionSemaforicaResponseDTO {
 	
 	private Long idValidacion;
 	private Long idVariable;
-	private Long idParametro;
+	private int idParametro;
 	private String resultado;
 	private String mensaje;
 	private LocalDateTime fechaValidacion;

@@ -28,13 +28,8 @@ public class EnsayoLaboratorioRepositorioImpl implements iEnsayoLaboratorioRepos
 	}
 
 	@Override
-<<<<<<< Updated upstream
-	public Optional<EnsayoLaboratorio> buscarPorId(int idEnsayoLaboratorio) {
-		return jpaRepositorio.findById(idEnsayoLaboratorio).map(entityMapper :: toDominio);
-=======
 	public Optional<EnsayoLaboratorio> buscarPorId(long idEnsayoLaboratorio) {
-		return jpaRepositorio.findById(idEnsayoLaboratorio).map(entityMapper::toDominio);
->>>>>>> Stashed changes
+		return jpaRepositorio.findById(idEnsayoLaboratorio).map(entityMapper :: toDominio);
 	}
 
 	@Override
@@ -43,7 +38,7 @@ public class EnsayoLaboratorioRepositorioImpl implements iEnsayoLaboratorioRepos
 	}
 
 	@Override
-	public void eliminar(int idEnsayoLaboratorio) {
+	public void eliminar(long idEnsayoLaboratorio) {
 		jpaRepositorio.deleteById(idEnsayoLaboratorio);
 	}
 

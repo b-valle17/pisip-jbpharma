@@ -8,8 +8,8 @@ import com.pisip.jbpharma.dominio.entidades.EnsayoVariable;
 public interface iEnsayoVariableRepositorio {
 	
 	EnsayoVariable guardar(EnsayoVariable nuevoEnsayoVariable);
-	Optional<EnsayoVariable> buscarPorId(int idEnsayoVariable);
+	Optional<EnsayoVariable> buscarPorId(long idEnsayoVariable);
 	List<EnsayoVariable> listarTodos();
-	void eliminar(int idEnsayoVariable);
+	void eliminar(long idEnsayoVariable);
 
 }

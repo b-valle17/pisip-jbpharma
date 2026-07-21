@@ -4,7 +4,7 @@ public class LoginResponseDto {
 
 	private boolean autenticado;
 	private String mensaje;
-	private UsuarioResponseDto usuario;
+	private UsuarioResponseDTO usuario;
 
 	public boolean isAutenticado() {
 		return autenticado;
@@ -22,11 +22,11 @@ public class LoginResponseDto {
 		this.mensaje = mensaje;
 	}
 
-	public UsuarioResponseDto getUsuario() {
+	public UsuarioResponseDTO getUsuario() {
 		return usuario;
 	}
 
-	public void setUsuario(UsuarioResponseDto usuario) {
+	public void setUsuario(UsuarioResponseDTO usuario) {
 		this.usuario = usuario;
 }
 }

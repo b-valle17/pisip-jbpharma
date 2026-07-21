@@ -1,29 +1,31 @@
 package com.pisip.jbpharma.infraestructura.persistencia.jpa;
 
+import java.util.ArrayList;
 import java.util.List;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
-import lombok.Data;
+import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
 @Entity
-@Data
+@Getter
+@Setter
 @Table(name = "rol")
 public class RolEntity {
-	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int idRol;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_rol")
+    private Integer idRol;
+
+    @Column(name = "nombre_rol", nullable = false, unique = true, length = 80)
     private String nombreRol;
-    @Column(name = ("descripcion_rol"))
+
+    @Column(name = "descripcion_rol", length = 255)
     private String descripcion;
 
-	@OneToMany(mappedBy = "fkRolEntity")
-	private List<UsuarioEntity> listaUsuarios;
-
+    @OneToMany(mappedBy = "rol", fetch = FetchType.LAZY)
+    @ToString.Exclude
+    private List<UsuarioEntity> usuarios = new ArrayList<>();
 }

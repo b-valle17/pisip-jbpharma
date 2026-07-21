@@ -7,7 +7,7 @@ import lombok.Data;
 @Data
 public class EnsayoLaboratorioResponseDTO {
 	private Long idEnsayo;
-	private Integer idLote;
+	private Integer idOrden;
 	private Integer idProducto;
 	private String codigoEnsayo;
 	private LocalDateTime fechaEnsayo;

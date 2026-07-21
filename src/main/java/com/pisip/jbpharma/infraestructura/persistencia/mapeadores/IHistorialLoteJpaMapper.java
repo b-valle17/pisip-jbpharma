@@ -1,5 +1,9 @@
 package com.pisip.jbpharma.infraestructura.persistencia.mapeadores;
 
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.util.Date;
+
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
@@ -11,12 +15,6 @@ public interface IHistorialLoteJpaMapper {
 
 	@Mapping(source = "ordenProduccion.idOrden", target = "idOrdenProduccion")
 	HistorialLote toDomain(HistorialLoteEntity entity);
-<<<<<<< Updated upstream
-=======
-
-	@Mapping(source = "idOrdenProduccion", target = "ordenProduccion.idOrden")
-	HistorialLoteEntity toEntity(HistorialLote historialLote);
-
 	// Convierte de LocalDateTime (JPA) a Date (Dominio)
 	default Date map(LocalDateTime localDateTime) {
 		if (localDateTime == null) {
@@ -32,5 +30,4 @@ public interface IHistorialLoteJpaMapper {
 		}
 		return LocalDateTime.ofInstant(date.toInstant(), ZoneId.systemDefault());
 	}
->>>>>>> Stashed changes
 }

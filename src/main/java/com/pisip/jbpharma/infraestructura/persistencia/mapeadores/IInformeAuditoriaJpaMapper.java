@@ -1,5 +1,9 @@
 package com.pisip.jbpharma.infraestructura.persistencia.mapeadores;
 
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.util.Date;
+
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
@@ -11,12 +15,6 @@ public interface IInformeAuditoriaJpaMapper {
 
 	@Mapping(source = "auditoria.idAuditoria", target = "idAuditoria")
 	InformeAuditoria toDomain(InformeAuditoriaEntity entity);
-<<<<<<< Updated upstream
-=======
-
-	@Mapping(source = "idAuditoria", target = "auditoria.idAuditoria")
-	InformeAuditoriaEntity toEntity(InformeAuditoria informeAuditoria);
-
 	// Convierte de LocalDateTime (JPA) a Date (Dominio)
 	default Date map(LocalDateTime localDateTime) {
 		if (localDateTime == null) {
@@ -32,5 +30,5 @@ public interface IInformeAuditoriaJpaMapper {
 		}
 		return LocalDateTime.ofInstant(date.toInstant(), ZoneId.systemDefault());
 	}
->>>>>>> Stashed changes
+
 }

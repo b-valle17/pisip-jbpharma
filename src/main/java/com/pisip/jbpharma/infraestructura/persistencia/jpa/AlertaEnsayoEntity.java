@@ -1,32 +1,43 @@
 package com.pisip.jbpharma.infraestructura.persistencia.jpa;
 
 import java.time.LocalDateTime;
-
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-import lombok.Data;
+import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
-@Data
-@Table(name = "AlertaEnsayo")
+@Getter
+@Setter
+@Table(name = "alerta_ensayo")
 public class AlertaEnsayoEntity {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id_alerta")
 	private Long idAlerta;
-	private Long idValidacion;
-	private String tipoAlerta;
-	@Column(name = "destinatario_alerta")
-	private String destinatario;
-	@Column(length = 80)
-	private String asunto;
-	@Column(length = 120)
-	private String mensaje;
-	private String estadoEnvio;
-	private LocalDateTime fechaGeneracion;
-	private LocalDateTime fechaEnvio;
 
+	@ManyToOne
+	@JoinColumn(name = "id_validacion")
+	private ValidacionSemaforicaEntity fkValidacionSemaforicaEntity;
+
+	@Column(name = "tipo_alerta")
+	private String tipoAlerta = "EMAIL";
+
+	@Column(name = "destinatario")
+	private String destinatario;
+
+	@Column(name = "asunto")
+	private String asunto;
+
+	@Column(name = "mensaje")
+	private String mensaje;
+
+	@Column(name = "estado_envio")
+	private String estadoEnvio = "PENDIENTE";
+
+	@Column(name = "fecha_generacion")
+	private LocalDateTime fechaGeneracion = LocalDateTime.now();
+
+	@Column(name = "fecha_envio")
+	private LocalDateTime fechaEnvio;
 }

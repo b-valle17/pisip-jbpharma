@@ -1,5 +1,9 @@
 package com.pisip.jbpharma.infraestructura.persistencia.mapeadores;
 
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.util.Date;
+
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
@@ -12,13 +16,6 @@ public interface IDictamenLoteJpaMapper {
 	@Mapping(source = "ordenProduccion.idOrden", target = "idOrdenProduccion")
 	@Mapping(source = "usuarioInspector.idUsuario", target = "idUsuarioInspector")
 	DictamenLote toDomain(DictamenLoteEntity entity);
-<<<<<<< Updated upstream
-=======
-
-	@Mapping(source = "idOrdenProduccion", target = "ordenProduccion.idOrden")
-	@Mapping(source = "idUsuarioInspector", target = "usuarioInspector.idUsuario")
-	DictamenLoteEntity toEntity(DictamenLote dictamenLote);
-
 	// Resuelve el error al pasar de la Entidad (LocalDateTime) al Dominio (Date)
 	default Date map(LocalDateTime localDateTime) {
 		if (localDateTime == null) {
@@ -34,5 +31,5 @@ public interface IDictamenLoteJpaMapper {
 		}
 		return LocalDateTime.ofInstant(date.toInstant(), ZoneId.systemDefault());
 	}
->>>>>>> Stashed changes
+
 }

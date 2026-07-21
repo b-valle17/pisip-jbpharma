@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 public class EnsayoLaboratorio {
 
 	private Long idEnsayo;
-	private Integer idLote;
+	private Integer idOrden;
 	private Integer idProducto;
 	private String codigoEnsayo;
 	private LocalDateTime fechaEnsayo;
@@ -18,11 +18,11 @@ public class EnsayoLaboratorio {
 		super();
 	}
 
-	public EnsayoLaboratorio(Long idEnsayo, Integer idLote, Integer idProducto, String codigoEnsayo,
+	public EnsayoLaboratorio(Long idEnsayo, Integer idOrden, Integer idProducto, String codigoEnsayo,
 			LocalDateTime fechaEnsayo, String responsable, String observacion, String estado, LocalDateTime creadoEn) {
 		super();
 		this.idEnsayo = idEnsayo;
-		this.idLote = idLote;
+		this.idOrden = idOrden;
 		this.idProducto = idProducto;
 		this.codigoEnsayo = codigoEnsayo;
 		this.fechaEnsayo = fechaEnsayo;
@@ -40,12 +40,12 @@ public class EnsayoLaboratorio {
 		this.idEnsayo = idEnsayo;
 	}
 
-	public Integer getIdLote() {
-		return idLote;
+	public Integer getIdOrden() {
+		return idOrden;
 	}
 
-	public void setIdLote(Integer idLote) {
-		this.idLote = idLote;
+	public void setIdOrden(Integer idOrden) {
+		this.idOrden = idOrden;
 	}
 
 	public Integer getIdProducto() {
@@ -103,7 +103,7 @@ public class EnsayoLaboratorio {
 	public void setCreadoEn(LocalDateTime creadoEn) {
 		this.creadoEn = creadoEn;
 	}
-	
+
 	
 }
 

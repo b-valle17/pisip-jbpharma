@@ -1,30 +1,52 @@
 package com.pisip.jbpharma.infraestructura.persistencia.jpa;
 
 import java.time.LocalDateTime;
-
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-import lombok.Data;
+import java.util.List;
+import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
-@Data
-@Table(name = "EnsayoLaboratorio")
+@Getter
+@Setter
+@Table(name = "ensayo_laboratorio")
 public class EnsayoLaboratorioEntity {
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long idEnsayo;
-	private Integer idLote;
-	private Integer idProducto;
-	private String codigoEnsayo;
-	private LocalDateTime fechaEnsayo;
-	@Column(name = "responsable_ensayo")
-	private String responsable;
-	@Column(length = 80)
-	private String observacion;
-	private String estado;
-	private LocalDateTime creadoEn;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_ensayo")
+    private Long idEnsayo;
+
+    @ManyToOne
+    @JoinColumn(name = "id_orden")
+    private OrdenProduccionEntity ordenProduccion;
+   
+    @ManyToOne
+    @JoinColumn(name = "id_producto")
+    private ProductoEntity producto;
+
+    @Column(name = "codigo_ensayo", nullable = false, unique = true, length = 30)
+    private String codigoEnsayo;
+
+    @Column(name = "fecha_ensayo")
+    private LocalDateTime fechaEnsayo = LocalDateTime.now();
+
+    @Column(name = "responsable")
+    private String responsable;
+
+    @Column(name = "observacion")
+    private String observacion;
+
+    @Column(name = "estado")
+    private String estado = "REGISTRADO";
+
+    @Column(name = "creado_en")
+    private LocalDateTime creadoEn = LocalDateTime.now();
+
+    @OneToMany(
+        mappedBy = "fkEnsayoLaboratorioEntity",
+        cascade = CascadeType.ALL,
+        orphanRemoval = true
+    )
+    private List<EnsayoVariableEntity> listaEnsayos;
 }
