@@ -17,7 +17,7 @@ public class Usuario {
 	}
 
 	public Usuario(Integer idUsuario, String nombre, String correo, String contrasenaHash, boolean estadoUsuario,
-			Date fechaCreacion, int idRol) {
+			Date fechaCreacion, Integer idRol) {
 		super();
 		this.idUsuario = idUsuario;
 		this.nombre = nombre;
@@ -76,11 +76,11 @@ public class Usuario {
 		this.fechaCreacion = fechaCreacion;
 	}
 
-	public int getIdRol() {
+	public Integer getIdRol() {
 		return idRol;
 	}
 
-	public void setIdRol(int idRol) {
+	public void setIdRol(Integer idRol) {
 		this.idRol = idRol;
 	}
 	
