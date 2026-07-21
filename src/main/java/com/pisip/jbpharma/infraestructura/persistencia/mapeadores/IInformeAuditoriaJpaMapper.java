@@ -15,6 +15,7 @@ public interface IInformeAuditoriaJpaMapper {
 
 	@Mapping(source = "auditoria.idAuditoria", target = "idAuditoria")
 	InformeAuditoria toDomain(InformeAuditoriaEntity entity);
+	InformeAuditoriaEntity toEntity(InformeAuditoria informeAuditoria);
 	// Convierte de LocalDateTime (JPA) a Date (Dominio)
 	default Date map(LocalDateTime localDateTime) {
 		if (localDateTime == null) {
