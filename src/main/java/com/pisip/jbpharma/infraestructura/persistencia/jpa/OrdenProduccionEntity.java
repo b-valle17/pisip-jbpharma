@@ -44,7 +44,7 @@ public class OrdenProduccionEntity {
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "fk_usuario", nullable = false)
     @ToString.Exclude
-    private UsuarioEntity usuarioResponsable;
+    private UsuarioEntity usuario;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "fk_producto", nullable = false)
