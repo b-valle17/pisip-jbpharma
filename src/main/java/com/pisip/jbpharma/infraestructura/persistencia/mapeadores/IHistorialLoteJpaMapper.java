@@ -5,6 +5,7 @@ import java.time.ZoneId;
 import java.util.Date;
 
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 
 import com.pisip.jbpharma.dominio.entidades.HistorialLote;
 import com.pisip.jbpharma.infraestructura.persistencia.jpa.HistorialLoteEntity;
@@ -12,10 +13,8 @@ import com.pisip.jbpharma.infraestructura.persistencia.jpa.HistorialLoteEntity;
 @Mapper(componentModel = "spring")
 public interface IHistorialLoteJpaMapper {
 
-	HistorialLoteEntity toEntity(HistorialLote historialLote);
-
+	@Mapping(source = "ordenProduccion.idOrden", target = "idOrdenProduccion")
 	HistorialLote toDomain(HistorialLoteEntity entity);
-
 	// Convierte de LocalDateTime (JPA) a Date (Dominio)
 	default Date map(LocalDateTime localDateTime) {
 		if (localDateTime == null) {

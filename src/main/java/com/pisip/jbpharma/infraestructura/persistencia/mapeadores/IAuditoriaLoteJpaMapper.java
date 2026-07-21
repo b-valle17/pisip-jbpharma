@@ -5,6 +5,7 @@ import java.time.ZoneId;
 import java.util.Date;
 
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 
 import com.pisip.jbpharma.dominio.entidades.AuditoriaLote;
 import com.pisip.jbpharma.infraestructura.persistencia.jpa.AuditoriaLoteEntity;
@@ -12,10 +13,9 @@ import com.pisip.jbpharma.infraestructura.persistencia.jpa.AuditoriaLoteEntity;
 @Mapper(componentModel = "spring")
 public interface IAuditoriaLoteJpaMapper {
 
-	AuditoriaLoteEntity toEntity(AuditoriaLote auditoriaLote);
-
+	@Mapping(source = "ordenProduccion.idOrden", target = "idOrdenProduccion")
+	@Mapping(source = "usuarioAuditor.idUsuario", target = "idUsuarioAuditor")
 	AuditoriaLote toDomain(AuditoriaLoteEntity entity);
-
 	// Convierte de LocalDateTime (JPA) a Date (Dominio) - Soluciona tu error
 	default Date map(LocalDateTime localDateTime) {
 		if (localDateTime == null) {

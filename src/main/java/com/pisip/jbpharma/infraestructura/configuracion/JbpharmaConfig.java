@@ -224,8 +224,9 @@ public class JbpharmaConfig {
 	}
 
 	@Bean
-	IDictamenLoteUseCase dictamenLoteUseCase(IDictamenLoteRepositorio repositorio) {
-		return new DictamenLoteUseCaseImpl(repositorio);
+	IDictamenLoteUseCase dictamenLoteUseCase(IDictamenLoteRepositorio repositorio,
+			iEnsayoLaboratorioRepositorio ensayoLaboratorioRepositorio) {
+		return new DictamenLoteUseCaseImpl(repositorio, ensayoLaboratorioRepositorio);
 	}
 
 	@Bean
@@ -257,7 +258,10 @@ public class JbpharmaConfig {
 	}
 
 	@Bean
-	IIndicadorKpiUseCase indicadorKpiUseCase(IIndicadorKpiRepositorio repositorio) {
-		return new IndicadorKpiUseCaseImpl(repositorio);
+	IIndicadorKpiUseCase indicadorKpiUseCase(IIndicadorKpiRepositorio repositorio,
+			IOrdenProduccionRepositorio ordenProduccionRepositorio,
+			iEnsayoLaboratorioRepositorio ensayoLaboratorioRepositorio) {
+		return new IndicadorKpiUseCaseImpl(repositorio, ordenProduccionRepositorio, ensayoLaboratorioRepositorio);
 	}
+
 }

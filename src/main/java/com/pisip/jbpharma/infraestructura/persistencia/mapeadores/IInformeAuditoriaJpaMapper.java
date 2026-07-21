@@ -5,6 +5,7 @@ import java.time.ZoneId;
 import java.util.Date;
 
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 
 import com.pisip.jbpharma.dominio.entidades.InformeAuditoria;
 import com.pisip.jbpharma.infraestructura.persistencia.jpa.InformeAuditoriaEntity;
@@ -12,10 +13,8 @@ import com.pisip.jbpharma.infraestructura.persistencia.jpa.InformeAuditoriaEntit
 @Mapper(componentModel = "spring")
 public interface IInformeAuditoriaJpaMapper {
 
-	InformeAuditoriaEntity toEntity(InformeAuditoria informeAuditoria);
-
+	@Mapping(source = "auditoria.idAuditoria", target = "idAuditoria")
 	InformeAuditoria toDomain(InformeAuditoriaEntity entity);
-
 	// Convierte de LocalDateTime (JPA) a Date (Dominio)
 	default Date map(LocalDateTime localDateTime) {
 		if (localDateTime == null) {
@@ -31,4 +30,5 @@ public interface IInformeAuditoriaJpaMapper {
 		}
 		return LocalDateTime.ofInstant(date.toInstant(), ZoneId.systemDefault());
 	}
+
 }

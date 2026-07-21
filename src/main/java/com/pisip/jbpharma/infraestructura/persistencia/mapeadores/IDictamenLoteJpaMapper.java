@@ -5,6 +5,7 @@ import java.time.ZoneId;
 import java.util.Date;
 
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 
 import com.pisip.jbpharma.dominio.entidades.DictamenLote;
 import com.pisip.jbpharma.infraestructura.persistencia.jpa.DictamenLoteEntity;
@@ -12,10 +13,9 @@ import com.pisip.jbpharma.infraestructura.persistencia.jpa.DictamenLoteEntity;
 @Mapper(componentModel = "spring")
 public interface IDictamenLoteJpaMapper {
 
-	DictamenLoteEntity toEntity(DictamenLote dictamenLote);
-
+	@Mapping(source = "ordenProduccion.idOrden", target = "idOrdenProduccion")
+	@Mapping(source = "usuarioInspector.idUsuario", target = "idUsuarioInspector")
 	DictamenLote toDomain(DictamenLoteEntity entity);
-
 	// Resuelve el error al pasar de la Entidad (LocalDateTime) al Dominio (Date)
 	default Date map(LocalDateTime localDateTime) {
 		if (localDateTime == null) {
@@ -31,4 +31,5 @@ public interface IDictamenLoteJpaMapper {
 		}
 		return LocalDateTime.ofInstant(date.toInstant(), ZoneId.systemDefault());
 	}
+
 }

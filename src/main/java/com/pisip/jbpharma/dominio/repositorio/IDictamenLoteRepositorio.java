@@ -14,4 +14,7 @@ public interface IDictamenLoteRepositorio {
 	List<DictamenLote> listarTodos();
 
 	void eliminar(int idDictamen);
+
+	/** Busca el dictamen mas reciente asociado a una orden de produccion (lote) especifica. */
+	Optional<DictamenLote> buscarPorIdOrdenProduccion(int idOrdenProduccion);
 }

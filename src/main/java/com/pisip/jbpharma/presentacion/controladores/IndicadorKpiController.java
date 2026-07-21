@@ -17,6 +17,7 @@ import com.pisip.jbpharma.aplicacion.casouso.entrada.IIndicadorKpiUseCase;
 import com.pisip.jbpharma.dominio.entidades.IndicadorKpi;
 import com.pisip.jbpharma.presentacion.dto.request.IndicadorKpiRequestDto;
 import com.pisip.jbpharma.presentacion.dto.response.IndicadorKpiResponseDto;
+import com.pisip.jbpharma.presentacion.dto.response.IndicadorKpiResumenDto;
 import com.pisip.jbpharma.presentacion.mapeadores.IIndicadorKpiDtoMapper;
 
 import jakarta.validation.Valid;
@@ -43,6 +44,12 @@ public class IndicadorKpiController {
 	@GetMapping
 	public List<IndicadorKpiResponseDto> listarTodo() {
 		return indicadorKpiUseCase.listarTodos().stream().map(mapper::toResponseDto).toList();
+	}
+
+	// IMPORTANTE: esta ruta debe declararse ANTES que "/{idKpi}" para que Spring no la confunda con un id.
+	@GetMapping("/resumen")
+	public IndicadorKpiResumenDto obtenerResumen() {
+		return indicadorKpiUseCase.calcularResumen();
 	}
 
 	@GetMapping("/{idKpi}")

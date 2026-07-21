@@ -6,17 +6,16 @@ import java.util.Optional;
 import com.pisip.jbpharma.dominio.entidades.EnsayoLaboratorio;
 import com.pisip.jbpharma.dominio.repositorio.iEnsayoLaboratorioRepositorio;
 import com.pisip.jbpharma.infraestructura.persistencia.jpa.EnsayoLaboratorioEntity;
-import com.pisip.jbpharma.infraestructura.persistencia.mapeadores.iEnsayoLaboratoriojpaMapper;import com.pisip.jbpharma.infraestructura.repositorio.iEnsayoLaboratoriojpaRepositorio;
+import com.pisip.jbpharma.infraestructura.persistencia.mapeadores.iEnsayoLaboratoriojpaMapper;
+import com.pisip.jbpharma.infraestructura.repositorio.iEnsayoLaboratoriojpaRepositorio;
 
-public class EnsayoLaboratorioRepositorioImpl implements iEnsayoLaboratorioRepositorio{
-	
+public class EnsayoLaboratorioRepositorioImpl implements iEnsayoLaboratorioRepositorio {
 
 	private final iEnsayoLaboratoriojpaRepositorio jpaRepositorio;
 	private final iEnsayoLaboratoriojpaMapper entityMapper;
-	
+
 	public EnsayoLaboratorioRepositorioImpl(iEnsayoLaboratoriojpaRepositorio jpaRepositorio,
 			iEnsayoLaboratoriojpaMapper entityMapper) {
-		
 		this.jpaRepositorio = jpaRepositorio;
 		this.entityMapper = entityMapper;
 	}
@@ -41,9 +40,13 @@ public class EnsayoLaboratorioRepositorioImpl implements iEnsayoLaboratorioRepos
 	@Override
 	public void eliminar(long idEnsayoLaboratorio) {
 		jpaRepositorio.deleteById(idEnsayoLaboratorio);
-		
 	}
-	
-	
 
+	@Override
+	public Optional<EnsayoLaboratorio> buscarPorIdOrden(int idOrden) {
+		return jpaRepositorio.findByOrdenProduccion_IdOrdenOrderByFechaEnsayoDesc(idOrden)
+				.stream()
+				.findFirst()
+				.map(entityMapper::toDominio);
+	}
 }
