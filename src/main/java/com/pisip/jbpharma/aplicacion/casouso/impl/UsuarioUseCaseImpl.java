@@ -58,4 +58,11 @@ public class UsuarioUseCaseImpl implements IUsuarioUseCase {
 	public void eliminar(int idUsuario) {
 		repositorio.eliminar(idUsuario);
 	}
+
+	@Override
+	public Usuario actualizar(int id, Usuario usuario) {
+		buscarPorId(id);
+		usuario.setIdUsuario(id);
+		return repositorio.guardar(usuario);
+	}
 }

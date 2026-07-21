@@ -34,10 +34,12 @@ public class UsuarioEntity {
 
     @Column(name = "fecha_creacion", nullable = false)
     private LocalDateTime fechaCreacion = LocalDateTime.now();
+    
+    @Column(name = "id_rol")
+	private Integer idRol;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "fk_rol", nullable = false)
-    @ToString.Exclude
+    @ManyToOne
+	@JoinColumn(name = "id_rol", insertable = false, updatable = false)
     private RolEntity rol;
 
     @OneToMany(mappedBy = "usuarioResponsable", fetch = FetchType.LAZY)
