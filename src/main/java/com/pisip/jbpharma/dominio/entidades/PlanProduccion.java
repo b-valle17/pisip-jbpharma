@@ -11,13 +11,14 @@ public class PlanProduccion {
 	private Date fechaEmision;
 	private String estado;
 	private String descripcion;
+	private Integer idUsuario;
 	
 	public PlanProduccion() {
 		super();
 	}
 
-	public PlanProduccion(Integer idPlan, String codigoPlan, Integer mes, Integer anio, Date fechaEmision, String estado,
-			String descripcion) {
+	public PlanProduccion(Integer idPlan, String codigoPlan, Integer mes, Integer anio, Date fechaEmision,
+			String estado, String descripcion, Integer idUsuario) {
 		super();
 		this.idPlan = idPlan;
 		this.codigoPlan = codigoPlan;
@@ -26,6 +27,7 @@ public class PlanProduccion {
 		this.fechaEmision = fechaEmision;
 		this.estado = estado;
 		this.descripcion = descripcion;
+		this.idUsuario = idUsuario;
 	}
 
 	public Integer getIdPlan() {
@@ -84,4 +86,13 @@ public class PlanProduccion {
 		this.descripcion = descripcion;
 	}
 
+	public Integer getIdUsuario() {
+		return idUsuario;
+	}
+
+	public void setIdUsuario(Integer idUsuario) {
+		this.idUsuario = idUsuario;
+	}
+	
+	
 }

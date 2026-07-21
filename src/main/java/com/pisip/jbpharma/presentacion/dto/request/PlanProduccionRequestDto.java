@@ -13,6 +13,7 @@ public class PlanProduccionRequestDto {
 	
 	
 	private Integer idPlan;
+	private Integer idUsuario;
 	@NotBlank
 	private String codigoPlan;
 	@NotNull(message = "El mes es obligatorio") 
