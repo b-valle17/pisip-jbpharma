@@ -186,8 +186,9 @@ public class JbpharmaConfig {
 
 	@Bean
 	IPlanProduccionRepositorio planProduccionRepositorio(IPlanProduccionJpaRepositorio jpaRepositorio,
-			IPlanProduccionJpaMapper mapper) {
-		return new PlanProduccionRepositorioImpl(jpaRepositorio, mapper);
+	        IUsuarioJpaRepositorio usuarioJpaRepositorio, 
+	        IPlanProduccionJpaMapper mapper) {
+	    return new PlanProduccionRepositorioImpl(jpaRepositorio, usuarioJpaRepositorio, mapper); // <-- 2. Se envía al constructor
 	}
 
 	@Bean
@@ -197,8 +198,15 @@ public class JbpharmaConfig {
 
 	@Bean
 	IOrdenProduccionRepositorio ordenProduccionRepositorio(IOrdenProduccionJpaRepositorio jpaRepositorio,
+			IPlanProduccionJpaRepositorio planJpaRepositorio,
+			IProductoJpaRepositorio productoJpaRepositorio,
+			IUsuarioJpaRepositorio usuarioJpaRepositorio,
 			IOrdenProduccionJpaMapper mapper) {
-		return new OrdenProduccionRepositorioImpl(jpaRepositorio, mapper);
+		return new OrdenProduccionRepositorioImpl(jpaRepositorio,
+				planJpaRepositorio,
+				productoJpaRepositorio,
+				usuarioJpaRepositorio,
+				mapper);
 	}
 
 	@Bean

@@ -41,7 +41,10 @@ public class PlanProduccionEntity {
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "fk_usuario", nullable = false)
     @ToString.Exclude
-    private UsuarioEntity usuarioResponsable;
+    private UsuarioEntity usuario;
+
+    public UsuarioEntity getUsuario() { return usuario; }
+    public void setUsuario(UsuarioEntity usuario) { this.usuario = usuario; }
 
     @OneToMany(mappedBy = "planProduccion", fetch = FetchType.LAZY)
     @ToString.Exclude

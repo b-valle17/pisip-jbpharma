@@ -42,11 +42,11 @@ public class UsuarioEntity {
 	@JoinColumn(name = "id_rol", insertable = false, updatable = false)
     private RolEntity rol;
 
-    @OneToMany(mappedBy = "usuarioResponsable", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "usuario", fetch = FetchType.LAZY)
     @ToString.Exclude
     private List<PlanProduccionEntity> planesProduccion = new ArrayList<>();
 
-    @OneToMany(mappedBy = "usuarioResponsable", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "usuario", fetch = FetchType.LAZY)
     @ToString.Exclude
     private List<OrdenProduccionEntity> ordenesProduccion = new ArrayList<>();
 

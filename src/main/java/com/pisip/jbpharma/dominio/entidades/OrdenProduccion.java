@@ -12,13 +12,15 @@ public class OrdenProduccion {
 	private Date fechaFin;
 	private String estado;
 	private Integer idPlan;
+	private Integer idProducto;
+	private Integer idUsuario;
 	
 	public OrdenProduccion() {
 		super();
 	}
 
 	public OrdenProduccion(Integer idOrden, String numeroLote, BigDecimal cantidadLote, Date fechaInicio, Date fechaFin,
-			String estado, Integer idPlan) {
+			String estado, Integer idPlan, Integer idProducto, Integer idUsuario) {
 		super();
 		this.idOrden = idOrden;
 		this.numeroLote = numeroLote;
@@ -27,6 +29,8 @@ public class OrdenProduccion {
 		this.fechaFin = fechaFin;
 		this.estado = estado;
 		this.idPlan = idPlan;
+		this.idProducto = idProducto;
+		this.idUsuario = idUsuario;
 	}
 
 	public Integer getIdOrden() {
@@ -83,6 +87,22 @@ public class OrdenProduccion {
 
 	public void setIdPlan(Integer idPlan) {
 		this.idPlan = idPlan;
+	}
+
+	public Integer getIdProducto() {
+		return idProducto;
+	}
+
+	public void setIdProducto(Integer idProducto) {
+		this.idProducto = idProducto;
+	}
+
+	public Integer getIdUsuario() {
+		return idUsuario;
+	}
+
+	public void setIdUsuario(Integer idUsuario) {
+		this.idUsuario = idUsuario;
 	}
 	
 }

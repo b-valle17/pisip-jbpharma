@@ -14,6 +14,8 @@ public class OrdenProduccionRequestDto {
 	
 	private Integer idOrden;
 	private Integer idPlan;
+	private Integer idProducto;
+	private Integer idUsuario;
 	@NotBlank
 	private String numeroLote;
 	@NotNull(message = "El tamaño o cantidad es obligatorio")
