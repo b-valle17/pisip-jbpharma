@@ -65,7 +65,7 @@ public class PlanProduccionController {
 	}
 
 	@DeleteMapping("/{id}")
-	public ResponseEntity<Void> eliminar(@PathVariable Integer idPlan) {
+	public ResponseEntity<Void> eliminar(@PathVariable("id") Integer idPlan) {
 		planProduccionUseCase.eliminar(idPlan);
 		return ResponseEntity.noContent().build();
 	}

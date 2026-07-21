@@ -188,7 +188,7 @@ public class JbpharmaConfig {
 	IPlanProduccionRepositorio planProduccionRepositorio(IPlanProduccionJpaRepositorio jpaRepositorio,
 	        IUsuarioJpaRepositorio usuarioJpaRepositorio, 
 	        IPlanProduccionJpaMapper mapper) {
-	    return new PlanProduccionRepositorioImpl(jpaRepositorio, usuarioJpaRepositorio, mapper); // <-- 2. Se envía al constructor
+	    return new PlanProduccionRepositorioImpl(jpaRepositorio, usuarioJpaRepositorio, mapper); 
 	}
 
 	@Bean
