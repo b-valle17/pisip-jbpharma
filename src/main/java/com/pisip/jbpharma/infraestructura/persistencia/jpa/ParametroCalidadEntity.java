@@ -33,9 +33,11 @@ public class ParametroCalidadEntity {
 
     @Column(name = "fecha_configuracion", nullable = false)
     private LocalDateTime fechaConfiguracion = LocalDateTime.now();
+    
+    @Column(name = "id_produto")
+	private Integer idProducto;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "fk_producto", nullable = false)
-    @ToString.Exclude
+    @ManyToOne
+	@JoinColumn(name = "id_produto", insertable = false, updatable = false)
     private ProductoEntity producto;
 }

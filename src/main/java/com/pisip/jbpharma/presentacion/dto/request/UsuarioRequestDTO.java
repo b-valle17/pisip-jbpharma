@@ -8,9 +8,8 @@ import lombok.Data;
 
 @Data
 public class UsuarioRequestDTO {
-	
-	@NotNull
-	private int idUsuario;
+
+	private Integer idUsuario;
 	@NotBlank
     private String nombre;
 	@NotBlank
@@ -20,5 +19,6 @@ public class UsuarioRequestDTO {
 	@NotNull
     private boolean estadoUsuario;
     private Date fechaCreacion;
+    private Integer idRol;
 
 }

@@ -15,4 +15,6 @@ public interface IUsuarioUseCase {
 	List<Usuario> listarTodos();
 
 	void eliminar(int idUsuario);
+	
+	Usuario actualizar(int id, Usuario usuario);
 }
