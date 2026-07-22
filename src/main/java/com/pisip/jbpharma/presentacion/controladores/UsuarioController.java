@@ -72,17 +72,16 @@ public class UsuarioController {
 
 	@PutMapping("/{idUsuario}")
 	public ResponseEntity<UsuarioResponseDTO> actualizar(@PathVariable int idUsuario,
-			@Valid @RequestBody UsuarioRequestDTO request) {
+	        @Valid @RequestBody UsuarioRequestDTO request) {
 
-		// 1. Convertir DTO a entidad de Dominio
-		Usuario usuario = mapper.toDomain(request);
-		usuario.setIdUsuario(idUsuario); // Asignar el ID de la URL
+	    // 1. Convertir DTO a entidad de Dominio
+	    Usuario usuario = mapper.toDomain(request);
 
-		// 2. Ejecutar el caso de uso para actualizar (o guardar)
-		Usuario usuarioActualizado = usuarioUseCase.guardar(usuario);
+	    // 2. Ejecutar el MÉTODO ACTUALIZAR del caso de uso (no el de guardar)
+	    Usuario usuarioActualizado = usuarioUseCase.actualizar(idUsuario, usuario);
 
-		// 3. Retornar respuesta 200 OK
-		return ResponseEntity.ok(mapper.toResponseDto(usuarioActualizado));
+	    // 3. Retornar respuesta 200 OK
+	    return ResponseEntity.ok(mapper.toResponseDto(usuarioActualizado));
 	}
 
 	@DeleteMapping("/{idUsuario}")
