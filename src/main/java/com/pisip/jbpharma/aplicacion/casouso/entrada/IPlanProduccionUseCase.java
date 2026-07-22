@@ -17,5 +17,6 @@ public interface IPlanProduccionUseCase {
 	List<PlanProduccion> listarTodos();
 	
 	void eliminar(int idPlanProduccion);
-
+	
+	PlanProduccion actualizar(Integer idPlan, PlanProduccion planProduccion);
 }
