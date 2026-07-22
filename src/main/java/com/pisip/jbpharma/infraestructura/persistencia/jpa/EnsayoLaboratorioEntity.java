@@ -25,7 +25,7 @@ public class EnsayoLaboratorioEntity {
     @JoinColumn(name = "id_producto")
     private ProductoEntity producto;
 
-    @Column(name = "codigo_ensayo", nullable = false, unique = true, length = 30)
+    @Column(name = "codigo_ensayo", nullable = false, unique = true, length = 100)
     private String codigoEnsayo;
 
     @Column(name = "fecha_ensayo")
