@@ -34,11 +34,14 @@ public class UsuarioUseCaseImpl implements IUsuarioUseCase {
 		}
 
 		// 3. ENCRIPTACIÓN SEGURA DE CONTRASEÑA
-		// Solo encriptamos si no es ya un hash BCrypt (las cadenas BCrypt inician con
-		// "$2a$" o "$2b$")
-		if (nuevoUsuario.getContrasenaHash() != null && !nuevoUsuario.getContrasenaHash().startsWith("$2a$")) {
-			String contrasenaEncriptada = BCrypt.hashpw(nuevoUsuario.getContrasenaHash(), BCrypt.gensalt());
-			nuevoUsuario.setContrasenaHash(contrasenaEncriptada);
+		// Verificamos prefijos estándar de BCrypt ($2a$, $2b$, $2y$)
+		String pass = nuevoUsuario.getContrasenaHash();
+		if (pass != null && !pass.trim().isEmpty()) {
+			boolean yaEstaEncriptada = pass.startsWith("$2a$") || pass.startsWith("$2b$") || pass.startsWith("$2y$");
+			if (!yaEstaEncriptada) {
+				String contrasenaEncriptada = BCrypt.hashpw(pass, BCrypt.gensalt());
+				nuevoUsuario.setContrasenaHash(contrasenaEncriptada);
+			}
 		}
 
 		return repositorio.guardar(nuevoUsuario);
@@ -46,12 +49,12 @@ public class UsuarioUseCaseImpl implements IUsuarioUseCase {
 
 	@Override
 	public Usuario actualizar(int id, Usuario usuario) {
-		// Aseguramos que el usuario existe antes de actualizar
+		// 1. Aseguramos que el usuario existe antes de actualizar
 		Usuario usuarioExistente = buscarPorId(id);
 		usuario.setIdUsuario(id);
 
-		// Si en la actualización no enviaron contraseña nueva, conservamos la que tenía
-		// registrada
+		// 2. Si la contraseña viene nula o vacía en el DTO de edición,
+		// reasignamos la contraseña que ya tiene almacenada en BD.
 		if (usuario.getContrasenaHash() == null || usuario.getContrasenaHash().trim().isEmpty()) {
 			usuario.setContrasenaHash(usuarioExistente.getContrasenaHash());
 		}
@@ -92,7 +95,7 @@ public class UsuarioUseCaseImpl implements IUsuarioUseCase {
 
 	@Override
 	public void eliminar(int idUsuario) {
-		buscarPorId(idUsuario); // Garantiza que existe antes de intentar eliminar
+		buscarPorId(idUsuario);
 		repositorio.eliminar(idUsuario);
 	}
 
