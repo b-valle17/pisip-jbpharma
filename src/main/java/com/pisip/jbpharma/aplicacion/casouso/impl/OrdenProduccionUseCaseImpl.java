@@ -4,7 +4,6 @@ import java.util.List;
 
 import com.pisip.jbpharma.aplicacion.casouso.entrada.IOrdenProduccionUseCase;
 import com.pisip.jbpharma.dominio.entidades.OrdenProduccion;
-import com.pisip.jbpharma.dominio.entidades.PlanProduccion;
 import com.pisip.jbpharma.dominio.repositorio.IOrdenProduccionRepositorio;
 
 public class OrdenProduccionUseCaseImpl implements IOrdenProduccionUseCase {
