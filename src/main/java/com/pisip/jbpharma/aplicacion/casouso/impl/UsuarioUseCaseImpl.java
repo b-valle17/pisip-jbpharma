@@ -1,6 +1,7 @@
 package com.pisip.jbpharma.aplicacion.casouso.impl;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.http.HttpStatus;
@@ -63,18 +64,20 @@ public class UsuarioUseCaseImpl implements IUsuarioUseCase {
 
 	@Override
 	public Usuario buscarPorId(int idUsuario) {
-		return repositorio.buscarPorId(idUsuario).orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+		return repositorio.buscarPorId(idUsuario)
+				.orElseThrow(() -> new org.springframework.web.server.ResponseStatusException(HttpStatus.NOT_FOUND,
+						"Usuario no encontrado con ID: " + idUsuario));
 	}
 
 	@Override
 	public Usuario autenticar(String correo, String contrasenaPlana) {
 		Usuario usuario = repositorio.buscarPorCorreo(correo)
 				.orElseThrow(() -> new org.springframework.web.server.ResponseStatusException(HttpStatus.UNAUTHORIZED,
-						"Credenciales invalidas"));
+						"Credenciales inválidas"));
 
 		if (!BCrypt.checkpw(contrasenaPlana, usuario.getContrasenaHash())) {
 			throw new org.springframework.web.server.ResponseStatusException(HttpStatus.UNAUTHORIZED,
-					"Credenciales invalidas");
+					"Credenciales inválidas");
 		}
 
 		if (!usuario.isEstadoUsuario()) {
@@ -97,9 +100,7 @@ public class UsuarioUseCaseImpl implements IUsuarioUseCase {
 	}
 
 	@Override
-	public Usuario actualizar(int id, Usuario usuario) {
-		buscarPorId(id);
-		usuario.setIdUsuario(id);
-		return repositorio.guardar(usuario);
+	public boolean existePorCorreo(String correo) {
+		return repositorio.buscarPorCorreo(correo).isPresent();
 	}
 }
