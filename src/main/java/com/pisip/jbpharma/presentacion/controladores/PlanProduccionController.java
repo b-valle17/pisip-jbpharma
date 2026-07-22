@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -41,20 +40,10 @@ public class PlanProduccionController {
 		return mapper.toResponseDto(planProduccionUseCase.guardar(mapper.toDomain(request)));
 	}
 
-	@GetMapping("/{id}")
-	public ResponseEntity<PlanProduccionResponseDto> buscarPorId(@PathVariable("id") Integer idPlan) { 
-	    PlanProduccion plan = planProduccionUseCase.buscarPorId(idPlan);
-	    return ResponseEntity.ok(mapper.toResponseDto(plan));
-	}
-	
-	@PutMapping("/{id}")
-	public ResponseEntity<PlanProduccionResponseDto> actualizar(
-	        @PathVariable("id") Integer idPlan, 
-	        @RequestBody PlanProduccionRequestDto dto) {
-	    
-	    PlanProduccion planActualizado = planProduccionUseCase.actualizar(idPlan, mapper.toDomain(dto));
-	    return ResponseEntity.ok(mapper.toResponseDto(planActualizado));
-	}
+	@GetMapping("/{idPlanProduccion}")
+	public PlanProduccionResponseDto buscarPorId(@PathVariable Integer idPlan) {
+		return mapper.toResponseDto(planProduccionUseCase.buscarPorId(idPlan));
+	};
 
 	@GetMapping("/codigo/{codigo}")
 	public PlanProduccionResponseDto buscarPorCodigo(@PathVariable String codigo) {
@@ -76,7 +65,7 @@ public class PlanProduccionController {
 	}
 
 	@DeleteMapping("/{id}")
-	public ResponseEntity<Void> eliminar(@PathVariable("id") Integer idPlan) {
+	public ResponseEntity<Void> eliminar(@PathVariable Integer idPlan) {
 		planProduccionUseCase.eliminar(idPlan);
 		return ResponseEntity.noContent().build();
 	}

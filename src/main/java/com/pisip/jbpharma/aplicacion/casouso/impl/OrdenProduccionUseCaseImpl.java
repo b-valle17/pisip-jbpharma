@@ -4,7 +4,6 @@ import java.util.List;
 
 import com.pisip.jbpharma.aplicacion.casouso.entrada.IOrdenProduccionUseCase;
 import com.pisip.jbpharma.dominio.entidades.OrdenProduccion;
-import com.pisip.jbpharma.dominio.entidades.PlanProduccion;
 import com.pisip.jbpharma.dominio.repositorio.IOrdenProduccionRepositorio;
 
 public class OrdenProduccionUseCaseImpl implements IOrdenProduccionUseCase {
@@ -43,16 +42,6 @@ public class OrdenProduccionUseCaseImpl implements IOrdenProduccionUseCase {
 	@Override
 	public void eliminar(int idOrdenProduccion) {
 		repositorio.eliminar(idOrdenProduccion);		
-	}
-
-	@Override
-	public OrdenProduccion actualizar(Integer idOrden, OrdenProduccion ordenProduccion) {
-		OrdenProduccion existente = buscarPorId(idOrden);
-	    if (existente == null) {
-	        throw new RuntimeException("Orden de Fabricación no encontrada con ID: " + idOrden);
-	    }
-	    ordenProduccion.setIdPlan(idOrden);
-	    return repositorio.guardar(ordenProduccion);
 	}
 
 }

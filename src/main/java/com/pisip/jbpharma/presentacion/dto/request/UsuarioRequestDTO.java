@@ -14,6 +14,7 @@ public class UsuarioRequestDTO {
     private String nombre;
 	@NotBlank
     private String correo;
+	@NotBlank
     private String contrasenaHash;
 	@NotNull
     private boolean estadoUsuario;
