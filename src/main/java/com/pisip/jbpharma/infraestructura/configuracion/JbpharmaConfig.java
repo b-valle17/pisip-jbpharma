@@ -2,7 +2,6 @@ package com.pisip.jbpharma.infraestructura.configuracion;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-
 import com.pisip.jbpharma.aplicacion.casouso.entrada.IProductoUseCase;
 import com.pisip.jbpharma.aplicacion.casouso.entrada.IOrdenProduccionUseCase;
 import com.pisip.jbpharma.aplicacion.casouso.entrada.IParametroCalidadUseCase;
@@ -107,68 +106,90 @@ public class JbpharmaConfig {
 	IProductoUseCase productoUseCase(IProductoRepositorio repositorio) {
 		return new ProductoUseCaseImpl(repositorio);
 	}
-	
+
 	@Bean
-	iAlertaEnsayoRepositorio alertaEnsayoRepositorio(iAlertaEnsayojpaRepositorio jpaRepositorio, iAlertaEnsayojpaMapper mapper) {
+	iAlertaEnsayoRepositorio alertaEnsayoRepositorio(iAlertaEnsayojpaRepositorio jpaRepositorio,
+			iAlertaEnsayojpaMapper mapper) {
 		return new AlertaEnsayoRepositorioImpl(jpaRepositorio, mapper);
-				
+
 	}
 
 	@Bean
 	iAlertaEnsayoUseCase alertaEnsayoUseCase(iAlertaEnsayoRepositorio respositorio) {
 		return new AlertaEnsayoUseCaseImpl(respositorio);
 	}
-	
+
 	@Bean
-	iEnsayoLaboratorioRepositorio ensayoLaboratorioRepositorio(iEnsayoLaboratoriojpaRepositorio jpaRepositorio, iEnsayoLaboratoriojpaMapper mapper) {
-		return new EnsayoLaboratorioRepositorioImpl(jpaRepositorio, mapper);
-				
+	iEnsayoLaboratorioRepositorio ensayoLaboratorioRepositorio(
+            iEnsayoLaboratoriojpaRepositorio jpaRepositorio,
+            IOrdenProduccionJpaRepositorio ordenRepositorio,
+            IProductoJpaRepositorio productoRepositorio,
+            iEnsayoLaboratoriojpaMapper mapper) {
+        return new EnsayoLaboratorioRepositorioImpl(
+                jpaRepositorio, ordenRepositorio, productoRepositorio, mapper);
 	}
 
 	@Bean
 	iEnsayoLaboratorioUseCase EnsayoLaboratorioUseCase(iEnsayoLaboratorioRepositorio respositorio) {
 		return new EnsayoLaboratorioUseCaseImpl(respositorio);
 	}
-	
+
 	@Bean
-	iEnsayoVariableRepositorio ensayoVariableRepositorio(iEnsayoVariablejpaRepositorio jpaRepositorio, iEnsayoVariablejpaMapper mapper) {
+	iEnsayoVariableRepositorio ensayoVariableRepositorio(iEnsayoVariablejpaRepositorio jpaRepositorio,
+			iEnsayoVariablejpaMapper mapper) {
 		return new EnsayoVariableRepositorioImpl(jpaRepositorio, mapper);
-				
+
 	}
 
 	@Bean
 	iEnsayoVariableUseCase EnsayoVariableUseCase(iEnsayoVariableRepositorio respositorio) {
 		return new EnsayoVariableUseCaseImpl(respositorio);
 	}
-	
+
 	@Bean
 	iValidacionSemaforicaRepositorio validacionSemaforicaRepositorio(iValidacionSemaforicajpaRepositorio jpaRepositorio, iValidacionSemaforicajpaMapper mapper) {
 		return new ValidacionSemaforicaRepositorioImpl(jpaRepositorio, mapper);
-				
+
 	}
 
 	@Bean
-	iValidacionSemaforicaUseCase ValidacionSemaforicaUseCase(iValidacionSemaforicaRepositorio respositorio) {
-		return new ValidacionSemaforicaUseCaseImpl(respositorio);
-	}
-	
+	iValidacionSemaforicaUseCase ValidacionSemaforicaUseCase(
+            iValidacionSemaforicaRepositorio repositorio,
+            iEnsayoVariableRepositorio variableRepositorio,
+            IParametroCalidadRepositorio parametroRepositorio,
+            iEnsayoLaboratorioRepositorio ensayoRepositorio) {
+        return new ValidacionSemaforicaUseCaseImpl(
+                repositorio, variableRepositorio, parametroRepositorio, ensayoRepositorio);
+    }
+
 	@Bean
-	IPlanProduccionRepositorio planProduccionRepositorio(IPlanProduccionJpaRepositorio jpaRepositorio, IPlanProduccionJpaMapper mapper) {
-		return new PlanProduccionRepositorioImpl(jpaRepositorio, mapper);
+	IPlanProduccionRepositorio planProduccionRepositorio(IPlanProduccionJpaRepositorio jpaRepositorio,
+	        IUsuarioJpaRepositorio usuarioJpaRepositorio, 
+	        IPlanProduccionJpaMapper mapper) {
+	    return new PlanProduccionRepositorioImpl(jpaRepositorio, usuarioJpaRepositorio, mapper); // <-- 2. Se envía al constructor
 	}
 
 	@Bean
 	IPlanProduccionUseCase planProduccionUseCase(IPlanProduccionRepositorio repositorio) {
 		return new PlanProduccionUseCaseImpl(repositorio);
 	}
-	
+
 	@Bean
-	IOrdenProduccionRepositorio ordenProduccionRepositorio(IOrdenProduccionJpaRepositorio jpaRepositorio, IOrdenProduccionJpaMapper mapper) {
-		return new OrdenProduccionRepositorioImpl(jpaRepositorio, mapper);
+	IOrdenProduccionRepositorio ordenProduccionRepositorio(IOrdenProduccionJpaRepositorio jpaRepositorio,
+			IPlanProduccionJpaRepositorio planJpaRepositorio,
+			IProductoJpaRepositorio productoJpaRepositorio,
+			IUsuarioJpaRepositorio usuarioJpaRepositorio,
+			IOrdenProduccionJpaMapper mapper) {
+		return new OrdenProduccionRepositorioImpl(jpaRepositorio,
+				planJpaRepositorio,
+				productoJpaRepositorio,
+				usuarioJpaRepositorio,
+				mapper);
 	}
 
 	@Bean
 	IOrdenProduccionUseCase ordenProduccionUseCase(IOrdenProduccionRepositorio repositorio) {
 		return new OrdenProduccionUseCaseImpl(repositorio);
 	}
+
 }

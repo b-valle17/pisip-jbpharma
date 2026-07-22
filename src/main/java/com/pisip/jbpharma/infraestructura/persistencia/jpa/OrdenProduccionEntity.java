@@ -44,7 +44,7 @@ public class OrdenProduccionEntity {
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "fk_usuario", nullable = false)
     @ToString.Exclude
-    private UsuarioEntity usuarioResponsable;
+    private UsuarioEntity usuario;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "fk_producto", nullable = false)
@@ -55,15 +55,6 @@ public class OrdenProduccionEntity {
     @ToString.Exclude
     private List<EnsayoLaboratorioEntity> ensayosLaboratorio = new ArrayList<>();
 
-    @OneToMany(mappedBy = "ordenProduccion", fetch = FetchType.LAZY)
-    @ToString.Exclude
-    private List<AuditoriaLoteEntity> auditorias = new ArrayList<>();
 
-    @OneToMany(mappedBy = "ordenProduccion", fetch = FetchType.LAZY)
-    @ToString.Exclude
-    private List<DictamenLoteEntity> dictamenes = new ArrayList<>();
 
-    @OneToMany(mappedBy = "ordenProduccion", fetch = FetchType.LAZY)
-    @ToString.Exclude
-    private List<HistorialLoteEntity> historial = new ArrayList<>();
 }

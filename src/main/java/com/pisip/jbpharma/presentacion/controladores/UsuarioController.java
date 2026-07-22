@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -45,7 +46,8 @@ public class UsuarioController {
 	}
 
 	@PostMapping("/login")
-	public ResponseEntity<UsuarioResponseDTO> login(@Valid @RequestBody com.pisip.jbpharma.presentacion.dto.request.LoginRequestDto request) {
+	public ResponseEntity<UsuarioResponseDTO> login(
+			@Valid @RequestBody com.pisip.jbpharma.presentacion.dto.request.LoginRequestDto request) {
 		Usuario usuario = usuarioUseCase.autenticar(request.getCorreo(), request.getContrasenaHash());
 		return ResponseEntity.ok(mapper.toResponseDto(usuario));
 	}
@@ -58,6 +60,21 @@ public class UsuarioController {
 	@GetMapping("/{idUsuario}")
 	public UsuarioResponseDTO buscarPorId(@PathVariable int idUsuario) {
 		return mapper.toResponseDto(usuarioUseCase.buscarPorId(idUsuario));
+	}
+
+	@PutMapping("/{idUsuario}")
+	public ResponseEntity<UsuarioResponseDTO> actualizar(@PathVariable int idUsuario,
+			@Valid @RequestBody UsuarioRequestDTO request) {
+
+		// 1. Convertir DTO a entidad de Dominio
+		Usuario usuario = mapper.toDomain(request);
+		usuario.setIdUsuario(idUsuario); // Asignar el ID de la URL
+
+		// 2. Ejecutar el caso de uso para actualizar (o guardar)
+		Usuario usuarioActualizado = usuarioUseCase.guardar(usuario);
+
+		// 3. Retornar respuesta 200 OK
+		return ResponseEntity.ok(mapper.toResponseDto(usuarioActualizado));
 	}
 
 	@DeleteMapping("/{idUsuario}")

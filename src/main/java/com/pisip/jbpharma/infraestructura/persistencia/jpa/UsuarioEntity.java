@@ -34,25 +34,21 @@ public class UsuarioEntity {
 
     @Column(name = "fecha_creacion", nullable = false)
     private LocalDateTime fechaCreacion = LocalDateTime.now();
+    
+    @Column(name = "id_rol")
+	private Integer idRol;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "fk_rol", nullable = false)
-    @ToString.Exclude
+    @ManyToOne
+	@JoinColumn(name = "id_rol", insertable = false, updatable = false)
     private RolEntity rol;
 
-    @OneToMany(mappedBy = "usuarioResponsable", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "usuario", fetch = FetchType.LAZY)
     @ToString.Exclude
     private List<PlanProduccionEntity> planesProduccion = new ArrayList<>();
 
-    @OneToMany(mappedBy = "usuarioResponsable", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "usuario", fetch = FetchType.LAZY)
     @ToString.Exclude
     private List<OrdenProduccionEntity> ordenesProduccion = new ArrayList<>();
 
-    @OneToMany(mappedBy = "usuarioAuditor", fetch = FetchType.LAZY)
-    @ToString.Exclude
-    private List<AuditoriaLoteEntity> auditoriasRealizadas = new ArrayList<>();
 
-    @OneToMany(mappedBy = "usuarioInspector", fetch = FetchType.LAZY)
-    @ToString.Exclude
-    private List<DictamenLoteEntity> dictamenesRealizados = new ArrayList<>();
 }

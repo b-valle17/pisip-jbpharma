@@ -5,19 +5,22 @@ import java.util.Date;
 
 public class OrdenProduccion {
 
-	private int idOrden;
+	private Integer idOrden;
 	private String numeroLote;
 	private BigDecimal cantidadLote;
 	private Date fechaInicio;
 	private Date fechaFin;
 	private String estado;
+	private Integer idPlan;
+	private Integer idProducto;
+	private Integer idUsuario;
 	
 	public OrdenProduccion() {
 		super();
 	}
 
-	public OrdenProduccion(int idOrden, String numeroLote, BigDecimal cantidadLote, Date fechaInicio, Date fechaFin,
-			String estado) {
+	public OrdenProduccion(Integer idOrden, String numeroLote, BigDecimal cantidadLote, Date fechaInicio, Date fechaFin,
+			String estado, Integer idPlan, Integer idProducto, Integer idUsuario) {
 		super();
 		this.idOrden = idOrden;
 		this.numeroLote = numeroLote;
@@ -25,13 +28,16 @@ public class OrdenProduccion {
 		this.fechaInicio = fechaInicio;
 		this.fechaFin = fechaFin;
 		this.estado = estado;
+		this.idPlan = idPlan;
+		this.idProducto = idProducto;
+		this.idUsuario = idUsuario;
 	}
 
-	public int getIdOrden() {
+	public Integer getIdOrden() {
 		return idOrden;
 	}
 
-	public void setIdOrden(int idOrden) {
+	public void setIdOrden(Integer idOrden) {
 		this.idOrden = idOrden;
 	}
 
@@ -73,6 +79,30 @@ public class OrdenProduccion {
 
 	public void setEstado(String estado) {
 		this.estado = estado;
+	}
+
+	public Integer getIdPlan() {
+		return idPlan;
+	}
+
+	public void setIdPlan(Integer idPlan) {
+		this.idPlan = idPlan;
+	}
+
+	public Integer getIdProducto() {
+		return idProducto;
+	}
+
+	public void setIdProducto(Integer idProducto) {
+		this.idProducto = idProducto;
+	}
+
+	public Integer getIdUsuario() {
+		return idUsuario;
+	}
+
+	public void setIdUsuario(Integer idUsuario) {
+		this.idUsuario = idUsuario;
 	}
 	
 }
