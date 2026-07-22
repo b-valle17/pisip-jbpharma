@@ -44,4 +44,14 @@ public class OrdenProduccionUseCaseImpl implements IOrdenProduccionUseCase {
 		repositorio.eliminar(idOrdenProduccion);		
 	}
 
+	@Override
+	public OrdenProduccion actualizar(Integer idOrden, OrdenProduccion ordenProduccion) {
+		OrdenProduccion existente = buscarPorId(idOrden);
+	    if (existente == null) {
+	        throw new RuntimeException("Orden de Fabricación no encontrada con ID: " + idOrden);
+	    }
+	    ordenProduccion.setIdPlan(idOrden);
+	    return repositorio.guardar(ordenProduccion);
+	}
+
 }
