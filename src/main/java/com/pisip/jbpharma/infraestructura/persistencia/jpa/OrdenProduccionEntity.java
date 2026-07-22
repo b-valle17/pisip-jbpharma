@@ -55,6 +55,15 @@ public class OrdenProduccionEntity {
     @ToString.Exclude
     private List<EnsayoLaboratorioEntity> ensayosLaboratorio = new ArrayList<>();
 
+    @OneToMany(mappedBy = "ordenProduccion", fetch = FetchType.LAZY)
+    @ToString.Exclude
+    private List<AuditoriaLoteEntity> auditorias = new ArrayList<>();
 
+    @OneToMany(mappedBy = "ordenProduccion", fetch = FetchType.LAZY)
+    @ToString.Exclude
+    private List<DictamenLoteEntity> dictamenes = new ArrayList<>();
 
+    @OneToMany(mappedBy = "ordenProduccion", fetch = FetchType.LAZY)
+    @ToString.Exclude
+    private List<HistorialLoteEntity> historial = new ArrayList<>();
 }

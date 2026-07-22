@@ -150,13 +150,10 @@ public class JbpharmaConfig {
 	}
 
 	@Bean
-	iEnsayoLaboratorioRepositorio ensayoLaboratorioRepositorio(
-            iEnsayoLaboratoriojpaRepositorio jpaRepositorio,
-            IOrdenProduccionJpaRepositorio ordenRepositorio,
-            IProductoJpaRepositorio productoRepositorio,
-            iEnsayoLaboratoriojpaMapper mapper) {
-        return new EnsayoLaboratorioRepositorioImpl(
-                jpaRepositorio, ordenRepositorio, productoRepositorio, mapper);
+	iEnsayoLaboratorioRepositorio ensayoLaboratorioRepositorio(iEnsayoLaboratoriojpaRepositorio jpaRepositorio,
+			iEnsayoLaboratoriojpaMapper mapper) {
+		return new EnsayoLaboratorioRepositorioImpl(jpaRepositorio, mapper);
+
 	}
 
 	@Bean
@@ -183,14 +180,9 @@ public class JbpharmaConfig {
 	}
 
 	@Bean
-	iValidacionSemaforicaUseCase ValidacionSemaforicaUseCase(
-            iValidacionSemaforicaRepositorio repositorio,
-            iEnsayoVariableRepositorio variableRepositorio,
-            IParametroCalidadRepositorio parametroRepositorio,
-            iEnsayoLaboratorioRepositorio ensayoRepositorio) {
-        return new ValidacionSemaforicaUseCaseImpl(
-                repositorio, variableRepositorio, parametroRepositorio, ensayoRepositorio);
-    }
+	iValidacionSemaforicaUseCase ValidacionSemaforicaUseCase(iValidacionSemaforicaRepositorio respositorio) {
+		return new ValidacionSemaforicaUseCaseImpl(respositorio);
+	}
 
 	@Bean
 	IPlanProduccionRepositorio planProduccionRepositorio(IPlanProduccionJpaRepositorio jpaRepositorio,

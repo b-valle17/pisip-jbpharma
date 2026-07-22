@@ -14,6 +14,5 @@ public class OrdenProduccionResponseDto {
 	private Date fechaFin;
 	private String estado;
 	private String codigoPlan;
-	private Integer idProducto;
 	
 }
