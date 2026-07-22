@@ -17,4 +17,6 @@ public interface IOrdenProduccionUseCase {
 	List<OrdenProduccion> listarTodos();
 	
 	void eliminar(int idOrdenProduccion);
+	
+	OrdenProduccion actualizar(Integer idOrden, OrdenProduccion ordenProduccion);
 }
