@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -40,10 +41,22 @@ public class OrdenProduccionController {
 		return mapper.toResponseDto(ordenProduccionUseCase.guardar(mapper.toDomain(request)));
 	}
 
-	@GetMapping("/{idPlanProduccion}")
-	public OrdenProduccionResponseDto buscarPorId(@PathVariable Integer idOrden) {
-		return mapper.toResponseDto(ordenProduccionUseCase.buscarPorId(idOrden));
-	};
+	@GetMapping("/{id}")
+    public ResponseEntity<OrdenProduccionResponseDto> buscarPorId(@PathVariable("id") Integer idOrden) {
+		OrdenProduccion orden = ordenProduccionUseCase.buscarPorId(idOrden);
+        
+        return ResponseEntity.ok(mapper.toResponseDto(orden));
+    }
+	
+	@PutMapping("/{id}")
+    public ResponseEntity<OrdenProduccionResponseDto> actualizar(
+            @PathVariable("id") Integer idOrden,
+            @RequestBody OrdenProduccionRequestDto dto) {
+
+        OrdenProduccion ordenDominio = mapper.toDomain(dto);
+        OrdenProduccion ordenActualizada = ordenProduccionUseCase.actualizar(idOrden, ordenDominio);
+        return ResponseEntity.ok(mapper.toResponseDto(ordenActualizada));
+    }
 
 	@GetMapping("/codigo/{codigo}")
 	public OrdenProduccionResponseDto buscarPorNumeroDeLote(@PathVariable String numeroLote) {
@@ -65,7 +78,7 @@ public class OrdenProduccionController {
 	}
 
 	@DeleteMapping("/{id}")
-	public ResponseEntity<Void> eliminar(@PathVariable Integer idOrden) {
+	public ResponseEntity<Void> eliminar(@PathVariable("id") Integer idOrden) {
 		ordenProduccionUseCase.eliminar(idOrden);
 		return ResponseEntity.noContent().build();
 	}

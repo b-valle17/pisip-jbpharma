@@ -45,4 +45,14 @@ public class PlanProduccionUseCaseImpl implements IPlanProduccionUseCase{
 		
 	}
 
+	@Override
+	public PlanProduccion actualizar(Integer idPlan, PlanProduccion planProduccion) {
+	    PlanProduccion existente = buscarPorId(idPlan);
+	    if (existente == null) {
+	        throw new RuntimeException("Plan de Producción no encontrado con ID: " + idPlan);
+	    }
+	    planProduccion.setIdPlan(idPlan);
+	    return repositorio.guardar(planProduccion);
+	}
+
 }

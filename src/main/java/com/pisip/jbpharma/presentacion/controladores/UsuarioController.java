@@ -36,13 +36,21 @@ public class UsuarioController {
 
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
-	public UsuarioResponseDTO guardar(@Valid @RequestBody UsuarioRequestDTO request) {
+	public ResponseEntity<?> guardar(@Valid @RequestBody UsuarioRequestDTO request) {
+		// 1. Validar si ya existe el correo antes de mapear y guardar
+		if (usuarioUseCase.existePorCorreo(request.getCorreo())) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("El correo electrónico ya está registrado.");
+		}
+
+		// 2. Si no existe, proceder con el flujo habitual
 		Usuario usuario = mapper.toDomain(request);
 		usuario.setEstadoUsuario(Boolean.TRUE.equals(request.isEstadoUsuario()));
 		if (usuario.getFechaCreacion() == null) {
 			usuario.setFechaCreacion(new java.util.Date());
 		}
-		return mapper.toResponseDto(usuarioUseCase.guardar(usuario));
+
+		UsuarioResponseDTO respuesta = mapper.toResponseDto(usuarioUseCase.guardar(usuario));
+		return ResponseEntity.status(HttpStatus.CREATED).body(respuesta);
 	}
 
 	@PostMapping("/login")

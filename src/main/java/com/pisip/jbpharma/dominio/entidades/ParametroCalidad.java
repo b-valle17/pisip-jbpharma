@@ -17,8 +17,8 @@ public class ParametroCalidad {
 		super();
 	}
 
-	 public ParametroCalidad(int idParametro, String nombreParametro, BigDecimal limiteMinimo, BigDecimal limiteMaximo,
-			String unidadMedida, Date fechaConfiguracion, int idProducto) {
+	 public ParametroCalidad(Integer idParametro, String nombreParametro, BigDecimal limiteMinimo, BigDecimal limiteMaximo,
+			String unidadMedida, Date fechaConfiguracion, Integer idProducto) {
 		super();
 		this.idParametro = idParametro;
 		this.nombreParametro = nombreParametro;
@@ -29,11 +29,11 @@ public class ParametroCalidad {
 		this.idProducto = idProducto;
 	 }
 
-	 public int getIdParametro() {
+	 public Integer getIdParametro() {
 		 return idParametro;
 	 }
 
-	 public void setIdParametro(int idParametro) {
+	 public void setIdParametro(Integer idParametro) {
 		 this.idParametro = idParametro;
 	 }
 

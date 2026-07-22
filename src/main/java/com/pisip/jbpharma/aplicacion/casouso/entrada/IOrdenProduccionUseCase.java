@@ -3,6 +3,7 @@ package com.pisip.jbpharma.aplicacion.casouso.entrada;
 import java.util.List;
 
 import com.pisip.jbpharma.dominio.entidades.OrdenProduccion;
+import com.pisip.jbpharma.dominio.entidades.PlanProduccion;
 
 public interface IOrdenProduccionUseCase {
 
@@ -17,4 +18,6 @@ public interface IOrdenProduccionUseCase {
 	List<OrdenProduccion> listarTodos();
 	
 	void eliminar(int idOrdenProduccion);
+	
+	OrdenProduccion actualizar(Integer idOrden, OrdenProduccion ordenProduccion);
 }
