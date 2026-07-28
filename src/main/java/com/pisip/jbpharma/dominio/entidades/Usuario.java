@@ -11,13 +11,14 @@ public class Usuario {
     private boolean estadoUsuario;
     private Date fechaCreacion;
     private Integer idRol;
+    private boolean esNuevo = true; // Por defecto true al crear
     
 	public Usuario() {
 		super();
 	}
 
 	public Usuario(Integer idUsuario, String nombre, String correo, String contrasenaHash, boolean estadoUsuario,
-			Date fechaCreacion, Integer idRol) {
+			Date fechaCreacion, Integer idRol, boolean esNuevo) {
 		super();
 		this.idUsuario = idUsuario;
 		this.nombre = nombre;
@@ -26,6 +27,7 @@ public class Usuario {
 		this.estadoUsuario = estadoUsuario;
 		this.fechaCreacion = fechaCreacion;
 		this.idRol = idRol;
+		this.esNuevo = esNuevo;
 	}
 
 	public Integer getIdUsuario() {
@@ -82,6 +84,14 @@ public class Usuario {
 
 	public void setIdRol(Integer idRol) {
 		this.idRol = idRol;
+	}
+
+	public boolean isEsNuevo() {
+		return esNuevo;
+	}
+
+	public void setEsNuevo(boolean esNuevo) {
+		this.esNuevo = esNuevo;
 	}
 	
 }
