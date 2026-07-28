@@ -37,6 +37,9 @@ public class UsuarioEntity {
     
     @Column(name = "id_rol")
 	private Integer idRol;
+    
+    @Column(name = "es_nuevo", nullable = false, columnDefinition = "boolean default true")
+    private boolean esNuevo = true;
 
     @ManyToOne
 	@JoinColumn(name = "id_rol", insertable = false, updatable = false)
