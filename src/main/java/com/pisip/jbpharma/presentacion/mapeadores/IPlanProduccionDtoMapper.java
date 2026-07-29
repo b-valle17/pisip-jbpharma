@@ -8,9 +8,9 @@ import com.pisip.jbpharma.presentacion.dto.response.PlanProduccionResponseDto;
 
 @Mapper(componentModel = "spring")
 public interface IPlanProduccionDtoMapper {
-	
-	PlanProduccion toDomain(PlanProduccionRequestDto dto);
 
-	PlanProduccionResponseDto toResponseDto(PlanProduccion planProduccion);
+    PlanProduccion toDomain(PlanProduccionRequestDto dto);
+
+    PlanProduccionResponseDto toResponseDto(PlanProduccion planProduccion);
 
 }

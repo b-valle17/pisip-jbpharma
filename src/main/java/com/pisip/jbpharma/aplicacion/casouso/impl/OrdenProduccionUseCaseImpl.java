@@ -50,7 +50,7 @@ public class OrdenProduccionUseCaseImpl implements IOrdenProduccionUseCase {
 	    if (existente == null) {
 	        throw new RuntimeException("Orden de Fabricación no encontrada con ID: " + idOrden);
 	    }
-	    ordenProduccion.setIdPlan(idOrden);
+	    ordenProduccion.setIdOrden(idOrden);
 	    return repositorio.guardar(ordenProduccion);
 	}
 
