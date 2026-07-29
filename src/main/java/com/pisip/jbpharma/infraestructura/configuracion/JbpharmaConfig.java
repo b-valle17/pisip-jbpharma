@@ -161,8 +161,8 @@ public class JbpharmaConfig {
 	}
 
 	@Bean
-	iEnsayoLaboratorioUseCase EnsayoLaboratorioUseCase(iEnsayoLaboratorioRepositorio respositorio) {
-		return new EnsayoLaboratorioUseCaseImpl(respositorio);
+	iEnsayoLaboratorioUseCase EnsayoLaboratorioUseCase(iEnsayoLaboratorioRepositorio respositorio, IOrdenProduccionRepositorio ordenProduccionRepositorio) {
+		return new EnsayoLaboratorioUseCaseImpl(respositorio, ordenProduccionRepositorio);
 	}
 
 	@Bean

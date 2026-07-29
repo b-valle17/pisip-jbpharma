@@ -6,12 +6,15 @@ import java.util.UUID;
 import com.pisip.jbpharma.aplicacion.casouso.entrada.iEnsayoLaboratorioUseCase;
 import com.pisip.jbpharma.dominio.entidades.EnsayoLaboratorio;
 import com.pisip.jbpharma.dominio.repositorio.iEnsayoLaboratorioRepositorio;
+import com.pisip.jbpharma.dominio.repositorio.IOrdenProduccionRepositorio;
 
 public class EnsayoLaboratorioUseCaseImpl implements iEnsayoLaboratorioUseCase {
 	private final iEnsayoLaboratorioRepositorio repositorio;
+	private final IOrdenProduccionRepositorio ordenRepositorio;
 
-	public EnsayoLaboratorioUseCaseImpl(iEnsayoLaboratorioRepositorio repositorio) {
+	public EnsayoLaboratorioUseCaseImpl(iEnsayoLaboratorioRepositorio repositorio, IOrdenProduccionRepositorio ordenRepositorio) {
 		this.repositorio = repositorio;
+		this.ordenRepositorio = ordenRepositorio;
 	}
 
 	@Override
@@ -23,8 +26,14 @@ public class EnsayoLaboratorioUseCaseImpl implements iEnsayoLaboratorioUseCase {
 		if (nuevo.getFechaEnsayo() == null)
 			nuevo.setFechaEnsayo(LocalDateTime.now());
 
-		// Se guarda primero con un código temporal único para obtener el ID.
-		nuevo.setCodigoEnsayo("TEMP-" + UUID.randomUUID());
+		// El producto siempre se obtiene de la orden; nunca se confía en el valor enviado por la vista.
+		if (nuevo.getIdOrden() == null) throw new IllegalArgumentException("Debe seleccionar una orden de producción.");
+		var orden = ordenRepositorio.buscarPorId(nuevo.getIdOrden())
+				.orElseThrow(() -> new IllegalArgumentException("Orden de producción no encontrada."));
+		nuevo.setIdProducto(orden.getIdProducto());
+
+		// Código temporal de máximo 30 caracteres para respetar VARCHAR(30).
+		nuevo.setCodigoEnsayo("TEMP-" + UUID.randomUUID().toString().replace("-", "").substring(0, 20));
 		EnsayoLaboratorio guardado = repositorio.guardar(nuevo);
 
 		String codigo = String.format(
@@ -51,8 +60,13 @@ public class EnsayoLaboratorioUseCaseImpl implements iEnsayoLaboratorioUseCase {
 	public EnsayoLaboratorio actualizar(long id, EnsayoLaboratorio datos) {
 		EnsayoLaboratorio actual = buscarPorId(id);
 		datos.setIdEnsayo(id);
-		// El código se conserva y no puede modificarse manualmente.
+		// El código y el responsable se conservan; el producto se recalcula desde la orden.
 		datos.setCodigoEnsayo(actual.getCodigoEnsayo());
+		datos.setResponsable(actual.getResponsable());
+		if (datos.getIdOrden() == null) throw new IllegalArgumentException("Debe seleccionar una orden de producción.");
+		var orden = ordenRepositorio.buscarPorId(datos.getIdOrden())
+				.orElseThrow(() -> new IllegalArgumentException("Orden de producción no encontrada."));
+		datos.setIdProducto(orden.getIdProducto());
 		if (datos.getCreadoEn() == null)
 			datos.setCreadoEn(actual.getCreadoEn());
 		return repositorio.guardar(datos);
