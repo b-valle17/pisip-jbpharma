@@ -1,15 +1,13 @@
 package com.pisip.jbpharma.infraestructura.persistencia.jpa;
 
-import java.time.LocalDateTime;
+import java.util.Date;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 import lombok.ToString;
 
 @Entity
-@Getter
-@Setter
+@Data
 @Table(name = "dictamen_lote")
 public class DictamenLoteEntity {
 
@@ -29,7 +27,7 @@ public class DictamenLoteEntity {
     private UsuarioEntity usuarioInspector;
 
     @Column(name = "fecha_dictamen", nullable = false)
-    private LocalDateTime fechaDictamen = LocalDateTime.now();
+    private Date fechaDictamen;
 
     @Column(name = "estado", nullable = false, length = 30)
     private String estado;
