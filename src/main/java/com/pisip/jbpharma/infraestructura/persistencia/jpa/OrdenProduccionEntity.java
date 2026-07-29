@@ -1,7 +1,7 @@
 package com.pisip.jbpharma.infraestructura.persistencia.jpa;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,17 +21,17 @@ public class OrdenProduccionEntity {
     @Column(name = "id_orden")
     private Integer idOrden;
 
-    @Column(name = "numero_lote", nullable = false, unique = true, length = 50)
+    @Column(name = "numero_lote", nullable = false, unique = true, length = 10)
     private String numeroLote;
 
     @Column(name = "cantidad_lote", nullable = false, precision = 12, scale = 3)
     private BigDecimal cantidadLote;
 
     @Column(name = "fecha_inicio")
-    private LocalDate fechaInicio;
+    private LocalDateTime fechaInicio = LocalDateTime.now();
 
     @Column(name = "fecha_final")
-    private LocalDate fechaFin;
+    private LocalDateTime fechaFin = LocalDateTime.now();
 
     @Column(nullable = false, length = 30)
     private String estado;

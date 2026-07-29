@@ -1,6 +1,7 @@
 package com.pisip.jbpharma.dominio.entidades;
 
-import java.util.Date;
+import java.time.LocalDateTime;
+
 
 public class PlanProduccion {
 	
@@ -8,17 +9,18 @@ public class PlanProduccion {
 	private String codigoPlan;
 	private Integer mes;    
 	private Integer anio;   
-	private Date fechaEmision;
+	private LocalDateTime fechaEmision;
 	private String estado;
 	private String descripcion;
+	private Integer cantidadLotesEstimada;
 	private Integer idUsuario;
 	
 	public PlanProduccion() {
 		super();
 	}
 
-	public PlanProduccion(Integer idPlan, String codigoPlan, Integer mes, Integer anio, Date fechaEmision,
-			String estado, String descripcion, Integer idUsuario) {
+	public PlanProduccion(Integer idPlan, String codigoPlan, Integer mes, Integer anio, LocalDateTime fechaEmision,
+			String estado, String descripcion, Integer cantidadLotesEstimada, Integer idUsuario) {
 		super();
 		this.idPlan = idPlan;
 		this.codigoPlan = codigoPlan;
@@ -27,6 +29,7 @@ public class PlanProduccion {
 		this.fechaEmision = fechaEmision;
 		this.estado = estado;
 		this.descripcion = descripcion;
+		this.cantidadLotesEstimada = cantidadLotesEstimada;
 		this.idUsuario = idUsuario;
 	}
 
@@ -62,11 +65,11 @@ public class PlanProduccion {
 		this.anio = anio;
 	}
 
-	public Date getFechaEmision() {
+	public LocalDateTime getFechaEmision() {
 		return fechaEmision;
 	}
 
-	public void setFechaEmision(Date fechaEmision) {
+	public void setFechaEmision(LocalDateTime fechaEmision) {
 		this.fechaEmision = fechaEmision;
 	}
 
@@ -86,6 +89,14 @@ public class PlanProduccion {
 		this.descripcion = descripcion;
 	}
 
+	public Integer getCantidadLotesEstimada() {
+		return cantidadLotesEstimada;
+	}
+
+	public void setCantidadLotesEstimada(Integer cantidadLotesEstimada) {
+		this.cantidadLotesEstimada = cantidadLotesEstimada;
+	}
+
 	public Integer getIdUsuario() {
 		return idUsuario;
 	}
@@ -93,6 +104,5 @@ public class PlanProduccion {
 	public void setIdUsuario(Integer idUsuario) {
 		this.idUsuario = idUsuario;
 	}
-	
-	
+
 }

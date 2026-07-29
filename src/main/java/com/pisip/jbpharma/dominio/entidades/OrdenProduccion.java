@@ -1,15 +1,16 @@
 package com.pisip.jbpharma.dominio.entidades;
 
 import java.math.BigDecimal;
-import java.util.Date;
+import java.time.LocalDateTime;
+
 
 public class OrdenProduccion {
 
 	private Integer idOrden;
 	private String numeroLote;
 	private BigDecimal cantidadLote;
-	private Date fechaInicio;
-	private Date fechaFin;
+	private LocalDateTime fechaInicio;
+	private LocalDateTime fechaFin;
 	private String estado;
 	private Integer idPlan;
 	private Integer idProducto;
@@ -19,8 +20,8 @@ public class OrdenProduccion {
 		super();
 	}
 
-	public OrdenProduccion(Integer idOrden, String numeroLote, BigDecimal cantidadLote, Date fechaInicio, Date fechaFin,
-			String estado, Integer idPlan, Integer idProducto, Integer idUsuario) {
+	public OrdenProduccion(Integer idOrden, String numeroLote, BigDecimal cantidadLote, LocalDateTime fechaInicio,
+			LocalDateTime fechaFin, String estado, Integer idPlan, Integer idProducto, Integer idUsuario) {
 		super();
 		this.idOrden = idOrden;
 		this.numeroLote = numeroLote;
@@ -57,19 +58,19 @@ public class OrdenProduccion {
 		this.cantidadLote = cantidadLote;
 	}
 
-	public Date getFechaInicio() {
+	public LocalDateTime getFechaInicio() {
 		return fechaInicio;
 	}
 
-	public void setFechaInicio(Date fechaInicio) {
+	public void setFechaInicio(LocalDateTime fechaInicio) {
 		this.fechaInicio = fechaInicio;
 	}
 
-	public Date getFechaFin() {
+	public LocalDateTime getFechaFin() {
 		return fechaFin;
 	}
 
-	public void setFechaFin(Date fechaFin) {
+	public void setFechaFin(LocalDateTime fechaFin) {
 		this.fechaFin = fechaFin;
 	}
 
@@ -104,5 +105,4 @@ public class OrdenProduccion {
 	public void setIdUsuario(Integer idUsuario) {
 		this.idUsuario = idUsuario;
 	}
-	
 }

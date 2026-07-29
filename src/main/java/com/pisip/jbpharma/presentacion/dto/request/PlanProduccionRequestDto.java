@@ -1,7 +1,6 @@
 package com.pisip.jbpharma.presentacion.dto.request;
 
-import java.util.Date;
-
+import java.time.LocalDateTime;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
@@ -24,10 +23,12 @@ public class PlanProduccionRequestDto {
 	@Min(value = 2025, message = "El año mínimo es 2025")
 	@Max(value = 2027, message = "El año máximo es 2027")
 	private Integer anio;
-	@NotNull
-	private Date fechaEmision;
+	
+	private LocalDateTime fechaEmision;
 	@NotBlank
 	private String estado;
 	@NotBlank
 	private String descripcion;
+	@NotNull
+	private Integer cantidadLotesEstimada;
 }

@@ -1,6 +1,6 @@
 package com.pisip.jbpharma.infraestructura.persistencia.jpa;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,13 +30,16 @@ public class PlanProduccionEntity {
     private Integer anio;
 
     @Column(name = "fecha_emision", nullable = false)
-    private LocalDate fechaEmision;
+    private LocalDateTime fechaEmision = LocalDateTime.now();;
 
     @Column(nullable = false, length = 30)
     private String estado;
 
     @Column(length = 255)
     private String descripcion;
+    
+    @Column(name = "cantidad_lotes_estimada", nullable = false)
+    private Integer cantidadLotesEstimada;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "fk_usuario", nullable = false)
