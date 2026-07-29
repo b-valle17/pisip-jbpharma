@@ -41,12 +41,12 @@ public class OrdenProduccionController {
 		return mapper.toResponseDto(ordenProduccionUseCase.guardar(mapper.toDomain(request)));
 	}
 
-	@GetMapping("/{id}")
+	/*@GetMapping("/{id}")
     public ResponseEntity<OrdenProduccionResponseDto> buscarPorId(@PathVariable("id") Integer idOrden) {
 		OrdenProduccion orden = ordenProduccionUseCase.buscarPorId(idOrden);
         
         return ResponseEntity.ok(mapper.toResponseDto(orden));
-    }
+    }*/
 	
 	@PutMapping("/{id}")
     public ResponseEntity<OrdenProduccionResponseDto> actualizar(
@@ -57,12 +57,16 @@ public class OrdenProduccionController {
         OrdenProduccion ordenActualizada = ordenProduccionUseCase.actualizar(idOrden, ordenDominio);
         return ResponseEntity.ok(mapper.toResponseDto(ordenActualizada));
     }
+	@GetMapping("/{idOrden}")
+	public OrdenProduccionResponseDto buscarPorId(@PathVariable("idOrden") Integer idOrden) {
+		return mapper.toResponseDto(ordenProduccionUseCase.buscarPorId(idOrden));
+	};
 
-	@GetMapping("/codigo/{codigo}")
-	public OrdenProduccionResponseDto buscarPorNumeroDeLote(@PathVariable String numeroLote) {
+	@GetMapping("/codigo/{numeroLote}")
+	public OrdenProduccionResponseDto buscarPorNumeroDeLote(@PathVariable("numeroLote") String numeroLote) {
 		OrdenProduccion orden = ordenProduccionUseCase.buscarPorNumeroLote(numeroLote);
 		if (orden == null) {
-			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Orden no encontrada con el número: " + orden);
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Orden no encontrada con el número: " + numeroLote);
 		}
 		return mapper.toResponseDto(orden);
 	}

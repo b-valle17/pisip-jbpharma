@@ -42,6 +42,11 @@ public class ValidacionSemaforicaController {
 		return mapper.toResponseDto(useCase.actualizar(id, mapper.toDomain(request)));
 	}
 
+	@ExceptionHandler(IllegalArgumentException.class)
+	public ResponseEntity<String> manejarValidacionInvalida(IllegalArgumentException ex) {
+		return ResponseEntity.badRequest().body(ex.getMessage());
+	}
+
 	@DeleteMapping("/{id}")
 	public ResponseEntity<Void> eliminar(@PathVariable long id) {
 		useCase.eliminar(id);
