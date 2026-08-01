@@ -9,6 +9,13 @@ public class InformeAuditoria {
 	private Date fechaGeneracion;
 	private String formato;
 	private String rutaArchivo;
+	private String comentario;
+	public String getComentario() {
+		return comentario;
+	}
+	public void setComentario(String comentario) {
+		this.comentario = comentario;
+	}
 	public int getIdInforme() {
 		return idInforme;
 	}

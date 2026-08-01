@@ -13,4 +13,6 @@ public interface IInformeAuditoriaUseCase {
 	List<InformeAuditoria> listarTodos();
 
 	void eliminar(int idInforme);
+
+	InformeAuditoria comentar(int idInforme, String comentario);
 }
