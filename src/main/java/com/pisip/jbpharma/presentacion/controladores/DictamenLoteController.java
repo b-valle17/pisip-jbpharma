@@ -19,7 +19,9 @@ import com.pisip.jbpharma.dominio.entidades.DictamenLote;
 import com.pisip.jbpharma.presentacion.dto.request.DictamenLoteRequestDto;
 import com.pisip.jbpharma.presentacion.dto.request.DictamenRechazoRequestDto;
 import com.pisip.jbpharma.presentacion.dto.response.DictamenLoteResponseDto;
+import com.pisip.jbpharma.presentacion.dto.response.EnsayoLaboratorioResponseDTO;
 import com.pisip.jbpharma.presentacion.mapeadores.IDictamenLoteDtoMapper;
+import com.pisip.jbpharma.presentacion.mapeadores.iEnsayoLaboratorioDtoMapper;
 
 import jakarta.validation.Valid;
 
@@ -29,10 +31,19 @@ public class DictamenLoteController {
 
 	private final IDictamenLoteUseCase dictamenLoteUseCase;
 	private final IDictamenLoteDtoMapper mapper;
+	private final iEnsayoLaboratorioDtoMapper ensayoMapper;
 
-	public DictamenLoteController(IDictamenLoteUseCase dictamenLoteUseCase, IDictamenLoteDtoMapper mapper) {
+	public DictamenLoteController(IDictamenLoteUseCase dictamenLoteUseCase, IDictamenLoteDtoMapper mapper,
+			iEnsayoLaboratorioDtoMapper ensayoMapper) {
 		this.dictamenLoteUseCase = dictamenLoteUseCase;
 		this.mapper = mapper;
+		this.ensayoMapper = ensayoMapper;
+	}
+
+	@GetMapping("/pendientes")
+	public List<EnsayoLaboratorioResponseDTO> listarEnsayosPendientes() {
+		return dictamenLoteUseCase.listarEnsayosPendientesDictamen().stream().map(ensayoMapper::toResponseDto)
+				.toList();
 	}
 
 	@PostMapping

@@ -7,9 +7,11 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 import com.pisip.jbpharma.aplicacion.casouso.entrada.IIndicadorKpiUseCase;
+import com.pisip.jbpharma.dominio.entidades.DictamenLote;
 import com.pisip.jbpharma.dominio.entidades.EnsayoLaboratorio;
 import com.pisip.jbpharma.dominio.entidades.IndicadorKpi;
 import com.pisip.jbpharma.dominio.entidades.OrdenProduccion;
+import com.pisip.jbpharma.dominio.repositorio.IDictamenLoteRepositorio;
 import com.pisip.jbpharma.dominio.repositorio.IIndicadorKpiRepositorio;
 import com.pisip.jbpharma.dominio.repositorio.IOrdenProduccionRepositorio;
 import com.pisip.jbpharma.dominio.repositorio.iEnsayoLaboratorioRepositorio;
@@ -27,13 +29,16 @@ public class IndicadorKpiUseCaseImpl implements IIndicadorKpiUseCase {
 	private final IIndicadorKpiRepositorio repositorio;
 	private final IOrdenProduccionRepositorio ordenProduccionRepositorio;
 	private final iEnsayoLaboratorioRepositorio ensayoLaboratorioRepositorio;
+	private final IDictamenLoteRepositorio dictamenLoteRepositorio;
 
 	public IndicadorKpiUseCaseImpl(IIndicadorKpiRepositorio repositorio,
 			IOrdenProduccionRepositorio ordenProduccionRepositorio,
-			iEnsayoLaboratorioRepositorio ensayoLaboratorioRepositorio) {
+			iEnsayoLaboratorioRepositorio ensayoLaboratorioRepositorio,
+			IDictamenLoteRepositorio dictamenLoteRepositorio) {
 		this.repositorio = repositorio;
 		this.ordenProduccionRepositorio = ordenProduccionRepositorio;
 		this.ensayoLaboratorioRepositorio = ensayoLaboratorioRepositorio;
+		this.dictamenLoteRepositorio = dictamenLoteRepositorio;
 	}
 
 	@Override
@@ -82,11 +87,26 @@ public class IndicadorKpiUseCaseImpl implements IIndicadorKpiUseCase {
 						o -> o.getEstado() == null ? "SIN_ESTADO" : o.getEstado(),
 						Collectors.counting()));
 
+		List<DictamenLote> dictamenes = dictamenLoteRepositorio.listarTodos();
+		long dictamenesAceptados = dictamenes.stream().filter(d -> "ACEPTADO".equalsIgnoreCase(d.getEstado())).count();
+		long dictamenesRechazados = dictamenes.stream().filter(d -> "RECHAZADO".equalsIgnoreCase(d.getEstado())).count();
+		long dictamenesPendientes = dictamenes.stream().filter(d -> "PENDIENTE".equalsIgnoreCase(d.getEstado())).count();
+		long dictamenesResueltos = dictamenesAceptados + dictamenesRechazados;
+		BigDecimal tasaAprobacion = dictamenesResueltos == 0
+				? BigDecimal.ZERO
+				: BigDecimal.valueOf(dictamenesAceptados)
+						.multiply(BigDecimal.valueOf(100))
+						.divide(BigDecimal.valueOf(dictamenesResueltos), 2, RoundingMode.HALF_UP);
+
 		IndicadorKpiResumenDto resumen = new IndicadorKpiResumenDto();
 		resumen.setCumplimientoPlanMensual(cumplimiento);
 		resumen.setTotalLotesProducidos(totalOrdenes);
 		resumen.setLotesEnCuarentena(lotesEnCuarentena);
 		resumen.setDistribucionPorEstado(distribucion);
+		resumen.setDictamenesAceptados(dictamenesAceptados);
+		resumen.setDictamenesRechazados(dictamenesRechazados);
+		resumen.setDictamenesPendientes(dictamenesPendientes);
+		resumen.setTasaAprobacionDictamenes(tasaAprobacion);
 		return resumen;
 	}
 }

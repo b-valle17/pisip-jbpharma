@@ -241,15 +241,16 @@ public class JbpharmaConfig {
 	}
 
 	@Bean
-	IDictamenLoteUseCase dictamenLoteUseCase(IDictamenLoteRepositorio repositorio,
-			iEnsayoLaboratorioRepositorio ensayoLaboratorioRepositorio) {
-		return new DictamenLoteUseCaseImpl(repositorio, ensayoLaboratorioRepositorio);
-	}
-
-	@Bean
 	IHistorialLoteRepositorio historialLoteRepositorio(IHistorialLoteJpaRepositorio jpaRepositorio,
 			IHistorialLoteJpaMapper mapper) {
 		return new HistorialLoteRepositorioImpl(jpaRepositorio, mapper);
+	}
+
+	@Bean
+	IDictamenLoteUseCase dictamenLoteUseCase(IDictamenLoteRepositorio repositorio,
+			iEnsayoLaboratorioRepositorio ensayoLaboratorioRepositorio,
+			IHistorialLoteRepositorio historialLoteRepositorio) {
+		return new DictamenLoteUseCaseImpl(repositorio, ensayoLaboratorioRepositorio, historialLoteRepositorio);
 	}
 
 	@Bean
@@ -264,8 +265,9 @@ public class JbpharmaConfig {
 	}
 
 	@Bean
-	IInformeAuditoriaUseCase informeAuditoriaUseCase(IInformeAuditoriaRepositorio repositorio) {
-		return new InformeAuditoriaUseCaseImpl(repositorio);
+	IInformeAuditoriaUseCase informeAuditoriaUseCase(IInformeAuditoriaRepositorio repositorio,
+			IAuditoriaLoteRepositorio auditoriaLoteRepositorio) {
+		return new InformeAuditoriaUseCaseImpl(repositorio, auditoriaLoteRepositorio);
 	}
 
 	@Bean
@@ -277,8 +279,10 @@ public class JbpharmaConfig {
 	@Bean
 	IIndicadorKpiUseCase indicadorKpiUseCase(IIndicadorKpiRepositorio repositorio,
 			IOrdenProduccionRepositorio ordenProduccionRepositorio,
-			iEnsayoLaboratorioRepositorio ensayoLaboratorioRepositorio) {
-		return new IndicadorKpiUseCaseImpl(repositorio, ordenProduccionRepositorio, ensayoLaboratorioRepositorio);
+			iEnsayoLaboratorioRepositorio ensayoLaboratorioRepositorio,
+			IDictamenLoteRepositorio dictamenLoteRepositorio) {
+		return new IndicadorKpiUseCaseImpl(repositorio, ordenProduccionRepositorio, ensayoLaboratorioRepositorio,
+				dictamenLoteRepositorio);
 	}
 
 }

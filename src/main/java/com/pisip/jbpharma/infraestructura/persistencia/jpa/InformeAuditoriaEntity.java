@@ -31,4 +31,7 @@ public class InformeAuditoriaEntity {
 
     @Column(name = "ruta_archivo", nullable = false, length = 500)
     private String rutaArchivo;
+
+    @Column(name = "comentario", length = 1000)
+    private String comentario;
 }

@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.pisip.jbpharma.aplicacion.casouso.entrada.IInformeAuditoriaUseCase;
 import com.pisip.jbpharma.dominio.entidades.InformeAuditoria;
 import com.pisip.jbpharma.presentacion.dto.request.InformeAuditoriaRequestDto;
+import com.pisip.jbpharma.presentacion.dto.request.InformeComentarioRequestDto;
 import com.pisip.jbpharma.presentacion.dto.response.InformeAuditoriaResponseDto;
 import com.pisip.jbpharma.presentacion.mapeadores.IInformeAuditoriaDtoMapper;
 
@@ -55,5 +57,11 @@ public class InformeAuditoriaController {
 	public ResponseEntity<Void> eliminar(@PathVariable int idInforme) {
 		informeAuditoriaUseCase.eliminar(idInforme);
 		return ResponseEntity.noContent().build();
+	}
+
+	@PutMapping("/{idInforme}/comentar")
+	public InformeAuditoriaResponseDto comentar(@PathVariable int idInforme,
+			@Valid @RequestBody InformeComentarioRequestDto request) {
+		return mapper.toResponseDto(informeAuditoriaUseCase.comentar(idInforme, request.getComentario()));
 	}
 }

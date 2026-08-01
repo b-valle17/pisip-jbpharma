@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import com.pisip.jbpharma.dominio.entidades.DictamenLote;
+import com.pisip.jbpharma.dominio.entidades.EnsayoLaboratorio;
 import com.pisip.jbpharma.presentacion.dto.response.DictamenLoteResponseDto;
 
 public interface IDictamenLoteUseCase {
@@ -27,4 +28,6 @@ public interface IDictamenLoteUseCase {
 
 	/** Busca el dictamen mas reciente de una orden de produccion (lote). Vacio si el lote aun no tiene dictamen. */
 	Optional<DictamenLote> buscarPorOrdenProduccion(int idOrdenProduccion);
+
+	List<EnsayoLaboratorio> listarEnsayosPendientesDictamen();
 }
