@@ -20,13 +20,13 @@ public class UsuarioUseCaseImpl implements IUsuarioUseCase {
 
 	@Override
 	public Usuario guardar(Usuario nuevoUsuario) {
-		// 1. VALIDACIÓN PARA REGISTRO NUEVO (idUsuario == 0)
-		if (nuevoUsuario.getIdUsuario() == 0 && repositorio.buscarPorCorreo(nuevoUsuario.getCorreo()).isPresent()) {
+		// 1. VALIDACIÓN PARA REGISTRO NUEVO (idUsuario == null)
+		if (nuevoUsuario.getIdUsuario() == null && repositorio.buscarPorCorreo(nuevoUsuario.getCorreo()).isPresent()) {
 			throw new IllegalArgumentException("El correo electrónico ya se encuentra registrado.");
 		}
 
 		// 2. VALIDACIÓN PARA EDICIÓN DE USUARIO EXISTENTE
-		if (nuevoUsuario.getIdUsuario() > 0) {
+		if (nuevoUsuario.getIdUsuario() != null && nuevoUsuario.getIdUsuario() > 0) {
 			Optional<Usuario> existente = repositorio.buscarPorCorreo(nuevoUsuario.getCorreo());
 			if (existente.isPresent() && existente.get().getIdUsuario() != nuevoUsuario.getIdUsuario()) {
 				throw new IllegalArgumentException("El correo ya está en uso por otro usuario.");
