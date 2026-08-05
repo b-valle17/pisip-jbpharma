@@ -21,7 +21,7 @@ public class UsuarioUseCaseImpl implements IUsuarioUseCase {
 	@Override
 	public Usuario guardar(Usuario nuevoUsuario) {
 		// 1. VALIDACIÓN PARA REGISTRO NUEVO (idUsuario == 0)
-		if (nuevoUsuario.getIdUsuario() == 0 && repositorio.buscarPorCorreo(nuevoUsuario.getCorreo()).isPresent())
+		if (nuevoUsuario.getIdUsuario() == 0 && repositorio.buscarPorCorreo(nuevoUsuario.getCorreo()).isPresent()) {
 			throw new IllegalArgumentException("El correo electrónico ya se encuentra registrado.");
 		}
 
