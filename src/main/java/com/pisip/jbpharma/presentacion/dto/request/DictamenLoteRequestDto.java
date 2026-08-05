@@ -1,5 +1,6 @@
 package com.pisip.jbpharma.presentacion.dto.request;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 import jakarta.validation.constraints.NotNull;
@@ -16,7 +17,7 @@ public class DictamenLoteRequestDto {
 	@NotNull
 	private int idUsuarioInspector;
 
-	private Date fechaDictamen;
+	private LocalDate fechaDictamen;
 	private String estado;
 	private String observaciones;
 }

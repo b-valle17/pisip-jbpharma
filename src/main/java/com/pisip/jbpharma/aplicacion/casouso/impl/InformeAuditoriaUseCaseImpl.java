@@ -18,10 +18,11 @@ public class InformeAuditoriaUseCaseImpl implements IInformeAuditoriaUseCase {
 		this.repositorio = repositorio;
 		this.auditoriaLoteRepositorio = auditoriaLoteRepositorio;
 	}
-
+	
 	@Override
 	public InformeAuditoria guardar(InformeAuditoria nuevoInforme) {
-		AuditoriaLote auditoria = auditoriaLoteRepositorio.buscarPorId(nuevoInforme.getIdAuditoria())
+	return null;
+	/*	AuditoriaLote auditoria = auditoriaLoteRepositorio.buscarPorId(nuevoInforme.getIdAuditoria())
 				.orElseThrow(() -> new IllegalArgumentException(
 						"Auditoria de lote no encontrada con id: " + nuevoInforme.getIdAuditoria()));
 
@@ -32,8 +33,8 @@ public class InformeAuditoriaUseCaseImpl implements IInformeAuditoriaUseCase {
 		nuevoInforme.setRutaArchivo(String.format("informes/informe-auditoria-lote%d-%d.%s",
 				auditoria.getIdOrdenProduccion(), System.currentTimeMillis(),
 				nuevoInforme.getFormato().toLowerCase()));
-		return repositorio.guardar(nuevoInforme);
-	}
+		return repositorio.guardar(nuevoInforme);  */
+	} 
 
 	@Override
 	public InformeAuditoria buscarPorId(int idInforme) {
@@ -57,4 +58,5 @@ public class InformeAuditoriaUseCaseImpl implements IInformeAuditoriaUseCase {
 		informe.setComentario(comentario);
 		return repositorio.guardar(informe);
 	}
+
 }

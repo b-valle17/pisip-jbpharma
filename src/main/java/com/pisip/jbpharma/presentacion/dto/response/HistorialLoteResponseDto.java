@@ -1,12 +1,13 @@
 package com.pisip.jbpharma.presentacion.dto.response;
 
 import java.sql.Date;
+import java.time.LocalDateTime;
 
 public class HistorialLoteResponseDto {
 
 	private int idHistorial;
 	private int idOrdenProduccion;
-	private Date fechaEvento;
+	private LocalDateTime fechaEvento;
 	private String accion;
 	private String descripcion;
 
@@ -20,8 +21,8 @@ public class HistorialLoteResponseDto {
 	public int getIdOrdenProduccion() { return idOrdenProduccion; }
 	public void setIdOrdenProduccion(int idOrdenProduccion) { this.idOrdenProduccion = idOrdenProduccion; }
 
-	public Date getFechaEvento() { return fechaEvento; }
-	public void setFechaEvento(Date fechaEvento) { this.fechaEvento = fechaEvento; }
+	public LocalDateTime getFechaEvento() { return fechaEvento; }
+	public void setFechaEvento(LocalDateTime fechaEvento) { this.fechaEvento = fechaEvento; }
 
 	public String getAccion() { return accion; }
 	public void setAccion(String accion) { this.accion = accion; }

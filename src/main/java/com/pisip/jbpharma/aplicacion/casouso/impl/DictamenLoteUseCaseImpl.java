@@ -106,12 +106,13 @@ public class DictamenLoteUseCaseImpl implements IDictamenLoteUseCase {
 	}
 
 	private HistorialLote construirHistorial(DictamenLote dictamen, String accion, String descripcion) {
-		HistorialLote historial = new HistorialLote();
-		historial.setIdOrdenProduccion(dictamen.getIdOrdenProduccion());
-		historial.setFechaEvento(new java.sql.Date(System.currentTimeMillis()));
-		historial.setAccion(accion);
-		historial.setDescripcion(descripcion);
-		return historial;
+	    HistorialLote historial = new HistorialLote();
+	    historial.setIdOrdenProduccion(dictamen.getIdOrdenProduccion());
+	    historial.setFechaEvento(java.time.LocalDateTime.now());
+	    
+	    historial.setAccion(accion);
+	    historial.setDescripcion(descripcion);
+	    return historial;
 	}
 
 	/** Arma el DTO de respuesta uniendo el dictamen con el ultimo ensayo de laboratorio del mismo lote. */

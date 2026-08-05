@@ -1,5 +1,6 @@
 package com.pisip.jbpharma.presentacion.dto.response;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 import lombok.Data;
@@ -10,7 +11,7 @@ public class DictamenLoteResponseDto {
 	private Integer idDictamen;
 	private int idOrdenProduccion;
 	private int idUsuarioInspector;
-	private Date fechaDictamen;
+	private LocalDate fechaDictamen;
 	private String estado;
 	private String observaciones;
 

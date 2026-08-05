@@ -1,12 +1,12 @@
 package com.pisip.jbpharma.dominio.entidades;
 
-import java.sql.Date;
+import java.time.LocalDateTime;
 
 public class HistorialLote {
 
 	private Integer idHistorial;
 	private int idOrdenProduccion;
-	private Date fechaEvento;
+	private LocalDateTime fechaEvento;
 	private String accion;
 	private String descripcion;
 	public Integer getIdHistorial() {
@@ -21,10 +21,10 @@ public class HistorialLote {
 	public void setIdOrdenProduccion(int idOrdenProduccion) {
 		this.idOrdenProduccion = idOrdenProduccion;
 	}
-	public Date getFechaEvento() {
+	public LocalDateTime getFechaEvento() {
 		return fechaEvento;
 	}
-	public void setFechaEvento(Date fechaEvento) {
+	public void setFechaEvento(LocalDateTime fechaEvento) {
 		this.fechaEvento = fechaEvento;
 	}
 	public String getAccion() {
@@ -39,7 +39,7 @@ public class HistorialLote {
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
 	}
-	public HistorialLote(Integer idHistorial, int idOrdenProduccion, Date fechaEvento, String accion, String descripcion) {
+	public HistorialLote(Integer idHistorial, int idOrdenProduccion, LocalDateTime fechaEvento, String accion, String descripcion) {
 		super();
 		this.idHistorial = idHistorial;
 		this.idOrdenProduccion = idOrdenProduccion;

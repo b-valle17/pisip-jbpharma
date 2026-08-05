@@ -1,13 +1,13 @@
 package com.pisip.jbpharma.dominio.entidades;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 public class DictamenLote {
 
 	private Integer idDictamen;
 	private int idOrdenProduccion;
 	private int idUsuarioInspector;
-	private Date fechaDictamen;
+	private LocalDate fechaDictamen;
 	private String estado;
 	private String observaciones;
 
@@ -15,7 +15,7 @@ public class DictamenLote {
 		super();
 	}
 
-	public DictamenLote(Integer idDictamen, int idOrdenProduccion, int idUsuarioInspector, Date fechaDictamen,
+	public DictamenLote(Integer idDictamen, int idOrdenProduccion, int idUsuarioInspector, LocalDate fechaDictamen,
 			String estado, String observaciones) {
 		super();
 		this.idDictamen = idDictamen;
@@ -50,11 +50,11 @@ public class DictamenLote {
 		this.idUsuarioInspector = idUsuarioInspector;
 	}
 
-	public Date getFechaDictamen() {
+	public LocalDate getFechaDictamen() {
 		return fechaDictamen;
 	}
 
-	public void setFechaDictamen(Date fechaDictamen) {
+	public void setFechaDictamen(LocalDate fechaDictamen) {
 		this.fechaDictamen = fechaDictamen;
 	}
 

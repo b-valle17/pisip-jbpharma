@@ -1,7 +1,6 @@
 package com.pisip.jbpharma.infraestructura.persistencia.jpa;
 
-import java.util.Date;
-
+import java.time.LocalDate;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.ToString;
@@ -27,7 +26,7 @@ public class DictamenLoteEntity {
     private UsuarioEntity usuarioInspector;
 
     @Column(name = "fecha_dictamen", nullable = false)
-    private Date fechaDictamen;
+    private LocalDate fechaDictamen;
 
     @Column(name = "estado", nullable = false, length = 30)
     private String estado;
