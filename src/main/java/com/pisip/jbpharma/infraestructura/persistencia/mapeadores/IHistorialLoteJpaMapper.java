@@ -15,6 +15,8 @@ public interface IHistorialLoteJpaMapper {
 
 	@Mapping(source = "ordenProduccion.idOrden", target = "idOrdenProduccion")
 	HistorialLote toDomain(HistorialLoteEntity entity);
+
+	@Mapping(source = "idOrdenProduccion", target = "ordenProduccion.idOrden")
 	HistorialLoteEntity toEntity(HistorialLote historialLote);
 	// Convierte de LocalDateTime (JPA) a Date (Dominio)
 	default Date map(LocalDateTime localDateTime) {

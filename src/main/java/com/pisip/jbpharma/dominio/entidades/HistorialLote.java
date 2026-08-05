@@ -4,15 +4,15 @@ import java.sql.Date;
 
 public class HistorialLote {
 
-	private int idHistorial;
+	private Integer idHistorial;
 	private int idOrdenProduccion;
 	private Date fechaEvento;
 	private String accion;
 	private String descripcion;
-	public int getIdHistorial() {
+	public Integer getIdHistorial() {
 		return idHistorial;
 	}
-	public void setIdHistorial(int idHistorial) {
+	public void setIdHistorial(Integer idHistorial) {
 		this.idHistorial = idHistorial;
 	}
 	public int getIdOrdenProduccion() {
@@ -39,7 +39,7 @@ public class HistorialLote {
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
 	}
-	public HistorialLote(int idHistorial, int idOrdenProduccion, Date fechaEvento, String accion, String descripcion) {
+	public HistorialLote(Integer idHistorial, int idOrdenProduccion, Date fechaEvento, String accion, String descripcion) {
 		super();
 		this.idHistorial = idHistorial;
 		this.idOrdenProduccion = idOrdenProduccion;

@@ -6,7 +6,7 @@ import jakarta.validation.constraints.NotNull;
 
 public class HistorialLoteRequestDto {
 
-	private int idHistorial;
+	private Integer idHistorial;
 
 	@NotNull
 	private int idOrdenProduccion;
@@ -15,8 +15,8 @@ public class HistorialLoteRequestDto {
 	private String accion;
 	private String descripcion;
 
-	public int getIdHistorial() { return idHistorial; }
-	public void setIdHistorial(int idHistorial) { this.idHistorial = idHistorial; }
+	public Integer getIdHistorial() { return idHistorial; }
+	public void setIdHistorial(Integer idHistorial) { this.idHistorial = idHistorial; }
 
 	public int getIdOrdenProduccion() { return idOrdenProduccion; }
 	public void setIdOrdenProduccion(int idOrdenProduccion) { this.idOrdenProduccion = idOrdenProduccion; }
