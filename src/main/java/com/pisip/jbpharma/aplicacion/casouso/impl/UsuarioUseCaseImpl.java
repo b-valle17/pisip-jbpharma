@@ -20,28 +20,64 @@ public class UsuarioUseCaseImpl implements IUsuarioUseCase {
 
 	@Override
 	public Usuario guardar(Usuario nuevoUsuario) {
-		// 1. VALIDACIÓN PARA REGISTRO NUEVO (idUsuario == 0)
-		if (nuevoUsuario.getIdUsuario() == 0 && repositorio.buscarPorCorreo(nuevoUsuario.getCorreo()).isPresent()) {
-			throw new IllegalArgumentException("El correo electrónico ya se encuentra registrado.");
+
+		if (nuevoUsuario == null) {
+			throw new IllegalArgumentException(
+					"Los datos del usuario son obligatorios.");
 		}
 
-		// 2. VALIDACIÓN PARA EDICIÓN DE USUARIO EXISTENTE
-		if (nuevoUsuario.getIdUsuario() > 0) {
-			Optional<Usuario> existente = repositorio.buscarPorCorreo(nuevoUsuario.getCorreo());
-			if (existente.isPresent() && existente.get().getIdUsuario() != nuevoUsuario.getIdUsuario()) {
-				throw new IllegalArgumentException("El correo ya está en uso por otro usuario.");
+		Integer idUsuario = nuevoUsuario.getIdUsuario();
+
+		if (nuevoUsuario.getCorreo() == null
+				|| nuevoUsuario.getCorreo().trim().isEmpty()) {
+			throw new IllegalArgumentException(
+					"El correo electrónico es obligatorio.");
+		}
+
+		nuevoUsuario.setCorreo(
+				nuevoUsuario.getCorreo().trim().toLowerCase()
+		);
+
+		Optional<Usuario> existente =
+				repositorio.buscarPorCorreo(nuevoUsuario.getCorreo());
+
+		// Registro nuevo: el ID todavía es null
+		if (idUsuario == null || idUsuario == 0) {
+
+			if (existente.isPresent()) {
+				throw new IllegalArgumentException(
+						"El correo electrónico ya se encuentra registrado.");
+			}
+
+		// Edición: el ID ya existe
+		} else {
+
+			if (existente.isPresent()
+					&& !existente.get()
+							.getIdUsuario()
+							.equals(idUsuario)) {
+
+				throw new IllegalArgumentException(
+						"El correo ya está en uso por otro usuario.");
 			}
 		}
 
-		// 3. ENCRIPTACIÓN SEGURA DE CONTRASEÑA
-		// Verificamos prefijos estándar de BCrypt ($2a$, $2b$, $2y$)
 		String pass = nuevoUsuario.getContrasenaHash();
-		if (pass != null && !pass.trim().isEmpty()) {
-			boolean yaEstaEncriptada = pass.startsWith("$2a$") || pass.startsWith("$2b$") || pass.startsWith("$2y$");
-			if (!yaEstaEncriptada) {
-				String contrasenaEncriptada = BCrypt.hashpw(pass, BCrypt.gensalt());
-				nuevoUsuario.setContrasenaHash(contrasenaEncriptada);
-			}
+
+		if (pass == null || pass.trim().isEmpty()) {
+			throw new IllegalArgumentException(
+					"La contraseña es obligatoria.");
+		}
+
+		boolean yaEstaEncriptada =
+				pass.startsWith("$2a$")
+				|| pass.startsWith("$2b$")
+				|| pass.startsWith("$2y$");
+
+		if (!yaEstaEncriptada) {
+			nuevoUsuario.setContrasenaHash(
+					BCrypt.hashpw(pass, BCrypt.gensalt())
+			);
 		}
 
 		return repositorio.guardar(nuevoUsuario);
