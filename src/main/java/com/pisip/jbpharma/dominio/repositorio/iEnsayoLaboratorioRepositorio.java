@@ -14,4 +14,5 @@ public interface iEnsayoLaboratorioRepositorio {
 
 	/** Busca el ultimo ensayo de laboratorio registrado para una orden de produccion (lote) especifica. */
 	Optional<EnsayoLaboratorio> buscarPorIdOrden(int idOrden);
+	boolean existeEnsayoActivoPorOrden(Integer idOrden);
 }

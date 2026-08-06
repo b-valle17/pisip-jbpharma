@@ -2,6 +2,7 @@ package com.pisip.jbpharma.infraestructura.persistencia.adaptadores;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import com.pisip.jbpharma.dominio.entidades.EnsayoLaboratorio;
 import com.pisip.jbpharma.dominio.repositorio.iEnsayoLaboratorioRepositorio;
@@ -19,7 +20,8 @@ public class EnsayoLaboratorioRepositorioImpl implements iEnsayoLaboratorioRepos
     private final IOrdenProduccionJpaRepositorio ordenRepositorio;
     private final IProductoJpaRepositorio productoRepositorio;
     private final iEnsayoLaboratoriojpaMapper entityMapper;
-
+    private static final Set<String> ESTADOS_TERMINALES =
+            Set.of("FINALIZADO", "RECHAZADO");
     public EnsayoLaboratorioRepositorioImpl(
             iEnsayoLaboratoriojpaRepositorio jpaRepositorio,
             IOrdenProduccionJpaRepositorio ordenRepositorio,
@@ -82,4 +84,19 @@ public class EnsayoLaboratorioRepositorioImpl implements iEnsayoLaboratorioRepos
         return jpaRepositorio.findByOrdenProduccion_IdOrdenOrderByFechaEnsayoDesc(idOrden)
                 .stream().findFirst().map(entityMapper::toDominio);
     }
+ 
+    @Override
+    public boolean existeEnsayoActivoPorOrden(Integer idOrden) {
+
+        if (idOrden == null) {
+            return false;
+        }
+
+        return jpaRepositorio
+                .existsByOrdenProduccion_IdOrdenAndEstadoNotIn(
+                        idOrden,
+                        ESTADOS_TERMINALES
+                );
+    }
+    
 }

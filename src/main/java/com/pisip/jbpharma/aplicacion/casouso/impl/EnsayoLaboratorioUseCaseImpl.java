@@ -12,34 +12,57 @@ public class EnsayoLaboratorioUseCaseImpl implements iEnsayoLaboratorioUseCase {
 	private final iEnsayoLaboratorioRepositorio repositorio;
 	private final IOrdenProduccionRepositorio ordenRepositorio;
 
-	public EnsayoLaboratorioUseCaseImpl(iEnsayoLaboratorioRepositorio repositorio, IOrdenProduccionRepositorio ordenRepositorio) {
+	public EnsayoLaboratorioUseCaseImpl(iEnsayoLaboratorioRepositorio repositorio,
+			IOrdenProduccionRepositorio ordenRepositorio) {
 		this.repositorio = repositorio;
 		this.ordenRepositorio = ordenRepositorio;
 	}
 
 	@Override
 	public EnsayoLaboratorio guardar(EnsayoLaboratorio nuevo) {
+
 		// El ID lo genera PostgreSQL/JPA.
 		nuevo.setIdEnsayo(null);
-		if (nuevo.getCreadoEn() == null)
-			nuevo.setCreadoEn(LocalDateTime.now());
-		if (nuevo.getFechaEnsayo() == null)
-			nuevo.setFechaEnsayo(LocalDateTime.now());
 
-		// El producto siempre se obtiene de la orden; nunca se confía en el valor enviado por la vista.
-		if (nuevo.getIdOrden() == null) throw new IllegalArgumentException("Debe seleccionar una orden de producción.");
+		if (nuevo.getCreadoEn() == null) {
+			nuevo.setCreadoEn(LocalDateTime.now());
+		}
+
+		if (nuevo.getFechaEnsayo() == null) {
+			nuevo.setFechaEnsayo(LocalDateTime.now());
+		}
+
+		if (nuevo.getIdOrden() == null) {
+			throw new IllegalArgumentException("Debe seleccionar una orden de producción.");
+		}
+
+		// Validar que la orden no tenga otro ensayo activo.
+		if (repositorio.existeEnsayoActivoPorOrden(nuevo.getIdOrden())) {
+
+			throw new IllegalStateException("La orden seleccionada ya tiene un ensayo activo. "
+					+ "Debe finalizarlo o rechazarlo antes de registrar uno nuevo.");
+		}
+
+		// Todo ensayo nuevo inicia como REGISTRADO.
+		nuevo.setEstado("REGISTRADO");
+
+		// El producto siempre se obtiene de la orden.
 		var orden = ordenRepositorio.buscarPorId(nuevo.getIdOrden())
 				.orElseThrow(() -> new IllegalArgumentException("Orden de producción no encontrada."));
+
+		if (orden.getIdProducto() == null) {
+			throw new IllegalStateException("La orden seleccionada no tiene un producto asociado.");
+		}
+
 		nuevo.setIdProducto(orden.getIdProducto());
 
-		// Código temporal de máximo 30 caracteres para respetar VARCHAR(30).
+		// Código temporal de máximo 30 caracteres.
 		nuevo.setCodigoEnsayo("TEMP-" + UUID.randomUUID().toString().replace("-", "").substring(0, 20));
+
 		EnsayoLaboratorio guardado = repositorio.guardar(nuevo);
 
-		String codigo = String.format(
-				"ENS-%d-%03d",
-				guardado.getFechaEnsayo().getYear(),
-				guardado.getIdEnsayo());
+		String codigo = String.format("ENS-%d-%03d", guardado.getFechaEnsayo().getYear(), guardado.getIdEnsayo());
+
 		guardado.setCodigoEnsayo(codigo);
 
 		return repositorio.guardar(guardado);
@@ -60,10 +83,12 @@ public class EnsayoLaboratorioUseCaseImpl implements iEnsayoLaboratorioUseCase {
 	public EnsayoLaboratorio actualizar(long id, EnsayoLaboratorio datos) {
 		EnsayoLaboratorio actual = buscarPorId(id);
 		datos.setIdEnsayo(id);
-		// El código y el responsable se conservan; el producto se recalcula desde la orden.
+		// El código y el responsable se conservan; el producto se recalcula desde la
+		// orden.
 		datos.setCodigoEnsayo(actual.getCodigoEnsayo());
 		datos.setResponsable(actual.getResponsable());
-		if (datos.getIdOrden() == null) throw new IllegalArgumentException("Debe seleccionar una orden de producción.");
+		if (datos.getIdOrden() == null)
+			throw new IllegalArgumentException("Debe seleccionar una orden de producción.");
 		var orden = ordenRepositorio.buscarPorId(datos.getIdOrden())
 				.orElseThrow(() -> new IllegalArgumentException("Orden de producción no encontrada."));
 		datos.setIdProducto(orden.getIdProducto());
