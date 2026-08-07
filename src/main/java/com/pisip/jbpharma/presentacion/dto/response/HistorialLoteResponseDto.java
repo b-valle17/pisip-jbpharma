@@ -11,8 +11,6 @@ public class HistorialLoteResponseDto {
 	private String accion;
 	private String descripcion;
 
-	// Estado final del lote (ACEPTADO/RECHAZADO), tomado del ultimo dictamen del mismo lote. Puede ser null
-	// si el lote todavia no tiene un dictamen registrado.
 	private String estadoLote;
 
 	public int getIdHistorial() { return idHistorial; }

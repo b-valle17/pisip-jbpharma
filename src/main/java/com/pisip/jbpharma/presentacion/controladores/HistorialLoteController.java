@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.pisip.jbpharma.aplicacion.casouso.entrada.IDictamenLoteUseCase;
 import com.pisip.jbpharma.aplicacion.casouso.entrada.IHistorialLoteUseCase;
 import com.pisip.jbpharma.dominio.entidades.HistorialLote;
 import com.pisip.jbpharma.presentacion.dto.request.HistorialLoteRequestDto;
@@ -31,13 +30,10 @@ public class HistorialLoteController {
 	private static final Set<String> ESTADOS_FINALES = Set.of("ACEPTADO", "RECHAZADO");
 
 	private final IHistorialLoteUseCase historialLoteUseCase;
-	private final IDictamenLoteUseCase dictamenLoteUseCase;
 	private final IHistorialLoteDtoMapper mapper;
 
-	public HistorialLoteController(IHistorialLoteUseCase historialLoteUseCase,
-			IDictamenLoteUseCase dictamenLoteUseCase, IHistorialLoteDtoMapper mapper) {
+	public HistorialLoteController(IHistorialLoteUseCase historialLoteUseCase, IHistorialLoteDtoMapper mapper) {
 		this.historialLoteUseCase = historialLoteUseCase;
-		this.dictamenLoteUseCase = dictamenLoteUseCase;
 		this.mapper = mapper;
 	}
 
@@ -80,8 +76,11 @@ public class HistorialLoteController {
 	}
 
 	private HistorialLoteResponseDto enriquecerConEstadoLote(HistorialLoteResponseDto dto) {
-		dictamenLoteUseCase.buscarPorOrdenProduccion(dto.getIdOrdenProduccion())
-				.ifPresent(dictamen -> dto.setEstadoLote(dictamen.getEstado()));
+		if ("ACEPTACION".equalsIgnoreCase(dto.getAccion())) {
+			dto.setEstadoLote("ACEPTADO");
+		} else if ("RECHAZO".equalsIgnoreCase(dto.getAccion())) {
+			dto.setEstadoLote("RECHAZADO");
+		}
 		return dto;
 	}
 }
